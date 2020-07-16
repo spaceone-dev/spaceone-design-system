@@ -174,7 +174,7 @@ import { copyAnyData, selectToCopyToClipboard } from '@/lib/util';
 import { makeProxy, windowEventMount } from '@/lib/compostion-util';
 // eslint-disable-next-line import/named
 import PSkeleton from '@/components/atoms/skeletons/Skeleton.vue';
-import { dataTableProps, DataTableSetupProps } from './toolset';
+import { dataTableProps, DataTableSetupProps } from './DataTable.toolset';
 
 const PCheckBox = () => import('@/components/molecules/forms/checkbox/CheckBox.vue');
 const PRadio = () => import('@/components/molecules/forms/radio/Radio.vue');
