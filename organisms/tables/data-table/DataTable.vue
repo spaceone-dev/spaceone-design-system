@@ -161,7 +161,7 @@
 <script lang="ts">
 import DragSelect from 'dragselect';
 import {
-    toRefs, computed, reactive, watch, onMounted, Ref, defineComponent, ref,
+    toRefs, computed, reactive, watch, onMounted, Ref, ref,
 } from '@vue/composition-api';
 import _ from 'lodash';
 import PTable from '@/components/molecules/tables/Table.vue';
@@ -199,7 +199,7 @@ const loadingHandler = (props) => {
 };
 
 
-export default defineComponent({
+export default {
     name: 'PDataTable',
     components: {
         PSkeleton,
@@ -464,7 +464,7 @@ export default defineComponent({
         };
     },
 
-});
+};
 </script>
 
 <style lang="postcss" scoped>
@@ -522,9 +522,6 @@ export default defineComponent({
         transition: opacity 0s;
     }
     .no-data-row {
-        /*&:hover {*/
-        /*    background-color: initial !important;*/
-        /*}*/
         .no-data {
             @apply text-primary2 border-0 text-center py-12 text-2xl;
             &:hover {

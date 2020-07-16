@@ -77,7 +77,6 @@
 
 <script lang="ts">
 
-import PPanelTop from '@/components/molecules/panel/panel-top/PanelTop_origin.vue';
 import PToolboxTable from '@/components/organisms/tables/toolbox-table/ToolboxTable.vue';
 import PQuerySearch from '@/components/organisms/search/query-search/PQuerySearch.vue';
 import { computed, reactive, toRefs } from '@vue/composition-api';
