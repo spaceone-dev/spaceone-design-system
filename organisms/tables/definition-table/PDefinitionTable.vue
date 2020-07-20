@@ -65,7 +65,7 @@ export default {
 <style lang="postcss" scoped>
 table {
     @apply w-full;
-    td{
+    td {
         line-height: 1.8;
     }
 }
@@ -74,6 +74,7 @@ table {
         &:first-child {
             @apply border-r-2 border-white;
         }
+
         @apply bg-violet-100;
     }
 }

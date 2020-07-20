@@ -23,13 +23,13 @@
     >
         <template #toolbox-top>
             <slot v-if="showTitle||$scopedSlots['toolbox-top']" name="toolbox-top">
-                <PPanelTop v-if="showTitle"
-                           style="margin: 0; margin-top: 0.5rem;"
-                           :use-total-count="true"
-                           :total-count="apiHandler.totalCount.value"
+                <p-panel-top v-if="showTitle"
+                             style="margin: 0; margin-top: 0.5rem;"
+                             :use-total-count="true"
+                             :total-count="apiHandler.totalCount.value"
                 >
                     {{ name }}
-                </PPanelTop>
+                </p-panel-top>
             </slot>
         </template>
         <template #toolbox-left>
@@ -56,7 +56,7 @@ import {
     computed, reactive, Ref, toRefs, watch,
 } from '@vue/composition-api';
 import PToolboxTable from '@/components/organisms/tables/toolbox-table/ToolboxTable.vue';
-import PDynamicField from '@/components/organisms/dynamic-view/dynamic-field/DynamicField.vue';
+import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import PSearch from '@/components/molecules/search/PSearch.vue';
 import { SearchTableFluentAPI } from '@/lib/api/table';
 import {

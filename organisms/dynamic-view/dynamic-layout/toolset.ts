@@ -7,6 +7,7 @@ import { Computed, ComputedOrRef } from '@/lib/type';
 import { DynamicFluentAPIToolSet } from '@/lib/api/toolset';
 import { DefinitionProps } from '@/components/organisms/definition/PDefinition.toolset';
 import { DataTableFieldType } from '@/components/organisms/tables/data-table/DataTable.toolset';
+import { getTimezone } from '@/lib/util';
 
 
 export interface DynamicFieldType<options=any> {
@@ -66,10 +67,19 @@ export const makeFields = (props: DynamicLayoutProps|any) => computed<DataTableF
     width: ds.options?.width,
 })) : []));
 
-export const makeTableSlots = (props: DynamicLayoutProps|any) => computed((): DynamicFieldType[] => (props.options.fields ? props.options.fields.map(ds => ({
-    ...ds,
-    name: `col-${ds.key}-format`,
-})) : []));
+
+export const makeTableSlots = (props: DynamicLayoutProps|any) => computed((): DynamicFieldType[] => (
+    props.options.fields ? props.options.fields.map((ds) => {
+        const res = {
+            ...ds,
+            name: `col-${ds.key}-format`,
+        };
+        if (res.type === 'datetime') {
+            if (!res.options) res.options = {};
+            if (!res.options.timezone) res.options.timezone = getTimezone();
+        }
+        return res;
+    }) : []));
 
 export const makeDefs = (
     fields: ComputedOrRef<DynamicFieldType[]>,
@@ -83,6 +93,7 @@ export const makeDefs = (
             options: item.options,
             data: _.get(data.value, item.key, ''),
         })) : []));
+
 const matchMap = {
     'created_at.seconds': 'created_at',
     'updated_at.seconds': 'updated_at',

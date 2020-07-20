@@ -59,7 +59,7 @@ import PFieldGroup from '@/components/molecules/forms/field-group/FieldGroup.vue
 
 const PTextInput = () => import('@/components/atoms/inputs/PTextInput.vue');
 const PRadio = () => import('@/components/molecules/forms/radio/PRadio.vue');
-const PDropdownMenuBtn = () => import('@/components/organisms/dropdown/dropdown-menu-btn/DropdownMenuBtn.vue');
+const PDropdownMenuBtn = () => import('@/components/organisms/dropdown/dropdown-menu-btn/PDropdownMenuBtn.vue');
 const PTagsInput = () => import('@/components/organisms/forms/tags-input/TagsInput.vue');
 
 export const map = {

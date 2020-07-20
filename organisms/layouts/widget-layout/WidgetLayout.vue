@@ -35,7 +35,7 @@
 <script lang="ts">
 import PPaneLayout from '@/components/molecules/layouts/pane-layout/PPaneLayout.vue';
 import PI from '@/components/atoms/icons/PI.vue';
-import PTooltipButton from '@/components/organisms/buttons/tooltip-button/TooltipButton.vue';
+import PTooltipButton from '@/components/organisms/buttons/tooltip-button/PTooltipButton.vue';
 import {
     widgetLayoutProps,
     WidgetLayoutPropsType,

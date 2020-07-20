@@ -36,7 +36,7 @@
 <script>
 import _ from 'lodash';
 import PMenuItem from '@/components/molecules/menu-item/PMenuItem.vue';
-import PTooltipButton from '@/components/organisms/buttons/tooltip-button/TooltipButton.vue';
+import PTooltipButton from '@/components/organisms/buttons/tooltip-button/PTooltipButton.vue';
 import PButton from '@/components/atoms/buttons/PButton.vue';
 
 const ACTIVATOR_MENU_SPACE = -8;

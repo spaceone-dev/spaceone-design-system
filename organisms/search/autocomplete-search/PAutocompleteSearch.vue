@@ -41,7 +41,7 @@ import {
     autocompleteSearchProps,
     AutocompleteSearchProps,
 } from '@/components/organisms/search/autocomplete-search/PAutocompleteSearch.toolset';
-import PContextMenu from '@/components/organisms/context-menu/context-menu/ContextMenu.vue';
+import PContextMenu from '@/components/organisms/context-menu/PContextMenu.vue';
 import {
     computed, getCurrentInstance, onMounted, onUnmounted, reactive, toRefs,
 } from '@vue/composition-api';

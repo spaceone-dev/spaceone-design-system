@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { computed, defineComponent } from '@vue/composition-api';
-import PSelectDropdown from '@/components/organisms/dropdown/select-dropdown/SelectDropdown.vue';
+import PSelectDropdown from '@/components/organisms/dropdown/select-dropdown/PSelectDropdown.vue';
 import { makeVModelProxy } from '@/lib/compostion-util';
 
 

@@ -72,7 +72,7 @@ import _ from 'lodash';
 import PGridLayout from '@/components/molecules/layouts/grid-layout/PGridLayout.vue';
 import PTextPagenation from '@/components/organisms/pagenations/textPagenation.vue';
 import PIconButton from '@/components/molecules/buttons/icon-button/PIconButton.vue';
-import PDropdownMenuBtn from '@/components/organisms/dropdown/dropdown-menu-btn/DropdownMenuBtn.vue';
+import PDropdownMenuBtn from '@/components/organisms/dropdown/dropdown-menu-btn/PDropdownMenuBtn.vue';
 import { computed, reactive, toRefs } from '@vue/composition-api';
 import { makeProxy } from '@/lib/compostion-util';
 import { gridLayoutProps } from '@/components/molecules/layouts/grid-layout/PGridLayout.toolset';
