@@ -1,4 +1,6 @@
-import {computed, getCurrentInstance, ref, Ref} from '@vue/composition-api';
+import {
+    computed, getCurrentInstance, ref, Ref,
+} from '@vue/composition-api';
 
 export const makeByPassListeners = (listeners: Record<string, Function | Function[]>, name: string, ...args: any[]) => {
     // @ts-ignore

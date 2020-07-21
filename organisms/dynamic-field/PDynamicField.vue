@@ -1,6 +1,7 @@
 <template>
     <component :is="component"
-               :options="options" :data="data" :extra="extra"
+               :key-path="keyPath" :options="options" :data="data"
+               :extra="extra"
     />
 </template>
 
@@ -19,12 +20,10 @@ interface State {
 export default {
     name: 'PDynamicField',
     props: {
-        // eslint-disable-next-line @typescript-eslint/camelcase,camelcase
         type: {
             type: String,
             default: 'text',
         },
-        // eslint-disable-next-line camelcase,@typescript-eslint/camelcase
         options: {
             type: Object,
             default: () => ({}),

@@ -1,4 +1,4 @@
-export interface DefaultItem {
+interface DefaultItem {
     name: string;
     label?: string;
 }

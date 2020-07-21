@@ -1,11 +1,20 @@
 <template>
     <div v-if="!isLoading">
-        <p-panel-top>{{ name }}</p-panel-top>
-        <p-definition-table :items="defs" v-on="$listeners">
-            <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
-                <slot :name="slot" v-bind="{...scope, rootData}" />
+        <p-panel-top
+            v-if="showTitle"
+            :use-total-count="true"
+            :total-count="items? items.length:0"
+        >
+            {{ name }}
+        </p-panel-top>
+        <p-data-table :items="items" :fields="fields" :col-copy="colCopy"
+                      :responsive-style="responsiveStyle"
+                      v-on="$listeners"
+        >
+            <template v-for="slot of slots" v-slot:[slot.name]="{value}">
+                <p-dynamic-field :key="slot.key" v-bind="slot" :data="value" />
             </template>
-        </p-definition-table>
+        </p-data-table>
     </div>
 </template>
 
@@ -13,23 +22,26 @@
 import {
     computed, reactive, watch,
 } from '@vue/composition-api';
-import { get, every } from 'lodash';
-import {
-    DynamicFieldType,
-    DynamicLayoutProps,
-    makeDefs,
-    DynamicLayoutApiProp, checkCanGetData, changeSetOnlys,
-} from '@/components/organisms/dynamic-view/dynamic-layout/toolset';
+import _ from 'lodash';
+import PDataTable from '@/components/organisms/tables/data-table/DataTable.vue';
+import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import PPanelTop from '@/components/molecules/panel/panel-top/PPanelTop.vue';
+import {
+    checkCanGetData,
+    DynamicLayoutApiProp,
+    DynamicLayoutProps,
+    makeFields, makeTableSlots,
+} from '@/components/organisms/dynamic-view/dynamic-layout/toolset';
 import { GetAction, ResourceActions } from '@/lib/fluent-api';
-import PDefinitionTable from '@/components/organisms/tables/definition-table/PDefinitionTable.vue';
 
 
 export default {
-    name: 'SDynamicLayoutItem',
+    name: 'SDynamicLayoutSimpleTable',
     components: {
+        PDynamicField,
+        PDataTable,
         PPanelTop,
-        PDefinitionTable,
+
     },
     props: {
         name: {
@@ -56,22 +68,26 @@ export default {
             type: Boolean,
             required: true,
         },
+        showTitle: {
+            type: Boolean,
+            default: true,
+        },
+        colCopy: {
+            type: Boolean,
+            default: false,
+        },
+        responsiveStyle: {
+            type: Object,
+            default: () => ({ height: '24rem', 'overflow-y': 'auto' }),
+        },
     },
     setup(props: DynamicLayoutProps) {
         const state = reactive({
             isApiMode: computed(() => !!props.api),
             data: {},
         });
-        const fields = computed<DynamicFieldType[]>(() => props.options.fields || []);
-        const onlyKeys = computed<string[]>(() => {
-            if (props.options.fields) {
-                if (props.options.root_path) {
-                    return props.options.fields.map(item => `${props.options.root_path}.${item.key}`);
-                }
-                return props.options.fields.map(item => item.key);
-            }
-            return [];
-        });
+        const fields = makeFields(props);
+
 
         const getData = async () => {
             if (checkCanGetData(props)) {
@@ -84,14 +100,14 @@ export default {
                 if (props.api?.getAction) {
                     action = props.api.getAction(action) as GetAction<any, any>;
                 }
-                if (onlyKeys.value.length) {
-                    // @ts-ignore
-                    action = action.setOnly(...changeSetOnlys(onlyKeys.value));
+                if (props.options.root_path) {
+                    action = action.setOnly(props.options.root_path);
                 }
                 const resp = await action.execute();
                 state.data = resp.data || {};
             }
         };
+        // const getData = _.debounce(getDataFunc, 50);
 
         let apiWatchStop: any = null;
         watch(() => state.isApiMode, (after, before) => {
@@ -113,20 +129,18 @@ export default {
             }
         });
 
-
         const readonlyData = computed(() => (state.isApiMode ? state.data : props.data));
-        const rootData = computed(() => {
+        const items = computed(() => {
             if (props.options.root_path) {
-                return get(readonlyData.value, props.options.root_path);
+                return _.get(readonlyData.value, props.options.root_path, []);
             }
             return readonlyData.value;
         });
-        const defs = makeDefs(fields, rootData);
-        const noData = computed(() => every(defs.value, def => !def.data));
+        const slots = makeTableSlots(props);
         return {
-            defs,
-            noData,
-            rootData,
+            fields,
+            slots,
+            items,
         };
     },
 };

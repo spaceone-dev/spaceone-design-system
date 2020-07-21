@@ -13,6 +13,11 @@ export enum DYNAMIC_FIELD_TYPE {
 
 export type DynamicFieldType = keyof typeof DYNAMIC_FIELD_TYPE;
 
+export interface Reference {
+    resource_type: string;
+    reference_key: string;
+}
+
 export interface CommonOptions {
     link?: string;
     tooltip?: string;
@@ -68,12 +73,15 @@ export type DynamicFieldOptions =
 
 
 export interface DynamicField {
+    key: string;
+    name: string;
     type: DynamicFieldType;
     options?: DynamicFieldOptions;
+    reference?: Reference;
     data: any;
 }
 
-/** Props type for Dynamic field components */
-export interface DynamicFieldProps extends Required<DynamicField> {
-    extra: any;
+/** Props type for Dynamic field component */
+export interface DynamicFieldProps extends Pick<DynamicField, 'type'|'options'|'data'> {
+    extra: any; // a set of extra props for each component
 }

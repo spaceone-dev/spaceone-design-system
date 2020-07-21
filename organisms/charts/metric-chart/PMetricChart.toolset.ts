@@ -1,4 +1,4 @@
-import { Timestamp } from '@/components/util/data-types';
+import { Timestamp } from '@/components/util/type';
 
 export const metricChartProps = {
     loading: {

@@ -1,9 +1,9 @@
 <script lang="ts">
-import _ from 'lodash';
+import { get } from 'lodash';
 import PStatus from '@/components/molecules/status/PStatus.vue';
 import { getColor } from '@/components/organisms/dynamic-field/PDynamicField.toolset';
 import { StatusProps } from '@/components/molecules/status/PStatus.toolset';
-import {StateOptions} from "@/components/organisms/dynamic-field/type";
+import { StateOptions } from '@/components/organisms/dynamic-field/type';
 
 export default {
     name: 'PDynamicFieldState',
@@ -23,9 +23,9 @@ export default {
     render(h, { props }) {
         const options: StateOptions = props.options;
         const statusProps: StatusProps = {
-            icon: _.get(options, ['icon', 'image'], null),
-            iconColor: getColor(_.get(options, ['icon', 'color'], null)),
-            textColor: getColor(_.get(options, ['text_color'], null)),
+            icon: get(options, ['icon', 'image'], null),
+            iconColor: getColor(get(options, ['icon', 'color'], null)),
+            textColor: getColor(get(options, ['text_color'], null)),
             text: props.data,
         };
         return h(PStatus, {

@@ -1,7 +1,7 @@
 <script lang="ts">
-import _ from 'lodash';
+import { get } from 'lodash';
 import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
-import { DynamicField, EnumOptions } from '@/components/organisms/dynamic-field/type';
+import { DynamicFieldProps, EnumOptions } from '@/components/organisms/dynamic-field/type';
 
 export default {
     name: 'PDynamicFieldEnum',
@@ -24,9 +24,8 @@ export default {
     render(h, { props }) {
         // eslint-disable-next-line camelcase
         const enumOptions: EnumOptions = props.options;
-        const option: Omit<DynamicField, 'data'> = _.get(
-            enumOptions,
-            [props.data],
+        const option: Omit<DynamicFieldProps, 'data'|'extra'> = get(
+            enumOptions, props.data,
             { type: 'text' },
         );
         return h(PDynamicField, { props: { ...option, data: props.data, extra: props.extra } });

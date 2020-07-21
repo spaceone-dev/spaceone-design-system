@@ -1,4 +1,4 @@
-import { reactive, computed, Ref } from '@vue/composition-api';
+import { reactive } from '@vue/composition-api';
 import { assign } from 'lodash';
 
 interface ClassTypeOf<T> {
