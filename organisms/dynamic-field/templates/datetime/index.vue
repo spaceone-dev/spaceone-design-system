@@ -1,6 +1,6 @@
 <script lang="ts">
 import { DateTime as dt } from 'luxon';
-import {DatetimeOptions} from "@/components/organisms/dynamic-field/type";
+import { DatetimeOptions } from '@/components/organisms/dynamic-field/type';
 
 export default {
     name: 'PDynamicFieldDatetime',
@@ -8,11 +8,18 @@ export default {
     props: {
         options: {
             type: Object,
-            default: () => ({}),
+            default: () => ({
+                // eslint-disable-next-line camelcase
+                source_type: 'timestamp',
+            }),
         },
         data: {
             type: [String, Object, Array, Boolean, Number],
             required: true,
+        },
+        extra: {
+            type: Object,
+            default: () => ({}),
         },
     },
     render(h, { props, data }) {
@@ -20,7 +27,7 @@ export default {
         const options: DatetimeOptions = props.options;
         if (props.data) {
             let time: dt;
-            if (options.source_type === 'iso861') {
+            if (options.source_type === 'iso8601') {
                 if (options.source_format) {
                     time = dt.fromFormat(props.data, options.source_format);
                 } else {
@@ -32,7 +39,7 @@ export default {
                 time = dt.fromISO(props.data);
             }
 
-            time = time.setZone(options.timezone ? options.timezone : 'UTC');
+            time = time.setZone(props.extra.timezone ? props.extra.timezone : 'UTC');
             if (options.display_format) {
                 result = time.toFormat(options.display_format);
             } else {

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 
+/** Metadata schema types for Dynamic field */
 export enum DYNAMIC_FIELD_TYPE {
     badge = 'badge',
     datetime = 'datetime',
@@ -12,37 +13,38 @@ export enum DYNAMIC_FIELD_TYPE {
 
 export type DynamicFieldType = keyof typeof DYNAMIC_FIELD_TYPE;
 
+export interface CommonOptions {
+    link?: string;
+    tooltip?: string;
+    sortable?: boolean;
+    sort_key?: string;
+}
 
-export interface BadgeOptions {
+export interface BadgeOptions extends CommonOptions {
     outline_color?: string;
     shape?: string;
-    link?: string;
     background_color?: string;
     text_color?: string;
 }
 
-export interface DatetimeOptions {
-    source_type: string;
+export enum DATETIME_SOURCE_TYPE {
+    iso8601 = 'iso8601',
+    timestamp = 'timestamp'
+}
+
+export interface DatetimeOptions extends CommonOptions {
+    source_type: keyof typeof DATETIME_SOURCE_TYPE;
     source_format?: string;
     display_format?: string;
-    timezone?: string;
 }
 
-export interface DictOptions {
-    [key: string]: string|number;
-}
-
-export interface EnumOptions {
-    [data: string]: DynamicField;
-}
-
-export interface ListOptions {
+export interface ListOptions extends CommonOptions {
     item?: DynamicField;
     sub_key?: string;
     delimiter?: string;
 }
 
-export interface StateOptions {
+export interface StateOptions extends CommonOptions {
     icon?: {
         image?: string;
         color?: string;
@@ -50,8 +52,13 @@ export interface StateOptions {
     text_color?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface TextOptions {}
+export interface EnumOptions {
+    [data: string]: DynamicField;
+}
+
+export type DictOptions = CommonOptions
+
+export type TextOptions = CommonOptions
 
 
 export type DynamicFieldOptions =
@@ -64,4 +71,9 @@ export interface DynamicField {
     type: DynamicFieldType;
     options?: DynamicFieldOptions;
     data: any;
+}
+
+/** Props type for Dynamic field components */
+export interface DynamicFieldProps extends Required<DynamicField> {
+    extra: any;
 }

@@ -75,8 +75,8 @@ export const makeTableSlots = (props: DynamicLayoutProps|any) => computed((): Dy
             name: `col-${ds.key}-format`,
         };
         if (res.type === 'datetime') {
-            if (!res.options) res.options = {};
-            if (!res.options.timezone) res.options.timezone = getTimezone();
+            if (!res.extra) res.extra = {};
+            if (!res.extra.timezone) res.extra.timezone = getTimezone();
         }
         return res;
     }) : []));

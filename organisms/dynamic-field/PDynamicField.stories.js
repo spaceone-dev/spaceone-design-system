@@ -112,20 +112,20 @@ export const datetimeType = () => ({
             data: [
                 {
                     option: {
-                        source_type: 'iso861',
+                        source_type: 'iso8601',
                     },
                     raw: '2013-02-08 09:30:26.123',
                 },
                 {
                     option: {
-                        source_type: 'iso861',
+                        source_type: 'iso8601',
                         source_format: 'MM-DD-YYYY',
                     },
                     raw: '10-20-2019',
                 },
                 {
                     option: {
-                        source_type: 'iso861',
+                        source_type: 'iso8601',
                         source_format: 'MM-DD-YYYY',
                         display_format: 'YYYY-MM-DD',
                     },

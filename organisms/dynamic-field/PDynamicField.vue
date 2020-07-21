@@ -1,6 +1,6 @@
 <template>
     <component :is="component"
-               :options="options" :data="data"
+               :options="options" :data="data" :extra="extra"
     />
 </template>
 
@@ -8,7 +8,7 @@
 import {
     computed, onMounted, reactive, toRefs,
 } from '@vue/composition-api';
-import { DynamicField } from '@/components/organisms/dynamic-field/type';
+import { DynamicFieldProps } from '@/components/organisms/dynamic-field/type';
 
 
 interface State {
@@ -33,8 +33,12 @@ export default {
             type: [String, Object, Array, Boolean, Number],
             default: '',
         },
+        extra: {
+            type: Object,
+            default: () => ({}),
+        },
     },
-    setup(props: DynamicField) {
+    setup(props: DynamicFieldProps) {
         // noinspection TypeScriptCheckImport
         const state = reactive<any>({
             component: null,

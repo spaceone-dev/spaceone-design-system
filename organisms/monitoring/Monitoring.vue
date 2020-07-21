@@ -65,6 +65,7 @@
                                         :dataset="chartMetrics[index].dataset"
                                         :colors="colors"
                                         :unit="item.metric.unit"
+                                        :timezone="timezone"
                                         :title="item.metric.name"
                                         :error="item.error"
                         />
@@ -107,8 +108,8 @@ import {
 } from '@/lib/fluent-api/monitoring/type';
 import { GetMetricData, MetricList } from '@/lib/fluent-api/monitoring/metric';
 import moment, { Moment } from 'moment';
-import { getTimestamp } from '@/lib/util';
-import PMetricChart from '@/views/common/charts/metric-chart/MetricChart.vue';
+import { getTimestamp, getTimezone } from '@/lib/util';
+import PMetricChart from '@/components/organisms/charts/metric-chart/PMetricChart.vue';
 import PGridLayout from '@/components/molecules/layouts/grid-layout/PGridLayout.vue';
 import PLottie from '@/components/molecules/lottie/PLottie.vue';
 import PButton from '@/components/atoms/buttons/PButton.vue';
@@ -145,6 +146,7 @@ export default {
         }
 
         interface State {
+            timezone: string;
             dataTools: DataToolType[];
             tools: readonly SelectBtnType[];
             selectedToolId: string;
@@ -162,6 +164,7 @@ export default {
         }
 
         const state: UnwrapRef<State> = reactive({
+            timezone: getTimezone(),
             dataTools: [],
             selectedToolId: '',
             tools: computed(() => state.dataTools.map(d => ({

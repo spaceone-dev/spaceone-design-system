@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import { getBindClass } from '@/components/util/functional-helpers';
-import { DynamicField, ListOptions } from '@/components/organisms/dynamic-field/type';
+import { DynamicField, DynamicFieldProps, ListOptions } from '@/components/organisms/dynamic-field/type';
 
 
 export default {
@@ -18,13 +18,17 @@ export default {
             type: [String, Object, Array, Boolean, Number],
             required: true,
         },
+        extra: {
+            type: Object,
+            default: () => ({}),
+        },
     },
     render(h, { props, data: compData }) {
         const listOptions: ListOptions = props.options || {};
         const childOptions: Omit<DynamicField, 'data'> = listOptions.item || { type: 'text' };
-        let datas: any[] = [];
+        let childrenData: any[] = [];
 
-        const getValue = (data, paths: string[], results: any[]): any[] => {
+        const getValue = (data, paths: string[], results: DynamicFieldProps[]): DynamicFieldProps[] => {
             if (Array.isArray(data)) {
                 data.forEach((v, idx) => {
                     getValue(data[idx], paths, results);
@@ -39,13 +43,13 @@ export default {
         };
         if (listOptions.sub_key) {
             const subKey = listOptions.sub_key.split('.');
-            datas = getValue(props.data, subKey, []);
+            childrenData = getValue(props.data, subKey, []);
         } else {
-            datas = props.data;
+            childrenData = props.data;
         }
         let children: any[] = [];
-        if (Array.isArray(datas)) {
-            children = datas.map(data => h(PDynamicField, { props: { ...childOptions, data } }));
+        if (Array.isArray(childrenData)) {
+            children = childrenData.map(data => h(PDynamicField, { props: { ...childOptions, data, extra: props.extra } }));
         }
 
 
@@ -56,6 +60,7 @@ export default {
         } else {
             delimiterEl = h('span', delimiter);
         }
+
         if (children.length) {
             const dim = _.fill(Array(children.length - 1), delimiterEl);
             children = _.flatten(_.zip(children, dim));

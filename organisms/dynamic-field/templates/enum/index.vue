@@ -16,6 +16,10 @@ export default {
             type: [String, Object, Array, Boolean, Number],
             required: true,
         },
+        extra: {
+            type: Object,
+            default: () => ({}),
+        },
     },
     render(h, { props }) {
         // eslint-disable-next-line camelcase
@@ -25,7 +29,7 @@ export default {
             [props.data],
             { type: 'text' },
         );
-        return h(PDynamicField, { props: { ...option, data: props.data } });
+        return h(PDynamicField, { props: { ...option, data: props.data, extra: props.extra } });
     },
 };
 </script>
