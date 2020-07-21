@@ -2,9 +2,9 @@ import { computed, reactive, Ref } from '@vue/composition-api';
 import { TableState, tableProps, TablePropsType } from '@/components/molecules/tables/PTable.toolset';
 import {
     HelperToolSet, initReactive, optionalType, StateToolSet, SyncStateToolSet,
-} from '@/lib/toolset';
-import _ from 'lodash';
-import { Computed } from '@/lib/type';
+} from '@/components/util/toolset-helpers';
+import { get } from 'lodash';
+import { Computed } from '@/components/util/type';
 import { UnwrapRef } from '@vue/composition-api/dist/reactivity';
 
 
@@ -196,8 +196,8 @@ export interface LinkState {
 export const initLinkState = (selectState: DataTableSelectState): LinkState => {
     const link: Ref<Readonly<string|undefined>> = computed((): string|undefined => {
         if (selectState.isSelectOne) {
-            return _.get(selectState.firstSelectItem, 'data.reference.link')
-                || _.get(selectState.firstSelectItem, 'reference.external_link');
+            return get(selectState.firstSelectItem, 'data.reference.link')
+                || get(selectState.firstSelectItem, 'reference.external_link');
         }
         return undefined;
     });

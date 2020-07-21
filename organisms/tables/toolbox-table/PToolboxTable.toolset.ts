@@ -5,7 +5,7 @@ import {
     DataTableState,
     DataTableSyncType,
     DataTableToolSet, LinkState,
-} from '@/components/organisms/tables/data-table/DataTable.toolset';
+} from '@/components/organisms/tables/data-table/PDataTable.toolset';
 import {
     HelperToolSet,
     initReactive, StateToolSet, SyncStateToolSet,

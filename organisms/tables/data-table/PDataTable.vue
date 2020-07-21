@@ -180,7 +180,7 @@ import { copyAnyData, selectToCopyToClipboard } from '@/components/util/helpers'
 import { makeProxy, windowEventMount } from '@/components/util/composition-helpers';
 // eslint-disable-next-line import/named
 import PSkeleton from '@/components/atoms/skeletons/PSkeleton.vue';
-import { dataTableProps, DataTableSetupProps } from './DataTable.toolset';
+import { dataTableProps, DataTableSetupProps } from './PDataTable.toolset';
 
 const PCheckBox = () => import('@/components/molecules/forms/checkbox/PCheckBox.vue');
 const PRadio = () => import('@/components/molecules/forms/radio/PRadio.vue');
