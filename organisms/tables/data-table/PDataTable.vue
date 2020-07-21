@@ -323,7 +323,7 @@ export default {
                     return;
                 }
                 if (event.shiftKey) {
-                    if (!props.dragable) {
+                    if (!props.draggable) {
                         checkboxToggle(index);
                     }
                     return;
@@ -400,7 +400,7 @@ export default {
 
         let dragSelect = null;
         onMounted(() => {
-            if (props.selectable && props.dragable) {
+            if (props.selectable && props.draggable) {
                 // @ts-ignore
                 dragSelect = new DragSelect({
                     selectables: dragSelectAbles.value as any[],
@@ -415,7 +415,7 @@ export default {
         }
 
         watch(() => props.items, () => {
-            if (props.selectable && props.dragable && props.items) {
+            if (props.selectable && props.draggable && props.items) {
                 context.root.$nextTick((() => {
                     // @ts-ignore
                     dragSelect.setSelectables(dragSelectAbles.value);

@@ -74,7 +74,7 @@ export class ToolboxTableState<
             padding: true,
             toolboxBackground: true,
             sortable: true,
-            dragable: true,
+            draggable: true,
             rowClickMultiSelectMode: true,
             selectable: true,
         };
