@@ -1,6 +1,6 @@
 <template>
     <component :is="component"
-               :key-path="keyPath" :options="options" :data="data"
+               :options="options" :data="data"
                :extra="extra"
     />
 </template>
@@ -29,7 +29,7 @@ export default {
             default: () => ({}),
         },
         data: {
-            type: [String, Object, Array, Boolean, Number],
+            type: [String, Object, Array, Boolean, Number, null],
             default: '',
         },
         extra: {

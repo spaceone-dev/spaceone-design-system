@@ -23,7 +23,7 @@ import {
     computed, reactive, watch,
 } from '@vue/composition-api';
 import _ from 'lodash';
-import PDataTable from '@/components/organisms/tables/data-table/DataTable.vue';
+import PDataTable from '@/components/organisms/tables/data-table/PDataTable.vue';
 import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import PPanelTop from '@/components/molecules/panel/panel-top/PPanelTop.vue';
 import {

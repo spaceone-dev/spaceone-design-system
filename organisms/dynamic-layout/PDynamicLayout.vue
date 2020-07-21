@@ -21,18 +21,12 @@
 /* eslint-disable camelcase,vue/prop-name-casing,@typescript-eslint/camelcase */
 
 import {
-    computed, onMounted, reactive, toRefs, watch,
+    computed, reactive, toRefs, watch,
 } from '@vue/composition-api';
 import PSkeleton from '@/components/atoms/skeletons/PSkeleton.vue';
 import { isEqual } from 'lodash';
 import { DynamicLayoutProps } from '@/components/organisms/dynamic-layout/PDynamicLayout.toolset';
-import { Computed } from '@/components/util/type';
 
-
-interface State {
-    component: any;
-    loader: Computed<() => Promise<any>>;
-}
 
 export default {
     name: 'PDynamicLayout',
@@ -59,35 +53,28 @@ export default {
         // noinspection TypeScriptCheckImport
         const state = reactive({
             component: null as any,
-            isLoading: false,
+            isLoading: true,
             loader: computed<() => Promise<any>>(() => () => import(`./templates/${props.type}/index.vue`)),
         });
 
-        const getComponent = () => {
-            // @ts-ignore
-            state.loader().then(() => {
+        const getComponent = async () => {
+            state.isLoading = true;
+            try {
                 // @ts-ignore
-                state.component = () => state.loader();
-            })
-                .catch(() => {
-                    // eslint-disable-next-line import/no-unresolved
-                    state.component = () => import('./templates/item/index.vue');
-                }).finally(() => {
-                    state.isLoading = false;
-                });
+                state.component = await (() => state.loader());
+            } catch (e) {
+                state.component = () => import('./templates/item/index.vue');
+            } finally {
+                state.isLoading = false;
+            }
         };
 
-
-        onMounted((): void => {
-            // @ts-ignore
-            getComponent();
-            watch(() => [props.type, props.name], (aft, bef) => {
-                if (!isEqual(aft, bef)) {
-                    state.isLoading = true;
-                    getComponent();
-                }
-            });
+        watch(() => [props.type, props.name], (aft, bef) => {
+            if (!isEqual(aft, bef)) {
+                getComponent();
+            }
         });
+
         return {
             ...toRefs(state),
         };

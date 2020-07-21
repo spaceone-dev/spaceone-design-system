@@ -55,7 +55,7 @@
 import {
     computed, reactive, Ref, toRefs, watch,
 } from '@vue/composition-api';
-import PToolboxTable from '@/components/organisms/tables/toolbox-table/ToolboxTable.vue';
+import PToolboxTable from '@/components/organisms/tables/toolbox-table/PToolboxTable.vue';
 import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import PSearch from '@/components/molecules/search/PSearch.vue';
 import { SearchTableFluentAPI } from '@/lib/api/table';

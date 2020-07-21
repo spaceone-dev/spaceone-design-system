@@ -13,8 +13,8 @@ export default {
             default: () => ({}),
         },
         data: {
-            type: [String, Object, Array, Boolean, Number],
-            required: true,
+            type: [String, Object, Array, Boolean, Number, null],
+            default: null,
         },
         extra: {
             type: Object,

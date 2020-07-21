@@ -17,7 +17,7 @@ import {
     DynamicLayoutApiProp, checkCanGetData,
 } from '@/components/organisms/dynamic-view/dynamic-layout/toolset';
 import { GetAction, ResourceActions } from '@/lib/fluent-api';
-import PRawData from '@/components/organisms/text-editor/raw-data/RawData.vue';
+import PRawData from '@/components/organisms/text-editor/raw-data/PRawData.vue';
 import PPanelTop from '@/components/molecules/panel/panel-top/PPanelTop.vue';
 
 export default defineComponent({

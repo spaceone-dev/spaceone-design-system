@@ -17,8 +17,8 @@ export default {
             default: () => ({}),
         },
         data: {
-            type: [String, Object, Array, Boolean, Number],
-            required: true,
+            type: [String, Object, Array, Boolean, Number, null],
+            default: null,
         },
         extra: {
             type: Object,
@@ -41,7 +41,7 @@ export default {
                 data.forEach((v, idx) => {
                     getValue(data[idx], paths, results);
                 });
-            } else if (typeof data === 'object') {
+            } else if (typeof data === 'object' && data !== null) {
                 getValue(data[paths[0]], paths.slice(1), results);
             } else if (paths.length === 0 && data !== '' && data !== null && data !== undefined) {
                 results.push(data);

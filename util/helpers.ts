@@ -1,4 +1,4 @@
-import { toString } from 'lodash';
+import _, { toString } from 'lodash';
 
 /** @function
  * @name selectToCopyToClipboard
@@ -20,4 +20,15 @@ export const copyAnyData = (value) => {
     } else if (typeof value === 'object') {
         selectToCopyToClipboard(JSON.stringify(value));
     } else selectToCopyToClipboard(value || '');
+};
+
+/** @function
+ * @name isNotEmpty
+ * @param value
+ * @returns {boolean}
+ */
+export const isNotEmpty = (value): boolean => {
+    if (['boolean', 'number'].includes(typeof value)) return true;
+    if (value instanceof Array) return !!value.length;
+    return !_.isEmpty(value); // String, Object
 };

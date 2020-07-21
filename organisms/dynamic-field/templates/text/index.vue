@@ -8,13 +8,13 @@ export default {
             default: () => ({}),
         },
         data: {
-            type: [String, Object, Array, Boolean, Number, typeof null],
-            default: '',
+            type: [String, Object, Array, Boolean, Number, null],
+            default: null,
         },
     },
     render(h, { props, data }) {
         let text: string = (typeof props.data === 'string') ? props.data : JSON.stringify(props.data);
-        text = text === 'null' ? '' : text;
+        text = (text === null) ? '' : text;
         return h('span', data, text);
     },
 };

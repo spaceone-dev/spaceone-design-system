@@ -82,7 +82,7 @@
 import {
     computed, onMounted, reactive, toRefs, watch,
 } from '@vue/composition-api';
-import PToolboxTable from '@/components/organisms/tables/toolbox-table/ToolboxTable.vue';
+import PToolboxTable from '@/components/organisms/tables/toolbox-table/PToolboxTable.vue';
 import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import PQuerySearchTags from '@/components/organisms/search/query-search-tags/PQuerySearchTags.vue';
 
