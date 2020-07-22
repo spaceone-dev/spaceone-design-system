@@ -5,8 +5,8 @@
         :options="options"
         :data="data"
         :api="api"
-        :toolset="toolset"
         :is-show="isShow"
+        :extra="extra"
         v-bind="vbind"
         :is-loading="isLoading"
         v-on="$listeners"
@@ -26,6 +26,7 @@ import {
 import PSkeleton from '@/components/atoms/skeletons/PSkeleton.vue';
 import { isEqual } from 'lodash';
 import { DynamicLayoutProps } from '@/components/organisms/dynamic-layout/PDynamicLayout.toolset';
+import { makeProxy } from '@/components/util/composition-helpers';
 
 
 export default {
@@ -52,10 +53,6 @@ export default {
             type: Object,
             default: null,
         },
-        toolset: {
-            type: Object,
-            default: null,
-        },
         isShow: {
             type: Boolean,
             default: true,
@@ -66,8 +63,12 @@ export default {
                 initData: {},
             }),
         },
+        extra: {
+            type: Object,
+            default: () => ({}),
+        },
     },
-    setup(props: DynamicLayoutProps) {
+    setup(props: DynamicLayoutProps, { emit }) {
         // noinspection TypeScriptCheckImport
         const state = reactive({
             component: null as any,

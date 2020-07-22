@@ -105,19 +105,37 @@ export class ToolboxTableToolSet<initData=any, initSyncData=any> extends Toolbox
 
      setAllPage: (totalCount: number) => void = null as unknown as (totalCount: number) => void;
 
-     static initToolSet(_this: any, ...args: any[]) {
-         DataTableToolSet.initToolSet(_this);
-         _this.setAllPage = (totalCount: number) => {
-             _this.state.allPage = getAllPage(totalCount, (_this.syncState.pageSize));
-         };
-     }
+    onSelect = (selectIndex: number[]) => {
+        this.syncState.selectIndex = selectIndex;
+    }
 
-     constructor(initData: initData = {} as initData, initSyncData: initSyncData = {} as initSyncData, lazy = false) {
-         super(initData, initSyncData);
-         if (!lazy) {
-             ToolboxTableToolSet.initToolSet(this);
-         }
-     }
+    onChangeSort = (sortBy: string, sortDesc: boolean) => {
+        this.syncState.sortBy = sortBy;
+        this.syncState.sortDesc = sortDesc;
+    }
+
+    onChangePageSize = (pageSize: number) => {
+        this.syncState.pageSize = pageSize;
+    }
+
+    onChangePageNumber = (thisPage: number) => {
+        this.syncState.thisPage = thisPage;
+    }
+
+
+    static initToolSet(_this: any, ...args: any[]) {
+        DataTableToolSet.initToolSet(_this);
+        _this.setAllPage = (totalCount: number) => {
+            _this.state.allPage = getAllPage(totalCount, (_this.syncState.pageSize));
+        };
+    }
+
+    constructor(initData: initData = {} as initData, initSyncData: initSyncData = {} as initSyncData, lazy = false) {
+        super(initData, initSyncData);
+        if (!lazy) {
+            ToolboxTableToolSet.initToolSet(this);
+        }
+    }
 }
 
 
