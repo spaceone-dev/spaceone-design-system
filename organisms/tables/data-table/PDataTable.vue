@@ -180,6 +180,7 @@ import { copyAnyData, selectToCopyToClipboard } from '@/components/util/helpers'
 import { makeProxy, windowEventMount } from '@/components/util/composition-helpers';
 // eslint-disable-next-line import/named
 import PSkeleton from '@/components/atoms/skeletons/PSkeleton.vue';
+import { tableProps } from '@/components/molecules/tables/PTable.toolset';
 import { dataTableProps, DataTableSetupProps } from './PDataTable.toolset';
 
 const PCheckBox = () => import('@/components/molecules/forms/checkbox/PCheckBox.vue');
@@ -216,7 +217,63 @@ export default {
         PLottie,
         PRadio,
     },
-    props: dataTableProps,
+    props: {
+        ...tableProps,
+        fields: Array,
+        items: Array,
+        sortable: {
+            type: Boolean,
+            default: false,
+        },
+        draggable: {
+            type: Boolean,
+            default: false,
+        },
+        rowClickMultiSelectMode: {
+            type: Boolean,
+            default: false,
+        },
+        selectable: {
+            type: Boolean,
+            default: false,
+        },
+        selectIndex: {
+            type: [Array, Number],
+            default: () => [],
+        },
+        sortBy: {
+            type: String,
+            default: null,
+        },
+        sortDesc: {
+            type: Boolean,
+            default: true,
+        },
+        colCopy: {
+            type: Boolean,
+            default: false,
+        },
+        loading: {
+            type: Boolean,
+            default: false,
+        },
+        useCursorLoading: {
+            type: Boolean,
+            default: false,
+        },
+        skeletonRows: {
+            type: Number,
+            default: 5,
+        },
+        /**
+         * @name multiSelect
+         * @description When it's 'false', should NOT give value 'true' to 'draggable' prop.
+         */
+        multiSelect: {
+            type: Boolean,
+            default: true,
+        },
+    },
     setup(props: DataTableSetupProps, context) {
         const state = reactive({
             table: null,
@@ -297,10 +354,10 @@ export default {
             if (!hasSelectData()) {
                 if (!props.multiSelect) return;
 
-                if (event.code === 'KeyC' && (event.ctrlKey || event.metaKey) && (props.selectIndex as Array<any>).length > 0) {
+                if (event.code === 'KeyC' && (event.ctrlKey || event.metaKey) && (proxySelectIndex.value as Array<any>).length > 0) {
                     let result = '';
-                    if (typeof props.selectIndex === 'object') {
-                        props.selectIndex.forEach((td) => {
+                    if (typeof proxySelectIndex.value === 'object') {
+                        proxySelectIndex.value.forEach((td) => {
                             result += makeTableText(dragSelectAbles.value[td]);
                         });
                     }
@@ -435,8 +492,8 @@ export default {
             }
         });
 
-        watch(() => props.selectIndex, () => {
-            if (props.items && props.items.length && props.items.length === (props.selectIndex as any[]).length) {
+        watch(() => proxySelectIndex.value, () => {
+            if (props.items && props.items.length && props.items.length === (proxySelectIndex.value as any[]).length) {
                 state.allState = true;
             } else {
                 state.allState = false;
