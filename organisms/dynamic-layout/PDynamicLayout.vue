@@ -5,10 +5,7 @@
         :options="options"
         :data="data"
         :loading="loading"
-        :api="api"
-        :is-show="isShow"
         :extra="extra"
-        v-bind="vbind"
         v-on="$listeners"
     >
         <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
@@ -47,20 +44,6 @@ export default {
         data: {
             type: [Object, Array],
             default: null,
-        },
-        api: {
-            type: Object,
-            default: null,
-        },
-        isShow: {
-            type: Boolean,
-            default: true,
-        },
-        vbind: {
-            type: Object,
-            default: () => ({
-                initData: {},
-            }),
         },
         loading: {
             type: Boolean,

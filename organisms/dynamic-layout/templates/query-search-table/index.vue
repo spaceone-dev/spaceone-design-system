@@ -160,18 +160,6 @@ export default {
             type: Array,
             default: () => [],
         },
-        api: {
-            type: Object,
-            default: null,
-        },
-        isShow: {
-            type: Boolean,
-            default: true,
-        },
-        isLoading: {
-            type: Boolean,
-            default: true,
-        },
         showTitle: {
             type: Boolean,
             default: true,
@@ -179,10 +167,6 @@ export default {
         exportFields: {
             type: Array,
             default: null,
-        },
-        isShowGetData: {
-            type: Boolean,
-            default: true,
         },
         loading: {
             type: Boolean,

@@ -28,18 +28,6 @@ export const tableProps = {
         type: Object,
         default: null,
     },
-    theadStyle: {
-        type: Object,
-        default: null,
-    },
-    tbodyStyle: {
-        type: Object,
-        default: null,
-    },
-    tfootStyle: {
-        type: Object,
-        default: null,
-    },
     tbodyClass: {
         type: Object,
         default: null,
@@ -98,9 +86,6 @@ export interface TablePropsType {
     theadStyleType?: string;
     responsiveStyle?: object;
     tableStyle?: object;
-    theadStyle?: object;
-    tbodyStyle?: object;
-    tfootStyle?: object;
     tbodyClass?: object;
     tfootClass?: object;
 }

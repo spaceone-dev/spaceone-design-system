@@ -5,17 +5,17 @@
             :class="classObject"
             :style="tableStyle"
         >
-            <thead :class="theadClassObject" :style="theadStyle">
+            <thead :class="theadClassObject">
                 <slot name="head" />
             </thead>
-            <tbody :class="tbodyClass" :style="tbodyStyle" :onselectstart="tbodyOnSelectStart? 'return true':'return false'">
+            <tbody :class="tbodyClass" :onselectstart="tbodyOnSelectStart? 'return true':'return false'">
                 <!--            is="transition-group" name="table-row"-->
                 <!--            @before-enter="beforRowEnter"-->
                 <!--            @enter="rowEnter"-->
                 <!--            @leave="rowLeave"-->
                 <slot name="body" />
             </tbody>
-            <tfoot :class="tfootClass" :style="tfootStyle">
+            <tfoot :class="tfootClass">
                 <slot name="foot" />
             </tfoot>
         </table>
