@@ -175,7 +175,6 @@ export default {
         extra: {
             type: Object,
             default: () => ({
-                responsiveStyle: { height: '24rem', 'overflow-y': 'auto' },
             }),
         },
     },
