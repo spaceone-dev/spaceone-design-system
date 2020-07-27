@@ -2,7 +2,7 @@
     <component
         :is="component"
         :name="name"
-        :options="options"
+        :options="mergedOptions"
         :data="data"
         :api="api"
         :toolset="toolset"
@@ -24,8 +24,11 @@ import {
     computed, defineComponent, onMounted, reactive, toRefs, watch,
 } from '@vue/composition-api';
 import { Computed } from '@/lib/type';
-import PSkeleton from '@/components/atoms/skeletons/Skeleton.vue';
+import PSkeleton from '@/components/atoms/skeletons/PSkeleton.vue';
 import _ from 'lodash';
+import { UnwrapRef } from '@vue/composition-api/dist/reactivity';
+import { makeProxy } from '@/lib/compostion-util';
+import referenceRouter from '@/lib/reference/referenceRouter';
 import { DynamicLayoutProps } from './toolset';
 
 
@@ -73,39 +76,50 @@ export default defineComponent({
             }),
         },
     },
-    setup(props: DynamicLayoutProps) {
+    setup(props: DynamicLayoutProps, { emit }) {
         // noinspection TypeScriptCheckImport
         const state = reactive({
             component: null as any,
-            isLoading: false,
-            loader: computed<() => Promise<any>>(() => () => import(`./templates/${props.type}/index.vue`)),
+            isLoading: true,
+            loader: computed<() => Promise<any>>(() => () => import(`./templates/${props.type}/index.vue`)) as unknown as () => Promise<any>,
+            fields: props.options.fields || [],
+            mergedOptions: computed(() => ({ ...props.options, fields: state.fields })),
         });
 
-        const getComponent = () => {
-            // @ts-ignore
-            state.loader().then(() => {
-                // @ts-ignore
-                state.component = () => state.loader();
-            })
-                .catch(() => {
-                    // eslint-disable-next-line import/no-unresolved
-                    state.component = () => import('./templates/item/index.vue');
-                }).finally(() => {
-                    state.isLoading = false;
-                });
+        const getComponent = async () => {
+            try {
+                // reference to link fields pre-process
+
+                for (const field of state.fields) {
+                    if (field.reference) {
+                        // eslint-disable-next-line no-await-in-loop
+                        field.options.link = await referenceRouter(
+                            field.reference.reference_type,
+                            field.reference.reference_key,
+                        );
+                    }
+                }
+
+                await state.loader();
+                state.component = async () => state.loader();
+            } catch (e) {
+                state.component = () => import('./templates/item/index.vue');
+            } finally {
+                state.isLoading = false;
+            }
         };
 
+        watch(() => [props.type, props.name], (aft, bef) => {
+            if (!_.isEqual(aft, bef)) {
+                state.isLoading = true;
+                getComponent();
+            }
+        }, { lazy: true });
 
-        onMounted((): void => {
-            // @ts-ignore
-            getComponent();
-            watch(() => [props.type, props.name], (aft, bef) => {
-                if (!_.isEqual(aft, bef)) {
-                    state.isLoading = true;
-                    getComponent();
-                }
-            });
+        onMounted(async () => {
+            await getComponent();
         });
+
         return {
             ...toRefs(state),
         };

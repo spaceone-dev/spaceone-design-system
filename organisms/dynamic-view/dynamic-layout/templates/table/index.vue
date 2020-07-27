@@ -11,9 +11,9 @@
         :loading.sync="apiHandler.tableTS.syncState.loading"
         :this-page.sync="apiHandler.tableTS.syncState.thisPage"
         :page-size.sync="apiHandler.tableTS.syncState.pageSize"
-        :responsive-style="responsiveStyle"
         :setting-visible="false"
         :use-cursor-loading="true"
+        ::layout-fixed="layoutFixed"
         v-on="$listeners"
         @changePageSize="getData"
         @changePageNumber="getData"
@@ -23,13 +23,13 @@
     >
         <template #toolbox-top>
             <slot v-if="showTitle||$scopedSlots['toolbox-top']" name="toolbox-top">
-                <PPanelTop v-if="showTitle"
-                           style="margin: 0; margin-top: 0.5rem;"
-                           :use-total-count="true"
-                           :total-count="apiHandler.totalCount.value"
+                <p-panel-top v-if="showTitle"
+                             style="margin: 0; margin-top: 0.5rem;"
+                             :use-total-count="true"
+                             :total-count="apiHandler.totalCount.value"
                 >
                     {{ name }}
-                </PPanelTop>
+                </p-panel-top>
             </slot>
         </template>
         <template #toolbox-left>
@@ -55,8 +55,8 @@
 import {
     computed, reactive, Ref, toRefs, watch,
 } from '@vue/composition-api';
-import PToolboxTable from '@/components/organisms/tables/toolbox-table/ToolboxTable.vue';
-import PDynamicField from '@/components/organisms/dynamic-view/dynamic-field/DynamicField.vue';
+import PToolboxTable from '@/components/organisms/tables/toolbox-table/PToolboxTable.vue';
+import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import PSearch from '@/components/molecules/search/PSearch.vue';
 import { SearchTableFluentAPI } from '@/lib/api/table';
 import {
@@ -66,7 +66,7 @@ import {
 import {
     ActionAPI, QueryAPI, GetDataAction, fluentApi,
 } from '@/lib/fluent-api';
-import PPanelTop from '@/components/molecules/panel/panel-top/PanelTop.vue';
+import PPanelTop from '@/components/molecules/panel/panel-top/PPanelTop.vue';
 import { ExcelExportAPIToolSet } from '@/lib/api/add-on';
 import _ from 'lodash';
 
@@ -121,10 +121,6 @@ export default {
             type: Boolean,
             required: true,
         },
-        responsiveStyle: {
-            type: Object,
-            default: () => ({ height: '24rem', 'overflow-y': 'auto' }),
-        },
         exportFields: {
             type: Array,
             default: null,
@@ -132,6 +128,10 @@ export default {
         isShowGetData: {
             type: Boolean,
             default: true,
+        },
+        layoutFixed: {
+            type: Boolean,
+            default: false,
         },
     },
     setup(props: DynamicLayoutProps, { emit }) {

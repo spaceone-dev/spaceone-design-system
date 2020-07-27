@@ -11,8 +11,9 @@
         :loading.sync="apiHandler.tableTS.syncState.loading"
         :this-page.sync="apiHandler.tableTS.syncState.thisPage"
         :page-size.sync="apiHandler.tableTS.syncState.pageSize"
-        :responsive-style="responsiveStyle"
-
+        :layout-fixed="layoutFixed"
+        :row-height-fixed="rowHeightFixed"
+        :width-fixed="widthFixed"
         :setting-visible="false"
         :use-cursor-loading="true"
         v-on="$listeners"
@@ -25,13 +26,13 @@
         >
         <template #toolbox-top>
             <slot v-if="showTitle||$scopedSlots['toolbox-top']" name="toolbox-top">
-                <PPanelTop v-if="showTitle"
-                           style="margin: 0; margin-top: 0.5rem;"
-                           :use-total-count="true"
-                           :total-count="apiHandler.totalCount.value"
+                <p-panel-top v-if="showTitle"
+                             style="margin: 0; margin-top: 0.5rem;"
+                             :use-total-count="true"
+                             :total-count="apiHandler.totalCount.value"
                 >
                     {{ name }}
-                </PPanelTop>
+                </p-panel-top>
             </slot>
         </template>
         <template #toolbox-left>
@@ -82,11 +83,11 @@
 import {
     computed, onMounted, reactive, toRefs, watch,
 } from '@vue/composition-api';
-import PToolboxTable from '@/components/organisms/tables/toolbox-table/ToolboxTable.vue';
-import PDynamicField from '@/components/organisms/dynamic-view/dynamic-field/DynamicField.vue';
+import PToolboxTable from '@/components/organisms/tables/toolbox-table/PToolboxTable.vue';
+import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import PQuerySearchTags from '@/components/organisms/search/query-search-tags/PQuerySearchTags.vue';
 
-import PHr from '@/components/atoms/hr/Hr.vue';
+import PHr from '@/components/atoms/hr/PHr.vue';
 import { QuerySearchTableFluentAPI } from '@/lib/api/table';
 import {
     ActionAPI, fluentApi, QueryAPI, ResourceActions,
@@ -98,7 +99,7 @@ import {
     makeFields,
     makeTableSlots,
 } from '@/components/organisms/dynamic-view/dynamic-layout/toolset';
-import PPanelTop from '@/components/molecules/panel/panel-top/PanelTop.vue';
+import PPanelTop from '@/components/molecules/panel/panel-top/PPanelTop.vue';
 import PQuerySearch from '@/components/organisms/search/query-search/PQuerySearch.vue';
 import { getKeyHandler, KeyItem } from '@/components/organisms/search/query-search/PQuerySearch.toolset';
 import { ACHandlerMeta, getStatApiValueHandlerMap } from '@/lib/api/query-search';
@@ -143,10 +144,6 @@ export default {
             type: Boolean,
             default: true,
         },
-        responsiveStyle: {
-            type: Object,
-            default: () => ({ height: '24rem', 'overflow-y': 'auto' }),
-        },
         exportFields: {
             type: Array,
             default: null,
@@ -159,9 +156,17 @@ export default {
             type: String,
             required: true,
         },
-        formatter: {
-            type: Function,
-            default: undefined,
+        layoutFixed: {
+            type: Boolean,
+            default: false,
+        },
+        rowHeightFixed: {
+            type: Boolean,
+            default: true,
+        },
+        widthFixed: {
+            type: Boolean,
+            default: false,
         },
     },
     setup(props: DynamicLayoutProps) {

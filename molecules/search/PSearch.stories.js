@@ -6,9 +6,9 @@ import { getKnobProps } from '@sb/storybook-util';
 import {
     text, number, select, object, boolean,
 } from '@storybook/addon-knobs/vue';
-import PButton from '@/components/atoms/buttons/Button.vue';
-import PSearch from './PSearch.vue';
-import { searchProps } from './PSearch.toolset';
+import PButton from '@/components/atoms/buttons/PButton.vue';
+import PSearch from '@/components/molecules/search/PSearch.vue';
+import { searchProps } from '@/components/molecules/search/PSearch.toolset';
 
 export default {
     title: 'molecules/search-new',
