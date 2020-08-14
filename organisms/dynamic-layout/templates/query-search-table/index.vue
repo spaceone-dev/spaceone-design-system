@@ -1,6 +1,6 @@
 <template>
     <div class="p-dynamic-layout-query-search-table">
-        <p-panel-top class="panel-top" v-if="name"
+        <p-panel-top v-if="name" class="panel-top"
                      :use-total-count="true"
                      :total-count="totalCount"
         >
@@ -49,7 +49,7 @@ import PPanelTop from '@/components/molecules/panel/panel-top/PPanelTop.vue';
 import PDynamicField from '@/components/organisms/dynamic-field/PDynamicField.vue';
 import { DynamicField, DynamicFieldProps } from '@/components/organisms/dynamic-field/type';
 import { KeyItem } from '@/components/organisms/search/query-search/type';
-import {forEach, get} from 'lodash';
+import { forEach, get } from 'lodash';
 import { QuerySearchDynamicLayoutProps } from '@/components/organisms/dynamic-layout/templates/query-search-table/type';
 
 export default {
