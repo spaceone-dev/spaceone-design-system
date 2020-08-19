@@ -18,6 +18,11 @@
                      @select="onSelect"
                      @clickRefresh="emitChange()"
                      @clickExcel="emitExport()"
+                     @rowLeftClick="byPassEvent('rowLeftClick', ...arguments)"
+                     @rowRightClick="byPassEvent('rowRightClick', ...arguments)"
+                     @rowMiddleClick="byPassEvent('rowMiddleClick', ...arguments)"
+                     @rowMouseOver="byPassEvent('rowMouseOver', ...arguments)"
+                     @rowMouseOut="byPassEvent('rowMouseOut', ...arguments)"
     >
         <template #toolbox-left>
             <slot name="toolbox-left" />
@@ -165,6 +170,10 @@ export default {
             }), Object.freeze({ ...options }));
         };
 
+        const byPassEvent = (name, item, index, mouseEvent) => {
+            emit(name, item, index, mouseEvent);
+        };
+
         const emitExport = () => {
             emit('export');
         };
@@ -233,6 +242,7 @@ export default {
             onChangeSort,
             onSelect,
             onSearch,
+            byPassEvent,
         };
     },
 };
