@@ -11,7 +11,7 @@
                      :page-size.sync="proxyPageSize"
                      use-cursor-loading
                      sortable
-                     selectable
+                     :selectable="selectable"
                      @changePageSize="onChangePageSize"
                      @changePageNumber="onChangePageNumber"
                      @changeSort="onChangeSort"
@@ -121,6 +121,10 @@ export default {
         queryTags: {
             type: Array,
             default: () => [],
+        },
+        selectable: {
+            type: Boolean,
+            default: true,
         },
     },
     setup(props: QuerySearchTableProps, { slots, emit, listeners }) {
