@@ -50,8 +50,15 @@ export default {
         });
         onMounted(async () => {
             try {
-                // TODO: data array -> list
-                if (props.beforeCreate) await props.beforeCreate(props);
+                if (props.beforeCreate) {
+                    const func = props.beforeCreate(props);
+                    let res;
+                    if (func instanceof Promise) {
+                        res = await func;
+                    } else {
+                        res = func;
+                    }
+                }
                 state.component = async () => state.loader();
             } catch (e) {
                 state.component = () => import('./templates/text/index.vue');

@@ -6,6 +6,7 @@
         :data="data"
         :fetch-options="fetchOptions"
         :extra="extra"
+        :before-create-field="beforeCreateField"
         v-on="$listeners"
     >
         <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
@@ -54,6 +55,10 @@ export default {
             default: undefined,
         },
         beforeCreate: {
+            type: Function,
+            default: undefined,
+        },
+        beforeCreateField: {
             type: Function,
             default: undefined,
         },

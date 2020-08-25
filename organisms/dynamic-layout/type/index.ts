@@ -1,7 +1,7 @@
 import { DynamicLayoutOptions, DynamicLayoutType } from '@/components/organisms/dynamic-layout/type/layout-schema';
 import { QueryTag } from '@/components/organisms/search/query-search-tags/PQuerySearchTags.toolset';
 import { KeyItem, ValueHandlerMap } from '@/components/organisms/search/query-search/type';
-import { DynamicField } from '@/components/organisms/dynamic-field/type';
+import { DynamicField, DynamicFieldProps } from '@/components/organisms/dynamic-field/type';
 
 
 export interface DynamicLayoutFetchOptions {
@@ -36,6 +36,7 @@ export interface DynamicLayoutProps<
     options: SchemaOptions;
     data?: any;
     beforeCreate?: (props: any) => void|Promise<void>;
+    beforeCreateField?: (props: any) => void|DynamicFieldProps|Promise<void|DynamicFieldProps>;
     fetchOptions?: FetchOptions;
     extra?: Extra;
 }

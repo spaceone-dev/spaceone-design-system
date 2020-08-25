@@ -26,6 +26,7 @@
                     <p-dynamic-field :key="item.name"
                                      v-bind="item"
                                      :data="data.value"
+                                     :before-create="beforeCreateField"
                     />
                 </slot>
             </template>
@@ -87,6 +88,10 @@ export default {
         },
         extra: {
             type: Object,
+            default: undefined,
+        },
+        beforeCreateField: {
+            type: Function,
             default: undefined,
         },
     },
