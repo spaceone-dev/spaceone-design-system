@@ -1,17 +1,17 @@
 <template>
-    <div class="p-query-search-tags">
+    <div v-if="proxyTags.length > 0" class="p-query-search-tags">
         <span class="filter">Filter: </span>
         <div class="delete-btn">
             <p-badge class="tag" outline style-type="gray900"
-                     @click="emitDeleteAllTags"
+                     @click="deleteAllTags"
             >
                 Clear all
             </p-badge>
         </div>
         <div class="divider" />
         <div class="tags">
-            <p-tag v-for="(tag, idx) in tags" :key="`${idx}-${tag.key ? tag.key.name : tag.value}`" class="tag"
-                   @delete="emitDeleteTag(idx)"
+            <p-tag v-for="(tag, idx) in proxyTags" :key="`${idx}-${tag.key ? tag.key.name : tag.value}`" class="tag"
+                   @delete="deleteTag(idx)"
             >
                 <span v-if="tag.key">
                     <span class="key-label">{{ tag.key.label || tag.key.name }}</span>
@@ -29,19 +29,79 @@
 import PTag from '@/components/molecules/tags/PTag.vue';
 import PBadge from '@/components/atoms/badges/PBadge.vue';
 import {
+    QuerySearchTagsFunctions,
     QuerySearchTagsProps,
-    querySearchTagsProps,
-} from '@/components/organisms/search/query-search-tags/PQuerySearchTags.toolset';
+    QueryTag, QueryValidator,
+} from '@/components/organisms/search/query-search-tags/type';
+import {
+    computed, reactive, ref, toRefs,
+} from '@vue/composition-api';
 
 
 export default {
     name: 'PQuerySearchTags',
     components: { PTag, PBadge },
-    props: querySearchTagsProps,
-    setup(props: QuerySearchTagsProps, { emit }) {
+    props: {
+        tags: {
+            type: Array,
+            required: true,
+        },
+    },
+    setup(props: QuerySearchTagsProps, { emit, listeners }) {
+        const _tags = ref<QueryTag[]>(props.tags);
+        const state = reactive({
+            proxyTags: computed<QueryTag[]>({
+                get() {
+                    if (listeners['update:tags']) return props.tags;
+                    return _tags.value;
+                },
+                set(val) {
+                    _tags.value = val;
+                    emit('update:tags', _tags.value);
+                },
+            }),
+        });
+        const validation = (query: QueryTag): boolean => state.proxyTags.every((tag) => {
+            if (tag.key && query.key) {
+                return (query.key.name !== tag.key.name
+                        || query.operator !== tag.operator
+                        || query.value !== tag.value);
+            }
+            if (!tag.key && !query.key) {
+                return query.value !== tag.value;
+            }
+            return true;
+        });
+
+
+        const publicFunctions: QuerySearchTagsFunctions = {
+            addTag(query: QueryTag, validator?: QueryValidator) {
+                console.debug('addTag', query);
+                if (validator) {
+                    if (!validator(query)) return;
+                } else if (!validation(query)) return;
+                // TODO: convert queryItem to queryTag with datatype
+                state.proxyTags = [...state.proxyTags, query];
+                emit('add', _tags.value);
+                emit('change', _tags.value);
+            },
+            deleteTag(idx: number) {
+                state.proxyTags.splice(idx, 1);
+                emit('delete', _tags.value);
+                emit('delete:tag', _tags.value);
+                emit('change', _tags.value);
+            },
+            deleteAllTags() {
+                state.proxyTags = [];
+                emit('delete', _tags.value);
+                emit('delete:all', _tags.value);
+                emit('change', _tags.value);
+            },
+        };
+
         return {
-            emitDeleteTag(...args) { emit('delete:tag', ...args); },
-            emitDeleteAllTags(...args) { emit('delete:all', ...args); },
+            ...toRefs(state),
+            ...publicFunctions,
         };
     },
 };
