@@ -1,7 +1,9 @@
+export type KeyDataType = 'string'|'integer'|'float'|'boolean'|'datetime'
+
 export interface KeyItem {
     label: string;
     name: string;
-    dataType?: string;
+    dataType?: KeyDataType;
 }
 
 export type OperatorType = ''|'!'|'>'|'>='|'<'|'<='|'='|'!='|'$';
@@ -18,8 +20,8 @@ export interface QueryItem {
     key?: KeyItem;
     operator: OperatorType;
     value: ValueItem;
-    // invalid?: boolean;
-    // description?: string;
+    invalid?: boolean;
+    description?: string;
 }
 
 
@@ -46,9 +48,5 @@ export interface QuerySearchProps extends QuerySearchState, QuerySearchSyncState
 }
 
 export interface QuerySearchListeners {
-    onMenuShow?: (val: string, keyItem?: KeyItem) => Promise<void>|void;
-    onKeySelect?: (keyItem: KeyItem) => Promise<void>|void;
-    onKeyInput?: (val: string) => Promise<void>|void;
-    onValueInput?: (val: string, keyItem: KeyItem) => Promise<void>|void;
-    onSearch?: (query: QueryItem) => Promise<void>|void;
+    search?: (query: QueryItem) => Promise<void>|void;
 }
