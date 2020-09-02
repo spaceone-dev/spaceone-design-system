@@ -178,6 +178,10 @@ export default {
             }),
         });
 
+        // watch(() => t, () => {
+        //     thisPage = 1
+        // })
+
         /** Event emitter */
         const emitSelect = () => {
             emit('select', [...state.proxySelectIndex]);

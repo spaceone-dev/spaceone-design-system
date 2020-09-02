@@ -145,19 +145,16 @@ export default {
         });
 
         /** Event emitter */
-        const emitChange = (options?: Partial<Options>) => {
+        const emitChange = (options: Partial<Options> = {}) => {
+            if (options?.queryTags || state.proxyThisPage > state.proxyPageSize) {
+                options.thisPage = 1;
+                state.proxyThisPage = 1;
+            }
             emit('change', Object.freeze({
                 ...state.options,
                 ...options,
             }), Object.freeze({ ...options }));
         };
-
-        watch(() => props.totalCount, async (after, before) => {
-            if (before !== after) {
-                state.proxyThisPage = 1;
-                // emitChange({ thisPage: 1 });
-            }
-        }, { immediate: true });
 
         const onChangePageSize = (pageSize: number) => {
             if (props.thisPage > (Math.ceil(props.totalCount / pageSize) || 1)) {
