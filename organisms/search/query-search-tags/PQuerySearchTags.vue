@@ -10,9 +10,16 @@
         </div>
         <div class="divider" />
         <div class="tags">
-            <p-tag v-for="(tag, idx) in proxyTags" :key="`${idx}-${tag.key ? tag.key.name : tag.value}`" class="tag"
+            <p-tag v-for="(tag, idx) in proxyTags" :key="`${idx}-${tag.key ? tag.key.name : tag.value}`"
+                   class="tag"
+                   :class="{invalid: tag.invalid}"
                    @delete="deleteTag(idx)"
             >
+                <p-i v-if="tag.invalid"
+                     v-tooltip.bottom="{content: tag.description, delay: {show: 200}}"
+                     class="alert-icon"
+                     name="ic_alert" height="1em" width="1em"
+                />
                 <span v-if="tag.key">
                     <span class="key-label">{{ tag.key.label || tag.key.name }}</span>
                     :{{ tag.operator }} {{ tag.value.label || tag.value.name }}
@@ -36,11 +43,16 @@ import {
 import {
     computed, reactive, ref, toRefs,
 } from '@vue/composition-api';
+import { QueryItem } from '@/components/organisms/search/query-search/type';
+import { convertQueryItemToQueryTag } from '@/components/organisms/search/query-search-tags/helper';
+import PI from '@/components/atoms/icons/PI.vue';
+import { VTooltip } from 'v-tooltip';
 
 
 export default {
     name: 'PQuerySearchTags',
-    components: { PTag, PBadge },
+    directives: { tooltip: VTooltip },
+    components: { PI, PTag, PBadge },
     props: {
         tags: {
             type: Array,
@@ -48,7 +60,7 @@ export default {
         },
     },
     setup(props: QuerySearchTagsProps, { emit, listeners }) {
-        const _tags = ref<QueryTag[]>(props.tags);
+        const _tags = ref<QueryTag[]>(props.tags.map(d => convertQueryItemToQueryTag(d as QueryItem)));
         const state = reactive({
             proxyTags: computed<QueryTag[]>({
                 get() {
@@ -61,7 +73,7 @@ export default {
                 },
             }),
         });
-        const validation = (query: QueryTag): boolean => state.proxyTags.every((tag) => {
+        const validation = (query: QueryItem): boolean => state.proxyTags.every((tag) => {
             if (tag.key && query.key) {
                 return (query.key.name !== tag.key.name
                         || query.operator !== tag.operator
@@ -73,15 +85,13 @@ export default {
             return true;
         });
 
-
         const publicFunctions: QuerySearchTagsFunctions = {
-            addTag(query: QueryTag, validator?: QueryValidator) {
+            addTag(query: QueryItem, validator?: QueryValidator) {
                 console.debug('addTag', query);
                 if (validator) {
                     if (!validator(query)) return;
                 } else if (!validation(query)) return;
-                // TODO: convert queryItem to queryTag with datatype
-                state.proxyTags = [...state.proxyTags, query];
+                state.proxyTags = [...state.proxyTags, convertQueryItemToQueryTag(query)];
                 emit('add', _tags.value);
                 emit('change', _tags.value);
             },
@@ -107,7 +117,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
 .p-query-search-tags {
     @apply flex flex-row w-full;
     margin-bottom: 0.37rem;
@@ -131,7 +141,14 @@ export default {
         flex-grow: 1;
         .tag {
             @apply rounded-sm mr-3 mb-3;
+            &.invalid {
+                @apply border-alert border bg-white;
+            }
         }
+    }
+    .alert-icon {
+        @apply mr-1;
+        cursor: help;
     }
     .key-label {
         @apply font-bold;

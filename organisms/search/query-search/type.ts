@@ -8,20 +8,18 @@ export interface KeyItem {
 
 export type OperatorType = ''|'!'|'>'|'>='|'<'|'<='|'='|'!='|'$';
 
-export interface ValueItem {
+export interface ValueItem<T=string> {
     label: string;
-    name: string;
+    name: T;
     icon?: string;
     link?: string;
     target?: string;
 }
 
-export interface QueryItem {
+export interface QueryItem<T=string> {
     key?: KeyItem;
     operator: OperatorType;
-    value: ValueItem;
-    invalid?: boolean;
-    description?: string;
+    value: ValueItem<T>;
 }
 
 

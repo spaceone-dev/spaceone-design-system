@@ -1,18 +1,21 @@
 import { QueryItem } from '@/components/organisms/search/query-search/type';
 
 
-export type QueryTag = QueryItem
+export interface QueryTag extends QueryItem<string|number|boolean> {
+    invalid?: boolean;
+    description?: string;
+}
 
 export interface QuerySearchTagsProps {
     tags: QueryTag[];
 }
 
 export interface QueryValidator {
-    (query: QueryTag): boolean;
+    (query: QueryItem): boolean;
 }
 
 export interface QuerySearchTagsFunctions {
-    addTag(query: QueryTag, validator?: QueryValidator): void;
+    addTag(query: QueryItem, validator?: QueryValidator): void;
     deleteTag(index: number): void;
     deleteAllTags(): void;
 }
