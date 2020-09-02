@@ -260,12 +260,11 @@ export default {
                 onSearch(val);
             } else {
                 const selected = state.keyMenu[idx];
-                state.selectedKey = {
-                    label: selected.label as string,
-                    name: selected.name as string,
-                };
-                onKeySelect(state.selectedKey);
-                showMenu();
+                if (selected.data) {
+                    state.selectedKey = selected.data;
+                    onKeySelect(state.selectedKey);
+                    showMenu();
+                }
             }
         };
 
