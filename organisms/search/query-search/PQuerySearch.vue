@@ -15,11 +15,16 @@
                            @mousedown.stop="showMenu"
                            @menu:hide="hideMenu"
     >
-        <template #search-left>
-            <span v-if="selectedKey" class="key-tag"
-                  :class="{active: isFocused || visibleMenu}"
-            >{{ selectedKey.label }}</span>
-            <span v-if="operator" class="operator-tag">{{ operator }}</span>
+        <template #search-left="scope">
+            <slot name="search-left" v-bind="scope">
+                <span v-if="selectedKey" class="key-tag"
+                      :class="{active: isFocused || visibleMenu}"
+                >{{ selectedKey.label }}</span>
+                <span v-if="operator" class="operator-tag">{{ operator }}</span>
+            </slot>
+        </template>
+        <template v-for="(_, slot) of $scopedSlots" v-slot:[slot]="scope">
+            <slot v-if="slot !== 'search-left'" :name="slot" v-bind="scope" />
         </template>
     </p-autocomplete-search>
 </template>
