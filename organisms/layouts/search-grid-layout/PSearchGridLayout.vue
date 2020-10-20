@@ -62,9 +62,10 @@ import {
     QuerySearchTagsListeners,
     QueryTag,
 } from '@/components/organisms/search/query-search-tags/type';
-import { Options, QuerySearchTableProps } from '@/components/organisms/tables/query-search-table/type';
+
 import { makeOptionalProxy } from '@/components/util/composition-helpers';
 import PToolboxGridLayout from '@/components/organisms/layouts/toolbox-grid-layout/PToolboxGridLayout.vue';
+import { SearchGridLayoutProps, Options } from '@/components/organisms/layouts/search-grid-layout/type';
 
 export default {
     name: 'PSearchGridLayout',
@@ -125,7 +126,7 @@ export default {
             default: () => [24, 36, 48],
         },
     },
-    setup(props: QuerySearchTableProps, { slots, emit, listeners }) {
+    setup(props: SearchGridLayoutProps, { slots, emit, listeners }) {
         const vm = getCurrentInstance() as ComponentRenderProxy;
 
         const proxyState = reactive({
