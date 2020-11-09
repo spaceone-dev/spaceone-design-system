@@ -123,7 +123,6 @@ export default {
                     extraData: { ...ds, index: i },
                 };
 
-
                 if (item.options.translation_id) delete item.options.translation_id;
 
                 if (ds.type === 'datetime') {
