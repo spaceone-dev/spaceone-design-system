@@ -1,10 +1,10 @@
 <template>
     <div class="p-dynamic-layout-query-search-table">
-        <p-panel-top v-if="name" class="panel-top"
+        <p-panel-top v-if="layoutName" class="panel-top"
                      :use-total-count="true"
                      :total-count="totalCount"
         >
-            {{ name }}
+            {{ layoutName }}
         </p-panel-top>
         <p-query-search-table :fields="fields"
                               :items="rootData"
@@ -47,7 +47,8 @@
 
 <script lang="ts">
 import {
-    computed, reactive, toRefs,
+    ComponentRenderProxy,
+    computed, getCurrentInstance, reactive, toRefs,
 } from '@vue/composition-api';
 import PQuerySearchTable from '@/components/organisms/tables/query-search-table/PQuerySearchTable.vue';
 import PPanelTop from '@/components/molecules/panel/panel-top/PPanelTop.vue';
@@ -103,7 +104,11 @@ export default {
         },
     },
     setup(props: QuerySearchTableDynamicLayoutProps, { emit }) {
+        const vm = getCurrentInstance() as ComponentRenderProxy;
         const state = reactive({
+            layoutName: computed(() => (props.options.translation_id ? vm.$t(props.options.translation_id) : props.name)),
+
+            /** table */
             fields: computed(() => {
                 if (!props.options.fields) return [];
 
@@ -166,9 +171,11 @@ export default {
             props.options.fields.forEach((ds: DynamicField, i) => {
                 const item: Omit<DynamicFieldProps, 'data'> = {
                     type: ds.type || 'text',
-                    options: ds.options || {},
+                    options: { ...ds.options },
                     extraData: { ...ds, index: i },
                 };
+
+                if (item.options.translation_id) delete item.options.translation_id;
 
                 if (ds.type === 'datetime') {
                     item.typeOptions = { timezone: state.timezone };
