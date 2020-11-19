@@ -4,7 +4,7 @@
              :key="index"
              :class="cardClass(item, index)"
              :style="cardStyle(item, index)"
-             @click="$emit('card:click',item,$event)"
+             v-on="$listeners"
         >
             <slot name="card" :item="item" :index="index">
                 {{ item }}
@@ -84,7 +84,8 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
+.p-grid-layout {
     .icon {
         @apply inline-block;
     }
@@ -94,9 +95,9 @@ export default {
         border-radius: 2px;
         cursor: pointer;
         &:hover {
-             @apply border-l border-secondary;
-             cursor: pointer;
-         }
+            @apply border-l border-secondary;
+            cursor: pointer;
+        }
     }
-
+}
 </style>

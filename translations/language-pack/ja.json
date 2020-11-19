@@ -1,0 +1,74 @@
+{
+	"BUTTON_MODAL": {
+		"CANCEL": "",
+		"CONFIRM": ""
+	},
+	"COLLAPSIBLE_PANEL": {
+		"HIDE": "",
+		"SEE_MORE": ""
+	},
+	"CONTEXT_MENU": {
+		"NO_ITEM": ""
+	},
+	"DATE_PAGINATION": {
+		"MONTH": "",
+		"YEAR": ""
+	},
+	"DEFINITION_TABLE": {
+		"NO_DATA": ""
+	},
+	"DICT_INPUT": {
+		"KEY": "",
+		"VALUE": ""
+	},
+	"DICT_INPUT_GROUP": {
+		"ADD": "",
+		"INVALID_DUPLICATED_KEY": "",
+		"INVALID_NO_KEY": "",
+		"INVALID_NO_VALUE": "",
+		"KEY_LABEL": "",
+		"VALUE_LABEL": ""
+	},
+	"DOUBLE_CHECK_MODAL": {
+		"INPUT_DESC": "",
+		"INVALID_TEXT": ""
+	},
+	"PAGE_TITLE": {
+		"SELECTED_OF": ""
+	},
+	"PANEL_CONTENT": {
+		"ID": "",
+		"NAME": "",
+		"STATE": ""
+	},
+	"PROGRESS_WIZARD": {
+		"CANCEL": "",
+		"CONFIRM": "",
+		"NEXT": "",
+		"OPTIONAL": "",
+		"PREV": "",
+		"STEP": ""
+	},
+	"QUERY_SEARCH": {
+		"HELP": ""
+	},
+	"QUERY_SEARCH_GUIDE": {
+		"CONTACT": "",
+		"FILTER": "",
+		"HELP": "",
+		"OPERATOR": "",
+		"QUERY_KEY": "",
+		"STEP_1": "",
+		"STEP_2_1": "",
+		"STEP_2_2": "",
+		"STEP_3": "",
+		"TITLE": ""
+	},
+	"QUERY_SEARCH_TAGS": {
+		"CLEAR_ALL": "",
+		"FILTER": ""
+	},
+	"SEARCH": {
+		"PLACEHOLDER": ""
+	}
+}

@@ -22,11 +22,15 @@
 
                 <p-field-group
                     :required="true"
-                    :invalid-text="'text is not '+verificationText"
+                    :invalid-text="$t('COMPONENT.DOUBLE_CHECK_MODAL.INVALID_TEXT', {text: verificationText})"
                     :invalid="invalid"
                 >
                     <template #label>
-                        <label class="form-label">Type <strong>[{{ verificationText }}]</strong> to Confirm</label>
+                        <i18n path="COMPONENT.DOUBLE_CHECK_MODAL.INPUT_DESC" tag="label" class="form-label">
+                            <template #text>
+                                <strong>[{{ verificationText }}]</strong>
+                            </template>
+                        </i18n>
                     </template>
                     <p-text-input
                         v-model="inputText"
@@ -148,18 +152,18 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-    .p-double-check-modal-sub-title{
-        font-style: normal;
-        font-weight: normal;
-        font-size: 1.5rem;
-        line-height: 1.9rem;
-        margin-bottom: 1.875rem;
-    }
-    .form-label {
-        display: inline-block;
-        font-size: .875rem;
-        letter-spacing: 0;
-        margin-bottom: 0.25rem;
-        margin-right: 0.375rem;
-    }
+.p-double-check-modal-sub-title {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+    margin-bottom: 1.875rem;
+}
+.form-label {
+    display: inline-block;
+    font-size: 0.875rem;
+    letter-spacing: 0;
+    margin-bottom: 0.25rem;
+    margin-right: 0.375rem;
+}
 </style>

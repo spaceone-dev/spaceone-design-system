@@ -2,17 +2,18 @@
 import { get } from 'lodash';
 import PStatus from '@/components/molecules/status/PStatus.vue';
 import { StatusProps } from '@/components/molecules/status/type';
-import { StateOptions, TextOptions } from '@/components/organisms/dynamic-field/type/field-schema';
+import { StateOptions } from '@/components/organisms/dynamic-field/type/field-schema';
 import { StateDynamicFieldProps } from '@/components/organisms/dynamic-field/templates/state/type';
 import PAnchor from '@/components/molecules/anchors/PAnchor.vue';
-import {getColor} from "@/components/util/helpers";
+import { getColor } from '@/components/util/helpers';
+import { TranslateResult } from 'vue-i18n';
+import { ComponentRenderProxy, getCurrentInstance } from '@vue/composition-api';
 
 export default {
     name: 'PDynamicFieldState',
     functional: true,
     components: { PStatus, PAnchor },
     props: {
-        // eslint-disable-next-line camelcase,vue/prop-name-casing
         options: {
             type: Object,
             default: () => ({}),
@@ -39,22 +40,25 @@ export default {
         },
     },
     render(h, { props }: {props: StateDynamicFieldProps}) {
+        const vm = getCurrentInstance() as ComponentRenderProxy;
+
         const options: StateOptions = props.options;
+
+        const text: TranslateResult = props.data === null || props.data === undefined ? '' : String(props.data);
+
         const statusProps: StatusProps = {
             icon: get(options, ['icon', 'image'], null),
             iconColor: getColor(get(options, ['icon', 'color'], null)),
             textColor: getColor(get(options, ['text_color'], null)),
-            text: props.data === null || props.data === undefined ? '' : String(props.data),
+            text,
         };
 
-        const statusEl = h(PStatus, {
-            props: statusProps,
-        });
+        let statusEl = h(PStatus, { props: statusProps });
 
-        if (props.options.link) {
-            return h(PAnchor, {
-                attrs: { href: (props.options as TextOptions).link, target: '_blank' },
-            }, statusEl);
+        if (options.link) {
+            statusEl = h(PAnchor, {
+                attrs: { href: options.link, target: '_blank' },
+            }, [statusEl]);
         }
 
         return statusEl;

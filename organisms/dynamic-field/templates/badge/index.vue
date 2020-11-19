@@ -1,17 +1,16 @@
 <script lang="ts">
-import { get } from 'lodash';
 import PBadge from '@/components/atoms/badges/PBadge.vue';
 import { BadgeOptions } from '@/components/organisms/dynamic-field/type/field-schema';
 import { BadgeDynamicFieldProps } from '@/components/organisms/dynamic-field/templates/badge/type';
 import { Badge, BADGE_SHAPE } from '@/components/atoms/badges/type';
-import {getColor} from "@/components/util/helpers";
+import { getColor } from '@/components/util/helpers';
+import PAnchor from '@/components/molecules/anchors/PAnchor.vue';
 
 export default {
     name: 'PDynamicFieldBadge',
     functional: true,
     components: { PBadge },
     props: {
-        // eslint-disable-next-line camelcase,vue/prop-name-casing
         options: {
             type: Object,
             default: () => ({}),
@@ -39,27 +38,31 @@ export default {
     },
     render(h, { props }: {props: BadgeDynamicFieldProps}) {
         const options: BadgeOptions = props.options;
-        const outline = get(options, ['outline_color'], null);
-        const shape = get(options, ['shape'], null);
-        const link = get(options, 'link', null);
-        const badge: Badge = {} as any;
-        if (shape) {
-            badge.shape = BADGE_SHAPE[shape];
+        const badgeProps = {} as Badge;
+
+        if (options.shape) {
+            badgeProps.shape = BADGE_SHAPE[options.shape];
         }
 
-        if (outline) {
-            badge.outline = true;
-            badge.backgroundColor = getColor(outline);
+        if (options.outline_color) {
+            badgeProps.outline = true;
+            badgeProps.backgroundColor = getColor(options.outline_color);
         } else {
-            badge.backgroundColor = getColor(get(options, ['background_color'], null));
-            badge.textColor = getColor(get(options, ['text_color'], null));
+            badgeProps.backgroundColor = getColor(options.background_color);
+            badgeProps.textColor = getColor(options.text_color);
         }
-        if (link) {
-            badge.link = link;
-            badge.target = '_blank';
+
+        let badgeEl = props.data;
+
+        if (badgeEl === undefined || badgeEl === null) return undefined;
+
+        if (options.link) {
+            badgeEl = [h(PAnchor, {
+                attrs: { href: options.link, target: '_blank' },
+            }, badgeEl)];
         }
-        if (props.data === undefined || props.data === null) return undefined;
-        return h(PBadge, { props: badge }, props.data);
+
+        return h(PBadge, { props: badgeProps }, badgeEl);
     },
 };
 </script>

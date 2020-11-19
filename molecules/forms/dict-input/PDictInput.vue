@@ -4,10 +4,10 @@
                        :invalid="keyInvalid"
                        class="input-box key"
         >
-            <p-input-text v-focus="focused"
+            <p-input-text v-focus.lazy="focused"
                           :class="{invalid: keyInvalid}"
                           :value="name"
-                          :placeholder="$t('WORD.KEY')"
+                          :placeholder="$t('COMPONENT.DICT_INPUT.KEY')"
                           :disabled="disabled"
                           @input="onInput('name', $event)"
                           @blur="$emit('blur:key')"
@@ -21,7 +21,7 @@
         >
             <p-input-text :class="{invalid: valueInvalid}"
                           :value="value"
-                          :placeholder="$t('WORD.VALUE')"
+                          :placeholder="$t('COMPONENT.DICT_INPUT.VALUE')"
                           :disabled="disabled"
                           @input="onInput('value', $event)"
                           @blur="$emit('blur:value')"
@@ -32,14 +32,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { focus } from 'vue-focus';
 import PInputText from '@/components/atoms/inputs/PTextInput.vue';
 import PFieldGroup from '@/components/molecules/forms/field-group/PFieldGroup.vue';
 import { DictInputProps } from '@/components/molecules/forms/dict-input/type';
 
-export default defineComponent({
+export default {
     name: 'PDictInput',
     components: { PInputText, PFieldGroup },
+    directives: { focus },
     props: {
         name: {
             type: String,
@@ -84,34 +85,33 @@ export default defineComponent({
             },
         };
     },
-});
+};
 </script>
 
 <style lang="postcss" scoped>
-    .p-dict-input {
-        display: inline-flex;
-        align-items: flex-start;
-        .input-box {
-            margin-bottom: 0;
-            &.key {
-                width: 15rem;
-            }
-            &.value {
-                width: 20rem;
-            }
-            .p-text-input {
-                width: 100%;
-                &.invalid {
-                    @apply border border-alert;
-                }
-            }
+.p-dict-input {
+    display: inline-flex;
+    align-items: flex-start;
+    .input-box {
+        margin-bottom: 0;
+        &.key {
+            width: 15rem;
         }
-        .split {
-            padding-left: 0.125rem;
-            padding-right: 0.125rem;
-            line-height: 2rem;
+        &.value {
+            width: 20rem;
+        }
+        .p-text-input {
+            width: 100%;
+            &.invalid {
+                @apply border border-alert;
+            }
         }
     }
-
+    .split {
+        padding-left: 0.125rem;
+        padding-right: 0.125rem;
+        line-height: 2rem;
+    }
+}
 
 </style>

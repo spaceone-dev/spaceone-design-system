@@ -2,28 +2,26 @@
     <div class="p-page-title">
         <p-icon-button v-if="child" width="1.5rem" height="1.5rem"
                        name="ic_back"
+                       class="back-btn"
                        @click="$emit('goBack',$event)"
-                       class="mr-1"
         />
-        <div class="title" :class="{child}">
-            <slot name="before-title" />
+        <div class="title-wrapper" :class="{child}">
             <slot name="title">
                 {{ title }}
             </slot>
-            <slot name="title-area" />
         </div>
+        <slot name="total-count">
+            <template v-if="useTotalCount">
+                <span v-if="useSelectedCount&&selectedCount" class="total-count">
+                    &nbsp;({{ $t('COMPONENT.PAGE_TITLE.SELECTED_OF',{selectedCount,totalCount}) }})
+                </span>
+                <span v-else class="total-count">
+                    &nbsp;({{ totalCount }})
+                </span>
+            </template>
+        </slot>
         <div class="extra">
-            <slot name="extra">
-                <template v-if="useTotalCount">
-                    <span v-if="useSelectedCount&&selectedCount">
-                        &nbsp;({{ $t('ACTION.SELECTED_OF',{selectedCount,totalCount}) }})
-                    </span>
-                    <span v-else>
-                        &nbsp;({{ totalCount }})
-                    </span>
-                </template>
-                <slot name="extra-area" />
-            </slot>
+            <slot name="extra" />
         </div>
     </div>
 </template>
@@ -65,18 +63,26 @@ export default {
 </script>
 
 <style lang="postcss">
-    .p-page-title {
-        @apply mb-6 inline-flex content-start items-center;
-        .title {
-            @apply font-bold;
-            font-size: 1.5rem;
-            line-height: 120%;
-            &.child {
-                font-size: 1.5rem;
-            }
-        }
-        .extra {
-            @apply font-normal text-lg;
-        }
+.p-page-title {
+    @apply mb-6 flex w-full items-start;
+    .back-btn {
+        @apply flex-shrink-0 mr-1;
     }
+    .title-wrapper {
+        @apply flex-shrink overflow-x-hidden;
+        font-weight: bold;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .total-count {
+        font-size: 1.125rem;
+        line-height: 2rem;
+    }
+    .extra {
+        flex-shrink: 0;
+        flex-grow: 1;
+        display: inline-flex;
+        justify-content: flex-end;
+    }
+}
 </style>

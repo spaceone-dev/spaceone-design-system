@@ -35,15 +35,16 @@ export default {
         },
     },
     render(h, { props }: {props: DictDynamicFieldProps}) {
-        const dictEl = h(PDictList, {
+        let dictEl = h(PDictList, {
             props: {
                 dict: props.data,
             },
         });
+
         if (props.options.link) {
-            return h(PAnchor, {
+            dictEl = h(PAnchor, {
                 attrs: { href: (props.options as TextOptions).link, target: '_blank' },
-            }, dictEl);
+            }, [dictEl]);
         }
         return dictEl;
     },

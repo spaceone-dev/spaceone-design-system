@@ -1,5 +1,7 @@
 <template>
-    <a :href="href" :target="target" class="p-anchor">
+    <a :href="href" :target="target" class="p-anchor"
+       :class="{highlight}"
+    >
         <span class="text">
             <slot v-bind="$props">
                 {{ text }}
@@ -13,6 +15,7 @@
 
 <script lang="ts">
 import PI from '@/components/atoms/icons/PI.vue';
+import { AnchorProps } from '@/components/molecules/anchors/type';
 
 export default {
     name: 'PAnchor',
@@ -34,8 +37,12 @@ export default {
             type: String,
             default: '_blank',
         },
+        highlight: {
+            type: Boolean,
+            default: false,
+        },
     },
-    setup(props) {
+    setup(props: AnchorProps) {
         return {
 
         };
@@ -47,7 +54,10 @@ export default {
 .p-anchor {
     @apply cursor-pointer inline-flex items-center;
     &:hover {
-       @apply underline;
+        @apply underline;
+    }
+    &.highlight {
+        @apply text-secondary;
     }
     .text {
         margin-right: 2px;

@@ -68,35 +68,37 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-    .widget-layout {
-        display: inline-flex;
-        flex-direction: column;
-        width: 100%;
+.widget-layout {
+    @apply border border-gray-100;
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
 
-        .top {
-            @apply flex items-center;
-            margin: 2rem 1.5rem 1.5rem 1.5rem;
-        }
-
-        .title {
-            @apply text-lg capitalize font-bold mr-2;
-            line-height: 120%;
-        }
-
-        .sub-title {
-            @apply mx-6 text-xs mb-4;
-            margin-top: -1.5rem;
-        }
-
-        .help {
-            @apply text-gray-400;
-            display: inline-flex;
-            cursor: help;
-        }
-
-        .widget-contents {
-            padding: 0 1.5rem 2.5rem 1.5rem;
-            flex-grow: 1;
-        }
+    .top {
+        @apply flex items-center;
+        margin: 2rem 1.5rem 1.5rem 1.5rem;
     }
+
+    .title {
+        @apply capitalize font-bold mr-2;
+        font-size: 1rem;
+        line-height: 120%;
+    }
+
+    .sub-title {
+        @apply mx-6 text-xs mb-4 text-gray-500;
+        margin-top: -1.2rem;
+    }
+
+    .help {
+        @apply text-gray-400;
+        display: inline-flex;
+        cursor: help;
+    }
+
+    .widget-contents {
+        padding: 0 1.5rem 2.5rem 1.5rem;
+        flex-grow: 1;
+    }
+}
 </style>

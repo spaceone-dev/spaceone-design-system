@@ -8,10 +8,10 @@ export type DynamicFieldType = typeof dynamicFieldTypes[number];
 
 export interface CommonOptions {
     link?: string;
-    tooltip?: string;
     sortable?: boolean;
     sort_key?: string;
     width?: string;
+    translation_id?: string;
 }
 
 export interface BadgeOptions extends CommonOptions {
@@ -60,9 +60,13 @@ export type TextOptions = CommonOptions
 
 
 export type DynamicFieldOptions =
-    BadgeOptions | DatetimeOptions |
-    DictOptions | EnumOptions |
-    ListOptions | StateOptions | TextOptions
+    | BadgeOptions
+    | DatetimeOptions
+    | DictOptions
+    | EnumOptions
+    | ListOptions
+    | StateOptions
+    | TextOptions
 
 
 export interface DynamicField {

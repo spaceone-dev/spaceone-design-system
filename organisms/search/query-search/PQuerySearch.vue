@@ -43,7 +43,7 @@
                     />
                 </span>
                 <div class="separator" />
-                <span class="help" @click="onHelpClick">help</span>
+                <span class="help" @click="onHelpClick">{{ $t('COMPONENT.QUERY_SEARCH.HELP') }}</span>
                 <p-query-search-guide v-model="visibleSearchGuide" />
             </div>
         </template>
@@ -137,7 +137,7 @@ export default {
         },
         placeholder: {
             type: String,
-            default: 'Search',
+            default: undefined,
         },
         focused: {
             type: Boolean,
@@ -247,7 +247,7 @@ export default {
             const value = val.toLowerCase();
             const res = find(state.keyMenu,
                 (item: MenuItem<KeyItem>) => (item.type === 'item'
-                    && ((item.label && item.label.toLowerCase() === value)
+                    && ((item.label && item.label.toString().toLowerCase() === value)
                     || (item.name && item.name.toLowerCase() === value)))) as MenuItem<KeyItem>|null;
 
             return res ? res.data : undefined;

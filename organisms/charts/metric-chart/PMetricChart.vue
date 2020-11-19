@@ -33,9 +33,13 @@ import PSkeleton from '@/components/atoms/skeletons/PSkeleton.vue';
 import PLottie from '@/components/molecules/lottie/PLottie.vue';
 import { ChartColor, ChartDataSets } from 'chart.js';
 import { PChart, tooltips } from '@/components/organisms/charts/chart-helper';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
-const chartTimestampFormatter = (value, timezone) => moment.tz(moment.unix(value.seconds), timezone).format('M/DD[\n]HH:mm');
+dayjs.extend(utc);
+
+
+const chartTimestampFormatter = (value, timezone) => dayjs.tz(dayjs.unix(value.seconds), timezone).format('M/DD[\n]HH:mm');
 
 export default {
     name: 'MetricChart',
@@ -213,21 +217,21 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-    .chart {
-        @apply mt-5 relative px-2;
-        height: 12.5rem;
-    }
-    .shade {
-        @apply absolute opacity-50 bg-white w-full h-full flex items-center justify-center;
-        bottom: 0;
-    }
-    .fade-in-enter-active, .fade-in-leave-active {
-        transition: opacity 0.5s;
-    }
-    .fade-in-enter, .fade-in-leave-to {
-        opacity: 0;
-    }
-    .fade-in-enter-to, .fade-in-leave {
-        opacity: 0.5;
-    }
+.chart {
+    @apply mt-5 relative px-2;
+    height: 12.5rem;
+}
+.shade {
+    @apply absolute opacity-50 bg-white w-full h-full flex items-center justify-center;
+    bottom: 0;
+}
+.fade-in-enter-active, .fade-in-leave-active {
+    transition: opacity 0.5s;
+}
+.fade-in-enter, .fade-in-leave-to {
+    opacity: 0;
+}
+.fade-in-enter-to, .fade-in-leave {
+    opacity: 0.5;
+}
 </style>
