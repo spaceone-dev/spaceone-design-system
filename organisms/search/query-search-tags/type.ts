@@ -1,7 +1,7 @@
 import { QueryItem } from '@/components/organisms/search/query-search/type';
 
 
-export interface QueryTag extends QueryItem {
+export interface QueryTag extends QueryItem<string|number|boolean> {
     invalid?: boolean;
     description?: string;
 }

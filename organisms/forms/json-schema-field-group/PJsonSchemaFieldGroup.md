@@ -26,3 +26,12 @@
 | default          | default value   |    O    |
 
 
+## support Validation(by toolset) 
+
+| Validation               | Support |
+|--------------------------|---------|
+| required                 |    X    |
+| enum                     |    X    |
+| range                    |    X    |
+| multipleOf               |    X    |
+| subschemas conditionally |    X    |

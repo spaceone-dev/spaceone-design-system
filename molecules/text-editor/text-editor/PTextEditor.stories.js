@@ -2,7 +2,7 @@ import PTextEditor from '@/components/molecules/text-editor/text-editor/PTextEdi
 import { computed } from '@vue/composition-api';
 
 export default {
-    title: 'molecules/text-editor/text-editor',
+    title: 'Inputs/TextEditor',
     component: PTextEditor,
     parameters: {
         info: {
@@ -58,7 +58,7 @@ const value = {
     ],
 };
 
-export const defaultCase = () => ({
+export const textEditor = () => ({
     components: { PTextEditor },
     props: {
         item: {
@@ -86,30 +86,30 @@ export const defaultCase = () => ({
     },
 });
 
-export const FoldingCase = () => ({
-    components: { PTextEditor },
-    props: {
-        item: {
-            type: [Object, Array],
-            default: value,
-        },
-        raw: {
-            type: String,
-            default: undefined,
-        },
-        loading: {
-            type: Boolean,
-            default: false,
-        },
-    },
-    template: `
-            <div style="width: 80vw; height:80vh" class="flex flex-wrap">
-                <PTextEditor :code.sync="code" class="sm:w-1/2 pr-4 pl-4" :mode="'readOnly'"/>
-            </div>`,
-    setup(props) {
-        const code = computed(() => JSON.stringify(props.item, undefined, 4));
-        return {
-            code,
-        };
-    },
-});
+// export const FoldingCase = () => ({
+//     components: { PTextEditor },
+//     props: {
+//         item: {
+//             type: [Object, Array],
+//             default: value,
+//         },
+//         raw: {
+//             type: String,
+//             default: undefined,
+//         },
+//         loading: {
+//             type: Boolean,
+//             default: false,
+//         },
+//     },
+//     template: `
+//             <div style="width: 80vw; height:80vh" class="flex flex-wrap">
+//                 <PTextEditor :code.sync="code" class="sm:w-1/2 pr-4 pl-4" :mode="'readOnly'"/>
+//             </div>`,
+//     setup(props) {
+//         const code = computed(() => JSON.stringify(props.item, undefined, 4));
+//         return {
+//             code,
+//         };
+//     },
+// });

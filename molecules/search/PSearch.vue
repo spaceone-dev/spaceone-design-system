@@ -39,8 +39,7 @@ import {
     computed, getCurrentInstance, reactive, toRefs,
 } from '@vue/composition-api';
 import PI from '@/components/atoms/icons/PI.vue';
-import { makeByPassListeners, makeOptionalProxy, makeProxy } from '@/components/util/composition-helpers';
-import { SearchProps } from '@/components/molecules/search/type';
+import { makeByPassListeners, makeProxy } from '@/components/util/composition-helpers';
 
 export default {
     name: 'PSearch',
@@ -78,10 +77,12 @@ export default {
             default: undefined,
         },
     },
-    setup(props: SearchProps, { emit, listeners }) {
+    setup(props, { emit, listeners }) {
         const vm = getCurrentInstance() as ComponentRenderProxy;
         const state: any = reactive({
-            proxyIsFocused: makeOptionalProxy('isFocused', vm, props.focused),
+            proxyIsFocused: props.isFocused === undefined
+                ? props.focused
+                : makeProxy('isFocused', props, emit),
         });
 
         const inputListeners = {
@@ -98,12 +99,11 @@ export default {
                 state.proxyIsFocused = true;
                 makeByPassListeners(listeners, 'focus', e);
             },
-            keyup(e) {
+            keyup: (e) => {
                 if (e.code === 'Enter') emit('search', props.value, e);
                 makeByPassListeners(listeners, 'keyup', e);
             },
         };
-
 
         return {
             ...toRefs(state),
@@ -129,7 +129,7 @@ export default {
 };
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .p-search {
     @apply flex items-center border border-gray-300 bg-white text-gray-900 px-2 w-full;
     border-radius: 2px;
@@ -155,26 +155,25 @@ export default {
             @apply text-gray-300;
         }
     }
-    .right {
-        @apply inline-flex items-center;
+}
+.right {
+    @apply inline-flex items-center;
+}
+.delete-btn {
+    @apply cursor-pointer inline-block flex-shrink-0;
+    position: relative;
+    border-radius: 100px;
+    height: 1rem;
+    width: 1rem;
+    &:hover {
+        @apply bg-gray-200;
     }
-    .delete-btn {
-        @apply cursor-pointer inline-block flex-shrink-0;
-        position: relative;
-        border-radius: 100px;
-        height: 1rem;
-        width: 1rem;
-        &:hover {
-            @apply bg-gray-200;
-        }
-        .icon {
-            position: absolute;
-        }
-    }
-    .left-icon {
-        @apply text-gray-300 mr-1;
+    .icon {
+        position: absolute;
     }
 }
-
+.left-icon {
+    @apply text-gray-300 mr-1;
+}
 
 </style>

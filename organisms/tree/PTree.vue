@@ -22,8 +22,8 @@ import {
 } from '@vue/composition-api';
 import PTreeNode from '@/components/molecules/tree-node/PTreeNode.vue';
 import {
-    TreeItem, TreeNode,
-} from '@/components/molecules/tree-node/type';
+    TreeItem, TreeNode, TreeNodeProps,
+} from '@/components/molecules/tree-node/PTreeNode.toolset';
 
 export default {
     name: 'PTree',
@@ -100,3 +100,7 @@ export default {
     },
 };
 </script>
+
+<style lang="postcss" scoped>
+
+</style>
