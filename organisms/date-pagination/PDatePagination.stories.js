@@ -3,11 +3,11 @@ import PDatePagination from '@/components/organisms/date-pagination/PDatePaginat
 import dayjs from 'dayjs';
 
 export default {
-    title: 'organisms/date-paginations',
+    title: 'Navigation/Paginations',
     component: PDatePagination,
 };
 
-export const monthCase = () => ({
+export const datePagination = () => ({
     components: { PDatePagination },
     template: `
 <div>
@@ -29,22 +29,22 @@ export const monthCase = () => ({
     },
 });
 
-export const weekCase = () => ({
-    components: { PDatePagination },
-    template: `
-<div>
-    <p-date-pagination :date.sync="now" type="week" />
-    <div>
-        <p>{{ now.startOf('week').format('YYYY-MM-DD') }} - {{ now.endOf('week').format('YYYY-MM-DD') }}</p>
-    </div>
-</div>`,
-    props: {},
-    setup() {
-        const state = reactive({
-            now: dayjs(),
-        });
-        return {
-            ...toRefs(state),
-        };
-    },
-});
+// export const weekCase = () => ({
+//     components: { PDatePagination },
+//     template: `
+// <div>
+//     <p-date-pagination :date.sync="now" type="week" />
+//     <div>
+//         <p>{{ now.startOf('week').format('YYYY-MM-DD') }} - {{ now.endOf('week').format('YYYY-MM-DD') }}</p>
+//     </div>
+// </div>`,
+//     props: {},
+//     setup() {
+//         const state = reactive({
+//             now: dayjs(),
+//         });
+//         return {
+//             ...toRefs(state),
+//         };
+//     },
+// });

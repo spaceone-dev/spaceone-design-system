@@ -9,7 +9,7 @@ import PProgressWizard from '@/components/organisms/wizards/progress-wizard/PPro
 
 
 export default {
-    title: 'organisms/wizards/ProgressWizard',
+    title: 'Navigation/ProgressWizard',
     component: PProgressWizard,
     decorators: [withKnobs],
     parameters: {
@@ -37,7 +37,7 @@ const actions = () => ({
 });
 
 
-export const defaultCase = () => ({
+export const progressWizard = () => ({
     components: { PProgressWizard },
     props: getKnobProps({
         tabs: {

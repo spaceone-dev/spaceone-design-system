@@ -72,7 +72,7 @@ function plainAutocompleteHandler(inputText, list, key) {
 }
 
 export default {
-    title: 'organisms/search/AutocompleteSearch',
+    title: 'Inputs/Search',
     component: PAutocompleteSearch,
     parameters: {
         notes: md,
@@ -85,7 +85,7 @@ export default {
 };
 
 
-export const defaultCase = () => ({
+export const autoCompleteSearch = () => ({
     components: { PAutocompleteSearch },
     props: getKnobProps(autocompleteSearchProps, {
     }, {
@@ -100,7 +100,7 @@ export const defaultCase = () => ({
                              v-bind="$props"
                              :menu="menu"
                              @search="search"
-                             @select-menu="search"
+                             @menu:select="search"
                              @input="input"
                              class="mt-10"
         >
@@ -138,80 +138,80 @@ export const defaultCase = () => ({
 });
 
 
-export const controlCase = () => ({
-    components: { PAutocompleteSearch },
-    props: getKnobProps(autocompleteSearchProps, {
-    }, {
-        menu: true,
-        value: true,
-        visibleMenu: true,
-        isFocused: true,
-        focused: true,
-    }),
-    template: `
-    <div style="width: 80vw;">
-        <p class="my-8 font-bold capitalize">Control menu visibility and focus</p>
-        <PAutocompleteSearch v-model="value" 
-                             v-bind="$props"
-                             :menu="menu"
-                             :visibleMenu.sync="visibleMenu"
-                             :isFocused.sync="isFocused"
-                             @search="search"
-                             @select-menu="search"
-                             @input="input"
-                             @mousedown.stop="mousedown"
-                             @hide-menu="onMenuHide"
-                             class="mt-10"
-        >
-            
-        </PAutocompleteSearch>
-        <div class="mt-8 bg-blue-100 flex w-full">
-            <div>
-                <p>Data</p>
-                <pre>{{data}}</pre>
-            </div>
-            <div class="ml-8">
-                <p>Menu</p>
-                <pre>{{menu}}</pre>
-            </div>
-        </div>
-    </div>`,
-    setup(props, context) {
-        const state = reactive({
-            value: 'test',
-            menu: [],
-            visibleMenu: false,
-            isFocused: true,
-        });
-
-        const data = arrayOf(10, () => ({ name: casual.name, phone: casual.phone }));
-
-        return {
-            ...toRefs(state),
-            data,
-            search: (val) => {
-                if (state.visibleMenu) {
-                    const isExist = state.menu.some(d => d.type === 'item' && d.label === val);
-                    if (isExist) {
-                        state.visibleMenu = false;
-                        state.isFocused = false;
-                    }
-                }
-                action('search')(val);
-            },
-            input(val) {
-                action('input')(val);
-                state.visibleMenu = true;
-                state.menu = plainAutocompleteHandler(val, data, 'name');
-            },
-            mousedown(e) {
-                action('mousedown')(e);
-                state.visibleMenu = true;
-            },
-            onMenuHide(e) {
-                action('hide-menu')(e);
-                state.visibleMenu = false;
-            },
-        };
-    },
-});
+// export const controlCase = () => ({
+//     components: { PAutocompleteSearch },
+//     props: getKnobProps(autocompleteSearchProps, {
+//     }, {
+//         menu: true,
+//         value: true,
+//         visibleMenu: true,
+//         isFocused: true,
+//         focused: true,
+//     }),
+//     template: `
+//     <div style="width: 80vw;">
+//         <p class="my-8 font-bold capitalize">Control menu visibility and focus</p>
+//         <PAutocompleteSearch v-model="value"
+//                              v-bind="$props"
+//                              :menu="menu"
+//                              :visibleMenu.sync="visibleMenu"
+//                              :isFocused.sync="isFocused"
+//                              @search="search"
+//                              @menu:select="search"
+//                              @input="input"
+//                              @mousedown.stop="mousedown"
+//                              @menu:hide="onMenuHide"
+//                              class="mt-10"
+//         >
+//
+//         </PAutocompleteSearch>
+//         <div class="mt-8 bg-blue-100 flex w-full">
+//             <div>
+//                 <p>Data</p>
+//                 <pre>{{data}}</pre>
+//             </div>
+//             <div class="ml-8">
+//                 <p>Menu</p>
+//                 <pre>{{menu}}</pre>
+//             </div>
+//         </div>
+//     </div>`,
+//     setup(props, context) {
+//         const state = reactive({
+//             value: 'test',
+//             menu: [],
+//             visibleMenu: false,
+//             isFocused: true,
+//         });
+//
+//         const data = arrayOf(10, () => ({ name: casual.name, phone: casual.phone }));
+//
+//         return {
+//             ...toRefs(state),
+//             data,
+//             search: (val) => {
+//                 if (state.visibleMenu) {
+//                     const isExist = state.menu.some(d => d.type === 'item' && d.label === val);
+//                     if (isExist) {
+//                         state.visibleMenu = false;
+//                         state.isFocused = false;
+//                     }
+//                 }
+//                 action('search')(val);
+//             },
+//             input(val) {
+//                 action('input')(val);
+//                 state.visibleMenu = true;
+//                 state.menu = plainAutocompleteHandler(val, data, 'name');
+//             },
+//             mousedown(e) {
+//                 action('mousedown')(e);
+//                 state.visibleMenu = true;
+//             },
+//             onMenuHide(e) {
+//                 action('menu:hide')(e);
+//                 state.visibleMenu = false;
+//             },
+//         };
+//     },
+// });

@@ -3,7 +3,7 @@ import { reactive, toRefs } from '@vue/composition-api';
 import PSelectBtnGroup from '@/components/organisms/buttons/select-btn-group/PSelectBtnGroup.vue';
 
 export default {
-    title: 'organisms/buttons/select-btn-group',
+    title: 'Inputs/Buttons',
     component: PSelectBtnGroup,
     parameters: {
         info: {
@@ -13,7 +13,7 @@ export default {
     },
 };
 
-export const base = () => ({
+export const seletButtonGroup = () => ({
     components: { PSelectBtnGroup },
     template: `
 <div style="width: 50vw">
@@ -79,98 +79,98 @@ const actions = {
     clickPROJ: action('click-project'),
     clickREGION: action('click-region'),
 };
-export const withTrHelper = () => ({
-    components: { PSelectBtnGroup },
-    template: `
-<div style="width: 50vw">
-    <PSelectBtnGroup 
-        :buttons="btns" 
-        :selected.sync="selected"
-        @clickButton="clickButton"
-        @click-ip="clickIP"
-        @click-cidr="clickCIDR"
-        @click-mac="clickMAC"
-        @click-network="clickNETWORK"
-        @click-project="clickPROJ"
-        @click-region="clickREGION"
-        ></PSelectBtnGroup>
-    <p>select btn : {{selected}}</p>
-</div>`,
-    setup(_, { parent }) {
-        const state = reactive({
-            btns: [
-                {
-                    name: 'ip', label: 'IP', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'cidr', label: 'CIDR', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'mac', label: 'MAC', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'network', label: 'NETWORK', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'project', label: 'PROJECT', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'region', label: 'REGION', disabled: true, styleType: 'primary', outline: true,
-                },
-            ],
-            selected: 'ip',
-        });
-        return {
-            ...toRefs(state),
-            ...actions,
-        };
-    },
-});
-
-export const scroll = () => ({
-    components: { PSelectBtnGroup },
-    template: `
-<div style="width: 30vw">
-    <PSelectBtnGroup 
-        :buttons="btns" 
-        :selected.sync="selected"
-        @clickButton="clickButton"
-        @click-ip="clickIP"
-        @click-cidr="clickCIDR"
-        @click-mac="clickMAC"
-        @click-network="clickNETWORK"
-        @click-project="clickPROJ"
-        @click-region="clickREGION"
-        ></PSelectBtnGroup>
-    <p>select btn : {{selected}}</p>
-</div>`,
-    setup(_, { parent }) {
-        const state = reactive({
-            btns: [
-                {
-                    name: 'ip', label: 'IP', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'cidr', label: 'CIDR', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'mac', label: 'MAC', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'network', label: 'NETWORK', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'project', label: 'PROJECT', styleType: 'primary', outline: true,
-                },
-                {
-                    name: 'region', label: 'REGION', disabled: true, styleType: 'primary', outline: true,
-                },
-            ],
-            selected: 'ip',
-        });
-        return {
-            ...toRefs(state),
-            ...actions,
-        };
-    },
-});
+// export const withTrHelper = () => ({
+//     components: { PSelectBtnGroup },
+//     template: `
+// <div style="width: 50vw">
+//     <PSelectBtnGroup
+//         :buttons="btns"
+//         :selected.sync="selected"
+//         @clickButton="clickButton"
+//         @click-ip="clickIP"
+//         @click-cidr="clickCIDR"
+//         @click-mac="clickMAC"
+//         @click-network="clickNETWORK"
+//         @click-project="clickPROJ"
+//         @click-region="clickREGION"
+//         ></PSelectBtnGroup>
+//     <p>select btn : {{selected}}</p>
+// </div>`,
+//     setup(_, { parent }) {
+//         const state = reactive({
+//             btns: [
+//                 {
+//                     name: 'ip', label: 'IP', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'cidr', label: 'CIDR', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'mac', label: 'MAC', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'network', label: 'NETWORK', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'project', label: 'PROJECT', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'region', label: 'REGION', disabled: true, styleType: 'primary', outline: true,
+//                 },
+//             ],
+//             selected: 'ip',
+//         });
+//         return {
+//             ...toRefs(state),
+//             ...actions,
+//         };
+//     },
+// });
+//
+// export const scroll = () => ({
+//     components: { PSelectBtnGroup },
+//     template: `
+// <div style="width: 30vw">
+//     <PSelectBtnGroup
+//         :buttons="btns"
+//         :selected.sync="selected"
+//         @clickButton="clickButton"
+//         @click-ip="clickIP"
+//         @click-cidr="clickCIDR"
+//         @click-mac="clickMAC"
+//         @click-network="clickNETWORK"
+//         @click-project="clickPROJ"
+//         @click-region="clickREGION"
+//         ></PSelectBtnGroup>
+//     <p>select btn : {{selected}}</p>
+// </div>`,
+//     setup(_, { parent }) {
+//         const state = reactive({
+//             btns: [
+//                 {
+//                     name: 'ip', label: 'IP', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'cidr', label: 'CIDR', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'mac', label: 'MAC', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'network', label: 'NETWORK', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'project', label: 'PROJECT', styleType: 'primary', outline: true,
+//                 },
+//                 {
+//                     name: 'region', label: 'REGION', disabled: true, styleType: 'primary', outline: true,
+//                 },
+//             ],
+//             selected: 'ip',
+//         });
+//         return {
+//             ...toRefs(state),
+//             ...actions,
+//         };
+//     },
+// });

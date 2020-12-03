@@ -3,7 +3,7 @@ import faker from 'faker';
 import PToolboxTable from '@/components/organisms/tables/toolbox-table/PToolboxTable.vue';
 
 export default {
-    title: 'organisms/tables/toolbox-table',
+    title: 'Data Display/Tables',
     component: PToolboxTable,
     parameters: {
         info: {
@@ -59,7 +59,7 @@ const mockupMixin = {
     },
 };
 
-export const table = () => ({
+export const toolboxTable = () => ({
     components: { PToolboxTable },
     mixins: [mockupMixin],
     template: `
@@ -107,97 +107,97 @@ export const table = () => ({
     },
 });
 
-export const rowSlot = () => ({
-    components: { PToolboxTable },
-    mixins: [mockupMixin],
-    template: `
-<div style="width: 80vw">
-    <p-toolbox-table
-        :items="items" 
-        :fields="fields"
-        :selectable="selectable"
-        :sortable="sortable"
-        :sortBy.sync="sortBy"
-        :sortDesc.sync="sortDesc"
-        :allPage="allPage"
-        :thisPage.sync="thisPage"
-        :selectIndex.sync="selectIndex"
-        :pageSize.sync="pageSize"
-        :excelVisible="true"
-        @rowLeftClick="rowLeftClick"
-        @rowRightClick="rowRightClick"
-        @changePageSize="changePageSize"
-        @changePageNumber="changePageNumber"
-        @clickSetting="clickSetting"
-        @clickRefresh="clickRefresh"
-        @clickExcel="clickExcel"
-        @theadClick="theadClick"
-    >
-        <template #row="scope">
-            <div>custom row </div>
-        </template>
-    </p-toolbox-table>
-    <div>
-        <h5>data</h5>
-        <p> sortBy : {{sortBy}} / sortDesc : {{sortDesc}} / thisPage : {{thisPage}} / allPage : {{allPage}} / pageSize: {{pageSize}}</p>
-        <p>{{selectIndex}}</p>
-    </div>
-</div>
-`,
-    data() {
-        return {
-            ...data,
-        };
-    },
-    methods: {
-        ...actions,
-    },
-});
-
-
-export const colSlot = () => ({
-    components: { PToolboxTable },
-    mixins: [mockupMixin],
-    template: `
-<div style="width: 80vw">
-    <p-toolbox-table
-        :items="items" 
-        :fields="fields"
-        :selectable="selectable"
-        :sortable="sortable"
-        :sortBy.sync="sortBy"
-        :sortDesc.sync="sortDesc"
-        :allPage="allPage"
-        :thisPage.sync="thisPage"
-        :selectIndex.sync="selectIndex"
-        :pageSize.sync="pageSize"
-        :excelVisible="true"
-        @rowLeftClick="rowLeftClick"
-        @rowRightClick="rowRightClick"
-        @changePageSize="changePageSize"
-        @changePageNumber="changePageNumber"
-        @clickSetting="clickSetting"
-        @clickRefresh="clickRefresh"
-        @clickExcel="clickExcel"
-        @theadClick="theadClick"
-    >
-        <template #col-name="scope">
-            <td>hi {{scope.value}} </td>
-        </template>
-    </p-toolbox-table>
-    <div>
-        <h5>data</h5>
-        <p> sortBy : {{sortBy}} / sortDesc : {{sortDesc}} / thisPage : {{thisPage}} / allPage : {{allPage}} / pageSize: {{pageSize}}</p>
-        <p>{{selectIndex}}</p>
-    </div>
-</div>
-`,
-    data() {
-        return {
-            ...data,
-        };
-    },
-    methods: {
-        ...actions,
-    },
-});
+// export const rowSlot = () => ({
+//     components: { PToolboxTable },
+//     mixins: [mockupMixin],
+//     template: `
+// <div style="width: 80vw">
+//     <p-toolbox-table
+//         :items="items"
+//         :fields="fields"
+//         :selectable="selectable"
+//         :sortable="sortable"
+//         :sortBy.sync="sortBy"
+//         :sortDesc.sync="sortDesc"
+//         :allPage="allPage"
+//         :thisPage.sync="thisPage"
+//         :selectIndex.sync="selectIndex"
+//         :pageSize.sync="pageSize"
+//         :excelVisible="true"
+//         @rowLeftClick="rowLeftClick"
+//         @rowRightClick="rowRightClick"
+//         @changePageSize="changePageSize"
+//         @changePageNumber="changePageNumber"
+//         @clickSetting="clickSetting"
+//         @clickRefresh="clickRefresh"
+//         @clickExcel="clickExcel"
+//         @theadClick="theadClick"
+//     >
+//         <template #row="scope">
+//             <div>custom row </div>
+//         </template>
+//     </p-toolbox-table>
+//     <div>
+//         <h5>data</h5>
+//         <p> sortBy : {{sortBy}} / sortDesc : {{sortDesc}} / thisPage : {{thisPage}} / allPage : {{allPage}} / pageSize: {{pageSize}}</p>
+//         <p>{{selectIndex}}</p>
+//     </div>
+// </div>
+// `,
+//     data() {
+//         return {
+//             ...data,
+//         };
+//     },
+//     methods: {
+//         ...actions,
+//     },
+// });
+//
+//
+// export const colSlot = () => ({
+//     components: { PToolboxTable },
+//     mixins: [mockupMixin],
+//     template: `
+// <div style="width: 80vw">
+//     <p-toolbox-table
+//         :items="items"
+//         :fields="fields"
+//         :selectable="selectable"
+//         :sortable="sortable"
+//         :sortBy.sync="sortBy"
+//         :sortDesc.sync="sortDesc"
+//         :allPage="allPage"
+//         :thisPage.sync="thisPage"
+//         :selectIndex.sync="selectIndex"
+//         :pageSize.sync="pageSize"
+//         :excelVisible="true"
+//         @rowLeftClick="rowLeftClick"
+//         @rowRightClick="rowRightClick"
+//         @changePageSize="changePageSize"
+//         @changePageNumber="changePageNumber"
+//         @clickSetting="clickSetting"
+//         @clickRefresh="clickRefresh"
+//         @clickExcel="clickExcel"
+//         @theadClick="theadClick"
+//     >
+//         <template #col-name="scope">
+//             <td>hi {{scope.value}} </td>
+//         </template>
+//     </p-toolbox-table>
+//     <div>
+//         <h5>data</h5>
+//         <p> sortBy : {{sortBy}} / sortDesc : {{sortDesc}} / thisPage : {{thisPage}} / allPage : {{allPage}} / pageSize: {{pageSize}}</p>
+//         <p>{{selectIndex}}</p>
+//     </div>
+// </div>
+// `,
+//     data() {
+//         return {
+//             ...data,
+//         };
+//     },
+//     methods: {
+//         ...actions,
+//     },
+// });

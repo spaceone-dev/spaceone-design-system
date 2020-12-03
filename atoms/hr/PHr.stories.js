@@ -1,7 +1,7 @@
 import PHr from '@/components/atoms/hr/PHr.vue';
 
 export default {
-    title: 'atoms/hr',
+    title: 'Layouts/divider',
     component: { PHr },
     parameters: {
         info: {

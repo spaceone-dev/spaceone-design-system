@@ -6,7 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 
 export default {
-    title: 'atoms/badges',
+    title: 'Data Display/Badges',
     component: PBadge,
     parameters: {
         info: {
@@ -22,7 +22,7 @@ export default {
 const actions = {};
 const data = {};
 
-export const DefaultCase = () => ({
+export const Badge = () => ({
     components: { PBadge },
     template: `<PBadge style="width: auto" 
                        :styleType="styleType"
@@ -50,43 +50,43 @@ export const DefaultCase = () => ({
         ...actions,
     },
 });
-export const longBadge = () => ({
-    components: { PBadge },
-    template: `<PBadge :styleType="styleType"  
-                       :text-color="textColor" 
-                       :backgroundColor="backgroundColor"
-                       :outline="outline"
-    >Badge with long size in length</PBadge>`,
-    props: {
-        styleType: {
-            default: select('styleType', [
-                '',
-                'primary', 'primary-dark', 'primary1', 'primary2', 'primary3', 'primary4',
-                'secondary', 'secondary1', 'secondary2',
-                'coral', 'yellow',
-                'gray', 'gray200', 'gray100',
-                'alert', 'safe', 'gray900',
-            ], ''),
-        },
-        textColor: {
-            default: color('textColor', ''),
-        },
-        backgroundColor: {
-            default: color('backgroundColor', ''),
-        },
-        outline: {
-            default: boolean('outline', true),
-        },
-    },
-    data() {
-        return {
-            ...data,
-        };
-    },
-    methods: {
-        ...actions,
-    },
-});
+// export const longBadge = () => ({
+//     components: { PBadge },
+//     template: `<PBadge :styleType="styleType"
+//                        :text-color="textColor"
+//                        :backgroundColor="backgroundColor"
+//                        :outline="outline"
+//     >Badge with long size in length</PBadge>`,
+//     props: {
+//         styleType: {
+//             default: select('styleType', [
+//                 '',
+//                 'primary', 'primary-dark', 'primary1', 'primary2', 'primary3', 'primary4',
+//                 'secondary', 'secondary1', 'secondary2',
+//                 'coral', 'yellow',
+//                 'gray', 'gray200', 'gray100',
+//                 'alert', 'safe', 'gray900',
+//             ], ''),
+//         },
+//         textColor: {
+//             default: color('textColor', ''),
+//         },
+//         backgroundColor: {
+//             default: color('backgroundColor', ''),
+//         },
+//         outline: {
+//             default: boolean('outline', true),
+//         },
+//     },
+//     data() {
+//         return {
+//             ...data,
+//         };
+//     },
+//     methods: {
+//         ...actions,
+//     },
+// });
 
 export const linkBadge = () => ({
     components: { PBadge },
@@ -129,3 +129,5 @@ export const linkBadge = () => ({
         ...actions,
     },
 });
+
+export const lightBadge = () => ({});

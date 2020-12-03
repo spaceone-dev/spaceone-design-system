@@ -4,11 +4,11 @@ import PStatus from '@/components/molecules/status/PStatus.vue';
 import { safe } from '@/components/styles/colors';
 
 export default {
-    title: 'molecules/status',
+    title: 'Data Display/Status',
     component: PStatus,
 };
 
-export const DefaultCase = () => ({
+export const status = () => ({
     components: { PStatus },
     props: {
         ...autoProps(PStatus, [
@@ -32,10 +32,10 @@ export const DefaultCase = () => ({
     template: '<p-status  v-bind="$props"/>',
 });
 
-export const iconStatus = () => ({
-    components: { PStatus },
-    template: `<div>
-                    <p-status icon="aws-ec2" iconColor="#60B731" text="enabled"/><br>
-                </div>`
-    ,
-});
+// export const iconStatus = () => ({
+//     components: { PStatus },
+//     template: `<div>
+//                     <p-status icon="aws-ec2" iconColor="#60B731" text="enabled"/><br>
+//                 </div>`
+//     ,
+// });
