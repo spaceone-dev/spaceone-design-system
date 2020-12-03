@@ -49,50 +49,50 @@ export const pageTitle = () => ({
     },
 });
 
-// export const childMode = () => ({
-//     components: { PPageTitle },
-//     template: `
-//         <PPageTitle
-//           v-bind="$props"
-//           @goBack="goBack"
-//         >
-//
-//         </PPageTitle>`,
-//     props: {
-//         child: {
-//             type: Boolean,
-//             default: boolean('child', true),
-//         },
-//     },
-//     setup(props, context) {
-//         return {
-//             goBack: action('goBack'),
-//         };
-//     },
-// });
-// export const selectedCount = () => ({
-//     components: { PPageTitle },
-//     template: '<PPageTitle v-bind="$props"></PPageTitle>',
-//     props: {
-//         useTotalCount: {
-//             type: Boolean,
-//             default: boolean('use Total Count', true),
-//         },
-//         useSelectedCount: {
-//             type: Boolean,
-//             default: boolean('use Selected Count', true),
-//         },
-//         totalCount: {
-//             type: Number,
-//             default: number('Total Count', 10),
-//         },
-//         selectedCount: {
-//             type: Number,
-//             default: number('Selected Count', 2),
-//         },
-//     },
-//     setup(props, context) {
-//         return {
-//         };
-//     },
-// });
+export const childMode = () => ({
+    components: { PPageTitle },
+    template: `
+        <PPageTitle
+          v-bind="$props"
+          @goBack="goBack"
+        >
+
+        </PPageTitle>`,
+    props: {
+        child: {
+            type: Boolean,
+            default: boolean('child', true),
+        },
+    },
+    setup(props, context) {
+        return {
+            goBack: action('goBack'),
+        };
+    },
+});
+export const selectedCount = () => ({
+    components: { PPageTitle },
+    template: '<PPageTitle v-bind="$props"></PPageTitle>',
+    props: {
+        useTotalCount: {
+            type: Boolean,
+            default: boolean('use Total Count', true),
+        },
+        useSelectedCount: {
+            type: Boolean,
+            default: boolean('use Selected Count', true),
+        },
+        totalCount: {
+            type: Number,
+            default: number('Total Count', 10),
+        },
+        selectedCount: {
+            type: Number,
+            default: number('Selected Count', 2),
+        },
+    },
+    setup(props, context) {
+        return {
+        };
+    },
+});

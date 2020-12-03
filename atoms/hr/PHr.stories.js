@@ -10,7 +10,7 @@ export default {
     },
 };
 
-export const DefaultCase = () => ({
+export const divider = () => ({
     components: { PHr },
     template: `
 <div style="width: 50vw; height: 50vh; border: 1px dashed #415ee1">

@@ -34,16 +34,16 @@ export const textPagination = () => ({
     },
 });
 
-// export const autoDisabledButton = () => ({
-//     components: { PTextPagination },
-//     template: '<p-text-pagination :thisPage.sync="thisPage" :allPage="allPage" @pageChange="pageChange"/>',
-//     data() {
-//         return {
-//             allPage: 10,
-//             thisPage: 10,
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//     },
-// });
+export const autoDisabledButton = () => ({
+    components: { PTextPagination },
+    template: '<p-text-pagination :thisPage.sync="thisPage" :allPage="allPage" @pageChange="pageChange"/>',
+    data() {
+        return {
+            allPage: 10,
+            thisPage: 10,
+        };
+    },
+    methods: {
+        ...actions,
+    },
+});

@@ -80,45 +80,45 @@ export const querySearch = () => ({
 });
 
 
-// export const defaultHandlers = () => ({
-//     components: { PQuerySearch },
-//     template: `
-//     <div style="width: 80vw;">
-//         <p class="my-8">
-//             If no value handler map is given, the default handler is run.
-//             The default handler operates differently for each data type.
-//         </p>
-//         <PQuerySearch v-model="value"
-//                       :keyItems="keyItems"
-//                       @search="onSearch"
-//         ></PQuerySearch>
-//         <pre class="mt-8">{{queries}}</pre>
-//     </div>`,
-//     setup(props, context) {
-//         const keyItems = [{
-//             label: 'Boolean', name: 'boolean', dataType: 'boolean',
-//         }, {
-//             label: 'String', name: 'string', dataType: 'string',
-//         }, {
-//             label: 'Integer', name: 'integer', dataType: 'integer',
-//         }, {
-//             label: 'Float', name: 'float', dataType: 'float',
-//         }, {
-//             label: 'Datetime', name: 'datetime', dataType: 'datetime',
-//         }];
-//
-//         const state = reactive({
-//             value: '',
-//             keyItems,
-//             queries: [],
-//         });
-//
-//         return {
-//             ...toRefs(state),
-//             onSearch(query) {
-//                 state.queries.push(query);
-//                 action('search')(query);
-//             },
-//         };
-//     },
-// });
+export const defaultHandlers = () => ({
+    components: { PQuerySearch },
+    template: `
+    <div style="width: 80vw;">
+        <p class="my-8">
+            If no value handler map is given, the default handler is run.
+            The default handler operates differently for each data type.
+        </p>
+        <PQuerySearch v-model="value"
+                      :keyItems="keyItems"
+                      @search="onSearch"
+        ></PQuerySearch>
+        <pre class="mt-8">{{queries}}</pre>
+    </div>`,
+    setup(props, context) {
+        const keyItems = [{
+            label: 'Boolean', name: 'boolean', dataType: 'boolean',
+        }, {
+            label: 'String', name: 'string', dataType: 'string',
+        }, {
+            label: 'Integer', name: 'integer', dataType: 'integer',
+        }, {
+            label: 'Float', name: 'float', dataType: 'float',
+        }, {
+            label: 'Datetime', name: 'datetime', dataType: 'datetime',
+        }];
+
+        const state = reactive({
+            value: '',
+            keyItems,
+            queries: [],
+        });
+
+        return {
+            ...toRefs(state),
+            onSearch(query) {
+                state.queries.push(query);
+                action('search')(query);
+            },
+        };
+    },
+});

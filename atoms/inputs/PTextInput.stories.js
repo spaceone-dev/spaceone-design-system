@@ -32,22 +32,22 @@ export const input = () => ({
 
 });
 
-// export const placeHolder = () => ({
-//     components: { PTextInput },
-//     template: `<div>
-//                     <p-text-input v-model="value" :disabled="disabled" placeholder="this is placeholder"></p-text-input>
-//                     <p>{{value}}</p>
-//                </div>`,
-//     props: {
-//         disabled: {
-//             default: boolean('disabled', false),
-//         },
-//     },
-//     data() {
-//         return {
-//             value: '',
-//         };
-//     },
-//
-//
-// });
+export const placeHolder = () => ({
+    components: { PTextInput },
+    template: `<div>
+                    <p-text-input v-model="value" :disabled="disabled" placeholder="this is placeholder"></p-text-input>
+                    <p>{{value}}</p>
+               </div>`,
+    props: {
+        disabled: {
+            default: boolean('disabled', false),
+        },
+    },
+    data() {
+        return {
+            value: '',
+        };
+    },
+
+
+});

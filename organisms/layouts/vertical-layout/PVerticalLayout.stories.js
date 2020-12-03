@@ -34,38 +34,38 @@ export const verticalLayout = () => ({
     },
 });
 
-// export const tableCase = () => ({
-//     components: { PVerticalLayout, PToolboxTable },
-//     props: {
-//     },
-//     template: `
-//         <div style="width: 100vw; border: 1px solid gray;">
-//             <p-vertical-layout :minWidth="435" :max-width="700" :initWidth="500">
-//                 <template #sidebar={width}>
-//                     <p-toolbox-table
-//                             style="width:100%;"
-//                             :items="[]"
-//                             :fields="['test','hellow']"
-//                             :selectable="true"
-//                             :shadow="false"
-//                             :border="false"
-//                             :padding="true"
-//                             :multi-select="false"
-//                             :setting-visible="false"
-//                             :sortable="true"
-//                             :background="true"
-//                             :toolbox-background="false"
-//                     />
-//                 </template>
-//                 <template #default>
-//                     Right Layout
-//                 </template>
-//
-//             </p-vertical-layout>
-//         </div>`,
-//     setup() {
-//         return {
-//
-//         };
-//     },
-// });
+export const tableCase = () => ({
+    components: { PVerticalLayout, PToolboxTable },
+    props: {
+    },
+    template: `
+        <div style="width: 100vw; border: 1px solid gray;">
+            <p-vertical-layout :minWidth="435" :max-width="700" :initWidth="500">
+                <template #sidebar={width}>
+                    <p-toolbox-table
+                            style="width:100%;"
+                            :items="[]"
+                            :fields="['test','hellow']"
+                            :selectable="true"
+                            :shadow="false"
+                            :border="false"
+                            :padding="true"
+                            :multi-select="false"
+                            :setting-visible="false"
+                            :sortable="true"
+                            :background="true"
+                            :toolbox-background="false"
+                    />
+                </template>
+                <template #default>
+                    Right Layout
+                </template>
+
+            </p-vertical-layout>
+        </div>`,
+    setup() {
+        return {
+
+        };
+    },
+});

@@ -139,270 +139,270 @@ export const dataTable = () => ({
     },
 });
 
-// export const sortCase = () => ({
-//     components: { PDataTable },
-//     props: {
-//         sortable: {
-//             default: boolean('sortable', true),
-//         },
-//     },
-//     template: `
-//             <div>
-//                 <PDataTable :sortable="sortable"
-//                             :sort-by.sync="sortBy"
-//                             :sort-desc.sync="sortDesc"
-//                             :fields="fields"
-//                             :items="items"
-//                             @changeSort="onChangeSort"
-//                 >
-//                 </PDataTable>
-//                 <p>sort by : {{sortBy}}, sort desc : {{sortDesc}}</p>
-//             </div>
-//     `,
-//     setup() {
-//         const state = reactive({
-//             fields: ['name', 'phone', 'email'],
-//             items: arrayOf(10, () => ({
-//                 name: casual.full_name,
-//                 phone: casual.phone,
-//                 email: casual.email,
-//             })),
-//             sortBy: 'name',
-//             sortDesc: true,
-//         });
-//
-//
-//         return {
-//             ...toRefs(state),
-//             onChangeSort(sortBy, sortDesc) {
-//                 if (sortBy) {
-//                     state.items = orderBy(state.items, [sortBy], [sortDesc ? 'desc' : 'asc']);
-//                 }
-//                 action('changeSort')(sortBy, sortDesc);
-//             },
-//         };
-//     },
-// });
-//
-// export const selectTable = () => ({
-//     components: { PDataTable, PButton },
-//     mixins: [mockupMixin],
-//     template: `
-// <div style="background-color: white;">
-// <PDataTable
-//     ref="table"
-//     :items="items"
-//     :fields="fields"
-//     :hover="true"
-//     @rowLeftClick="rowLeftClick"
-//     :selectable="true"
-//     :selectIndex.sync="selectIndex"
-// >
-// </PDataTable>
-// <p>select index: {{selectIndex}} </p>
-// <p-button @click="getData" styleType="primary" >선택한 데이터 가져오기</p-button>
-// <p>{{selected}}</p>
-// </div>
-// `,
-//     data() {
-//         return {
-//             ...data,
-//             selectIndex: [],
-//             selected: [],
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//         getData() {
-//             this.selected = this.$refs.table.getSelectItem();
-//         },
-//     },
-// });
-//
-// export const rowClickMultiSelectMode = () => ({
-//     components: { PDataTable, PButton },
-//     mixins: [mockupMixin],
-//     template: `
-// <div>
-// <PDataTable
-//     ref="table"
-//     :items="items"
-//     :fields="fields"
-//     :hover="true"
-//     :rowClickMultiSelectMode="true"
-//     @rowLeftClick="rowLeftClick"
-//     :selectable="true"
-//     :selectIndex.sync="selectIndex"
-// >
-// </PDataTable>
-// <p>select index: {{selectIndex}} </p>
-// <p-button @click="getData" styleType="primary" >선택한 데이터 가져오기</p-button>
-// <p>{{selected}}</p>
-// </div>
-// `,
-//     data() {
-//         return {
-//             ...data,
-//             selectIndex: [],
-//             selected: [],
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//         getData() {
-//             this.selected = this.$refs.table.getSelectItem();
-//         },
-//     },
-// });
-//
-// export const rowVBind = () => ({
-//     components: { PDataTable },
-//     mixins: [mockupMixin],
-//     template: `
-// <PDataTable
-//     :items="items"
-//     :fields="fields"
-//     :hover="true"
-//     @rowLeftClick="rowLeftClick"
-//     @rowRightClick="rowRightClick"
-//     @rowMiddleClick="rowMiddleClick"
-//     @rowMouseOver="rowMouseOver"
-//     @rowMouseOut="rowMouseOut"
-// >
-// </PDataTable>
-// `,
-//     data() {
-//         return {
-//             ...data,
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//         getUser(step) {
-//             const bindClass = step % 2 === 0 ? 'gray900' : 'light';
-//             return {
-//                 name: faker.name.firstName(),
-//                 phone: faker.phone.phoneNumberFormat(),
-//                 email: faker.internet.email(),
-//                 vbind: {
-//                     class: [bindClass],
-//                 },
-//             };
-//         },
-//     },
-//     computed: {
-//         items() {
-//             const dataset = [];
-//             for (let step = 0; step < 20; step++) {
-//                 dataset.push(this.getUser(step));
-//             }
-//             return dataset;
-//         },
-//     },
-// });
-//
-// export const customRowSlot = () => ({
-//     components: {
-//         PDataTable,
-//     },
-//     mixins: [mockupMixin],
-//     template: `
-// <PDataTable
-//     :items="items"
-//     :fields="fields"
-//     :hover="true"
-//     @rowLeftClick="rowLeftClick"
-//     @rowRightClick="rowRightClick"
-//     @rowMiddleClick="rowMiddleClick"
-//     @rowMouseOver="rowMouseOver"
-//     @rowMouseOut="rowMouseOut"
-// >
-// <template slot="row"  slot-scope="data">
-// <tr  style="color: #0f69ff;">
-//     <td v-for="field in data.fields">
-//         {{data.item[field]}}
-//     </td>
-// </tr>
-// </template>
-// </PDataTable>
-// `,
-//     data() {
-//         return {
-//             ...data,
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//     },
-// });
-//
-//
-// export const customColSlot = () => ({
-//     components: {
-//         PDataTable, PButton,
-//     },
-//     mixins: [mockupMixin],
-//     template: `
-//         <div style="background-color: white;">
-// <PDataTable
-//     :items="items"
-//     :fields="fields"
-//     @rowLeftClick="rowLeftClick"
-//     @rowRightClick="rowRightClick"
-//     @rowMiddleClick="rowMiddleClick"
-//     @rowMouseOver="rowMouseOver"
-//     @rowMouseOut="rowMouseOut"
-// >
-// <template slot="col-email"  slot-scope="data">
-//     <td style="color: #0f69ff;" >
-//         <p-button styleType="primary" @click.stop="sendEmail(data.item,data.index,$event)">send email</p-button>
-//     </td>
-// </template>
-// </PDataTable>
-//         </div>
-// `,
-//     data() {
-//         return {
-//             ...data,
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//         sendEmail: action('send_email'),
-//     },
-// });
-//
-// export const loading = () => ({
-//     components: { PDataTable },
-//     mixins: [mockupMixin],
-//     template: `<PDataTable
-//                 :items="items"
-//                 :fields="fields"
-//                 :hover="true"
-//                 :loading="loading"
-//                 :useCursorLoding="useCursorLoading"
-//                 @rowLeftClick="rowLeftClick"
-//                 @rowRightClick="rowRightClick"
-//                 @rowMiddleClick="rowMiddleClick"
-//                 @rowMouseOver="rowMouseOver"
-//                 @rowMouseOut="rowMouseOut"
-//                 >
-//                </PDataTable>
-//               `,
-//     props: {
-//         loading: {
-//             default: boolean('loading', true),
-//         },
-//         useCursorLoading: {
-//             default: boolean('useCursorLoading', false),
-//         },
-//     },
-//     data() {
-//         return {
-//             ...data,
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//     },
-// });
+export const sortCase = () => ({
+    components: { PDataTable },
+    props: {
+        sortable: {
+            default: boolean('sortable', true),
+        },
+    },
+    template: `
+            <div>
+                <PDataTable :sortable="sortable"
+                            :sort-by.sync="sortBy"
+                            :sort-desc.sync="sortDesc"
+                            :fields="fields"
+                            :items="items"
+                            @changeSort="onChangeSort"
+                >
+                </PDataTable>
+                <p>sort by : {{sortBy}}, sort desc : {{sortDesc}}</p>
+            </div>
+    `,
+    setup() {
+        const state = reactive({
+            fields: ['name', 'phone', 'email'],
+            items: arrayOf(10, () => ({
+                name: casual.full_name,
+                phone: casual.phone,
+                email: casual.email,
+            })),
+            sortBy: 'name',
+            sortDesc: true,
+        });
+
+
+        return {
+            ...toRefs(state),
+            onChangeSort(sortBy, sortDesc) {
+                if (sortBy) {
+                    state.items = orderBy(state.items, [sortBy], [sortDesc ? 'desc' : 'asc']);
+                }
+                action('changeSort')(sortBy, sortDesc);
+            },
+        };
+    },
+});
+
+export const selectTable = () => ({
+    components: { PDataTable, PButton },
+    mixins: [mockupMixin],
+    template: `
+<div style="background-color: white;">
+<PDataTable
+    ref="table"
+    :items="items"
+    :fields="fields"
+    :hover="true"
+    @rowLeftClick="rowLeftClick"
+    :selectable="true"
+    :selectIndex.sync="selectIndex"
+>
+</PDataTable>
+<p>select index: {{selectIndex}} </p>
+<p-button @click="getData" styleType="primary" >선택한 데이터 가져오기</p-button>
+<p>{{selected}}</p>
+</div>
+`,
+    data() {
+        return {
+            ...data,
+            selectIndex: [],
+            selected: [],
+        };
+    },
+    methods: {
+        ...actions,
+        getData() {
+            this.selected = this.$refs.table.getSelectItem();
+        },
+    },
+});
+
+export const rowClickMultiSelectMode = () => ({
+    components: { PDataTable, PButton },
+    mixins: [mockupMixin],
+    template: `
+<div>
+<PDataTable
+    ref="table"
+    :items="items"
+    :fields="fields"
+    :hover="true"
+    :rowClickMultiSelectMode="true"
+    @rowLeftClick="rowLeftClick"
+    :selectable="true"
+    :selectIndex.sync="selectIndex"
+>
+</PDataTable>
+<p>select index: {{selectIndex}} </p>
+<p-button @click="getData" styleType="primary" >선택한 데이터 가져오기</p-button>
+<p>{{selected}}</p>
+</div>
+`,
+    data() {
+        return {
+            ...data,
+            selectIndex: [],
+            selected: [],
+        };
+    },
+    methods: {
+        ...actions,
+        getData() {
+            this.selected = this.$refs.table.getSelectItem();
+        },
+    },
+});
+
+export const rowVBind = () => ({
+    components: { PDataTable },
+    mixins: [mockupMixin],
+    template: `
+<PDataTable
+    :items="items"
+    :fields="fields"
+    :hover="true"
+    @rowLeftClick="rowLeftClick"
+    @rowRightClick="rowRightClick"
+    @rowMiddleClick="rowMiddleClick"
+    @rowMouseOver="rowMouseOver"
+    @rowMouseOut="rowMouseOut"
+>
+</PDataTable>
+`,
+    data() {
+        return {
+            ...data,
+        };
+    },
+    methods: {
+        ...actions,
+        getUser(step) {
+            const bindClass = step % 2 === 0 ? 'gray900' : 'light';
+            return {
+                name: faker.name.firstName(),
+                phone: faker.phone.phoneNumberFormat(),
+                email: faker.internet.email(),
+                vbind: {
+                    class: [bindClass],
+                },
+            };
+        },
+    },
+    computed: {
+        items() {
+            const dataset = [];
+            for (let step = 0; step < 20; step++) {
+                dataset.push(this.getUser(step));
+            }
+            return dataset;
+        },
+    },
+});
+
+export const customRowSlot = () => ({
+    components: {
+        PDataTable,
+    },
+    mixins: [mockupMixin],
+    template: `
+<PDataTable
+    :items="items"
+    :fields="fields"
+    :hover="true"
+    @rowLeftClick="rowLeftClick"
+    @rowRightClick="rowRightClick"
+    @rowMiddleClick="rowMiddleClick"
+    @rowMouseOver="rowMouseOver"
+    @rowMouseOut="rowMouseOut"
+>
+<template slot="row"  slot-scope="data">
+<tr  style="color: #0f69ff;">
+    <td v-for="field in data.fields">
+        {{data.item[field]}}
+    </td>
+</tr>
+</template>
+</PDataTable>
+`,
+    data() {
+        return {
+            ...data,
+        };
+    },
+    methods: {
+        ...actions,
+    },
+});
+
+
+export const customColSlot = () => ({
+    components: {
+        PDataTable, PButton,
+    },
+    mixins: [mockupMixin],
+    template: `
+        <div style="background-color: white;">
+<PDataTable
+    :items="items"
+    :fields="fields"
+    @rowLeftClick="rowLeftClick"
+    @rowRightClick="rowRightClick"
+    @rowMiddleClick="rowMiddleClick"
+    @rowMouseOver="rowMouseOver"
+    @rowMouseOut="rowMouseOut"
+>
+<template slot="col-email"  slot-scope="data">
+    <td style="color: #0f69ff;" >
+        <p-button styleType="primary" @click.stop="sendEmail(data.item,data.index,$event)">send email</p-button>
+    </td>
+</template>
+</PDataTable>
+        </div>
+`,
+    data() {
+        return {
+            ...data,
+        };
+    },
+    methods: {
+        ...actions,
+        sendEmail: action('send_email'),
+    },
+});
+
+export const loading = () => ({
+    components: { PDataTable },
+    mixins: [mockupMixin],
+    template: `<PDataTable
+                :items="items"
+                :fields="fields"
+                :hover="true"
+                :loading="loading"
+                :useCursorLoding="useCursorLoading"
+                @rowLeftClick="rowLeftClick"
+                @rowRightClick="rowRightClick"
+                @rowMiddleClick="rowMiddleClick"
+                @rowMouseOver="rowMouseOver"
+                @rowMouseOut="rowMouseOut"
+                >
+               </PDataTable>
+              `,
+    props: {
+        loading: {
+            default: boolean('loading', true),
+        },
+        useCursorLoading: {
+            default: boolean('useCursorLoading', false),
+        },
+    },
+    data() {
+        return {
+            ...data,
+        };
+    },
+    methods: {
+        ...actions,
+    },
+});

@@ -53,34 +53,34 @@ export const tab = () => ({
         ...actions,
     },
 });
-// export const oneTab = () => ({
-//     components: { PTab },
-//     template: `
-// <div style="width: 80vw;">
-//     <PTab :tabs="tabs" :activeTab.sync="activeTab" >
-//     <template #detail="{tabName}" >
-//         <keep-alive>
-//            <p> this tab is {{tabName}}</p>
-//         </keep-alive>
-//     </template>
-//     <template #info="{tabName}" >
-//            <p> this tab is {{tabName}}</p>
-//     </template>
-//     <template #tags="{tabName}" >
-//            <p> this tab is {{tabName}}</p>
-//     </template>
-//
-//     </PTab>
-// </div>`,
-//     data() {
-//         return {
-//             tabs: [
-//                 { name: 'detail', label: '디테일' },
-//             ],
-//             activeTab: 'detail',
-//         };
-//     },
-//     methods: {
-//         ...actions,
-//     },
-// });
+export const oneTab = () => ({
+    components: { PTab },
+    template: `
+<div style="width: 80vw;">
+    <PTab :tabs="tabs" :activeTab.sync="activeTab" >
+    <template #detail="{tabName}" >
+        <keep-alive>
+           <p> this tab is {{tabName}}</p>
+        </keep-alive>
+    </template>
+    <template #info="{tabName}" >
+           <p> this tab is {{tabName}}</p>
+    </template>
+    <template #tags="{tabName}" >
+           <p> this tab is {{tabName}}</p>
+    </template>
+
+    </PTab>
+</div>`,
+    data() {
+        return {
+            tabs: [
+                { name: 'detail', label: '디테일' },
+            ],
+            activeTab: 'detail',
+        };
+    },
+    methods: {
+        ...actions,
+    },
+});

@@ -102,265 +102,265 @@ export const contextMenu = () => ({
 });
 
 
-// export const slotCase = () => ({
-//     components: { PContextMenu, PEmpty, PI },
-//     template: `
-// <div class="context-menu-story flex">
-//     <!--  position:static 은 스토리북에서 편하게 보기 위해 임시로 주었습니다.  -->
-//     <div class="ml-4">
-//         <p class="mb-2 font-bold">Slot Types</p>
-//         <table>
-//             <thead>
-//                 <th>Name</th>
-//                 <th>Derived</th>
-//                 <th width="200">Original Example</th>
-//                 <th width="200">Slot Example</th>
-//                 <th>Props</th>
-//             </thead>
-//             <tbody>
-//                 <tr>
-//                     <td>loading</td>
-//                     <td>loading-format</td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         loading
-//                         />
-//                     </td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         loading
-//                         >
-//                             <template #loading>
-//                                 <div style="height: 2rem; line-height: 2rem; text-align: center">
-//                                     ...loading
-//                                 </div>
-//                             </template>
-//                         </p-context-menu>
-//                     </td>
-//                     <td>{...props, uuid}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>no-data</td>
-//                     <td>no-data-format</td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                         />
-//                     </td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                         >
-//                             <template #no-data>
-//                                 <p-empty>No Data</p-empty>
-//                             </template>
-//                         </p-context-menu>
-//                     </td>
-//                     <td>{...props, uuid}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>menu</td>
-//                     <td></td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         :menu="menu"
-//                         >
-//                         </p-context-menu>
-//                     </td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         :menu="menu"
-//                         >
-//                             <template #menu="{menu}">
-//                                 <template v-for="(m, i) in menu">
-//                                     <div v-if="m.type === 'item'"
-//                                           :key="i"
-//                                          class="border-b border-blue-200 py-1 text-center text-xs"
-//                                     >
-//                                         {{m.label}}
-//                                     </div>
-//                                 </template>
-//                             </template>
-//                         </p-context-menu>
-//                     </td>
-//                     <td>{...props, uuid}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>item</td>
-//                     <td>
-//                         item-{name}<br>
-//                         item--format<br>
-//                         item-{name}-format
-//                     </td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         :menu="menu"
-//                         />
-//                     </td>
-//                     <td>
-//                         <ul>
-//                             <li>
-//                                 <p class="mb-1">item</p>
-//                                 <p-context-menu style="position: static;"
-//                                                 :menu="menu"
-//                                 >
-//                                     <template #item="{item}">
-//                                         <div>
-//                                             <p-i name="btn_gnb_top-logo"/>
-//                                             {{item.label}}
-//                                         </div>
-//                                     </template>
-//                                 </p-context-menu>
-//                             </li>
-//                             <li>
-//                                 <p class="mb-1">item--format</p>
-//                                 <p-context-menu style="position: static;"
-//                                                 :menu="menu"
-//                                 >
-//                                     <template #item--format="{item}">
-//                                         <p-i name="btn_gnb_top-logo"/>
-//                                         {{item.label}}
-//                                     </template>
-//                                 </p-context-menu>
-//                             </li>
-//                         </ul>
-//                     </td>
-//                     <td>{...props, uuid, item, index}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>divider</td>
-//                     <td>divider-{name}</td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         :menu="menu"
-//                         />
-//                     </td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         :menu="menu"
-//                         >
-//                             <template #divider>
-//                                 <div class="border border-red-200"></div>
-//                             </template>
-//                         </p-context-menu>
-//                     </td>
-//                     <td>{...props, uuid, item, index}</td>
-//                 </tr>
-//                 <tr>
-//                     <td>header</td>
-//                     <td>
-//                         header-{name}<br>
-//                         header--format<br>
-//                         header-{name}-format
-//                     </td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         :menu="menu"
-//                         />
-//                     </td>
-//                     <td>
-//                         <p-context-menu style="position: static;"
-//                                         :menu="menu"
-//                         >
-//                             <template #header="{item}">
-//                                 <div class="text-red-200 text-sm text-center">{{item.label || item.name}}</div>
-//                             </template>
-//                         </p-context-menu>
-//                     </td>
-//                     <td>{...props, uuid, item, index}</td>
-//                 </tr>
-//             </tbody>
-//         </table>
-//     </div>
-//
-// </div>`,
-//     props: {
-//         theme: {
-//             default: select('theme', ['secondary', 'gray900', 'white'], 'secondary'),
-//         },
-//         menu: {
-//             default: object('menu', [
-//                 {
-//                     type: 'item', label: 'add', name: 'add', disabled: false,
-//                 },
-//                 {
-//                     type: 'item', label: 'hello', name: 'hello', disabled: false,
-//                 },
-//                 { type: 'divider' },
-//                 { type: 'header', label: 'this is header' },
-//                 {
-//                     type: 'item', label: 'update', name: 'update', disabled: false,
-//                 },
-//                 {
-//                     type: 'item', label: 'delete', name: 'delete', disabled: true,
-//                 },
-//                 { type: 'divider' },
-//                 {
-//                     type: 'item', label: 'collect', name: 'collect', disabled: false,
-//                 },
-//                 { type: 'divider' },
-//                 {
-//                     type: 'item', label: 'remove', name: 'remove', disabled: false,
-//                 },
-//
-//
-//             ]),
-//         },
-//     },
-//     setup() {
-//         const contextRef = ref(null);
-//         return {
-//             ...actions,
-//             contextRef,
-//         };
-//     },
-// }
-// );
-//
-//
-// export const whiteCase = () => ({
-//     components: { PContextMenu, PI },
-//     template: `
-// <div class="context-menu-story">
-//     <p-context-menu
-//             style="position:static; width:15.125rem;"
-//             ref="contextRef"
-//             :menu="menu"
-//             theme="white"
-//             @click:select='clickLink'
-//     >
-//         <template #info--format>
-//             <div class="context-info">
-//                 <p-i class="mr-1" name="admin" style="border-radius: 0.625rem" />
-//                 <span class="value">admin@admin.com</span>
-//             </div>
-//         </template>
-//         <template #divider>
-//             <div class="border my-2" />
-//         </template>
-//     </p-context-menu>
-// <!--    ContextMenu에 버튼이 아닌 텍스트를 넣고 싶은 경우, info 타입을 적용한 뒤, #info&#45;&#45;format 안에 해당 내용을 넣으면 됩니다.-->
-// </div>`,
-//     setup() {
-//         const state = reactive({
-//             menu: [
-//                 {
-//                     type: 'info', label: 'info', name: 'info', disabled: false,
-//                 },
-//                 {
-//                     type: 'divider',
-//                 },
-//                 {
-//                     type: 'item', label: 'one', name: 'one', disabled: false,
-//                 },
-//                 {
-//                     type: 'item', label: 'two', name: 'two', disabled: false,
-//                 },
-//                 {
-//                     type: 'item', label: 'three', name: 'three', disabled: false,
-//                 },
-//             ],
-//         });
-//         return {
-//             ...toRefs(state),
-//         };
-//     },
-// });
+export const slotCase = () => ({
+    components: { PContextMenu, PEmpty, PI },
+    template: `
+<div class="context-menu-story flex">
+    <!--  position:static 은 스토리북에서 편하게 보기 위해 임시로 주었습니다.  -->
+    <div class="ml-4">
+        <p class="mb-2 font-bold">Slot Types</p>
+        <table>
+            <thead>
+                <th>Name</th>
+                <th>Derived</th>
+                <th width="200">Original Example</th>
+                <th width="200">Slot Example</th>
+                <th>Props</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>loading</td>
+                    <td>loading-format</td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        loading
+                        />
+                    </td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        loading
+                        >
+                            <template #loading>
+                                <div style="height: 2rem; line-height: 2rem; text-align: center">
+                                    ...loading
+                                </div>
+                            </template>
+                        </p-context-menu>
+                    </td>
+                    <td>{...props, uuid}</td>
+                </tr>
+                <tr>
+                    <td>no-data</td>
+                    <td>no-data-format</td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                        />
+                    </td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                        >
+                            <template #no-data>
+                                <p-empty>No Data</p-empty>
+                            </template>
+                        </p-context-menu>
+                    </td>
+                    <td>{...props, uuid}</td>
+                </tr>
+                <tr>
+                    <td>menu</td>
+                    <td></td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        :menu="menu"
+                        >
+                        </p-context-menu>
+                    </td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        :menu="menu"
+                        >
+                            <template #menu="{menu}">
+                                <template v-for="(m, i) in menu">
+                                    <div v-if="m.type === 'item'"
+                                          :key="i"
+                                         class="border-b border-blue-200 py-1 text-center text-xs"
+                                    >
+                                        {{m.label}}
+                                    </div>
+                                </template>
+                            </template>
+                        </p-context-menu>
+                    </td>
+                    <td>{...props, uuid}</td>
+                </tr>
+                <tr>
+                    <td>item</td>
+                    <td>
+                        item-{name}<br>
+                        item--format<br>
+                        item-{name}-format
+                    </td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        :menu="menu"
+                        />
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                <p class="mb-1">item</p>
+                                <p-context-menu style="position: static;"
+                                                :menu="menu"
+                                >
+                                    <template #item="{item}">
+                                        <div>
+                                            <p-i name="btn_gnb_top-logo"/>
+                                            {{item.label}}
+                                        </div>
+                                    </template>
+                                </p-context-menu>
+                            </li>
+                            <li>
+                                <p class="mb-1">item--format</p>
+                                <p-context-menu style="position: static;"
+                                                :menu="menu"
+                                >
+                                    <template #item--format="{item}">
+                                        <p-i name="btn_gnb_top-logo"/>
+                                        {{item.label}}
+                                    </template>
+                                </p-context-menu>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>{...props, uuid, item, index}</td>
+                </tr>
+                <tr>
+                    <td>divider</td>
+                    <td>divider-{name}</td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        :menu="menu"
+                        />
+                    </td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        :menu="menu"
+                        >
+                            <template #divider>
+                                <div class="border border-red-200"></div>
+                            </template>
+                        </p-context-menu>
+                    </td>
+                    <td>{...props, uuid, item, index}</td>
+                </tr>
+                <tr>
+                    <td>header</td>
+                    <td>
+                        header-{name}<br>
+                        header--format<br>
+                        header-{name}-format
+                    </td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        :menu="menu"
+                        />
+                    </td>
+                    <td>
+                        <p-context-menu style="position: static;"
+                                        :menu="menu"
+                        >
+                            <template #header="{item}">
+                                <div class="text-red-200 text-sm text-center">{{item.label || item.name}}</div>
+                            </template>
+                        </p-context-menu>
+                    </td>
+                    <td>{...props, uuid, item, index}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>`,
+    props: {
+        theme: {
+            default: select('theme', ['secondary', 'gray900', 'white'], 'secondary'),
+        },
+        menu: {
+            default: object('menu', [
+                {
+                    type: 'item', label: 'add', name: 'add', disabled: false,
+                },
+                {
+                    type: 'item', label: 'hello', name: 'hello', disabled: false,
+                },
+                { type: 'divider' },
+                { type: 'header', label: 'this is header' },
+                {
+                    type: 'item', label: 'update', name: 'update', disabled: false,
+                },
+                {
+                    type: 'item', label: 'delete', name: 'delete', disabled: true,
+                },
+                { type: 'divider' },
+                {
+                    type: 'item', label: 'collect', name: 'collect', disabled: false,
+                },
+                { type: 'divider' },
+                {
+                    type: 'item', label: 'remove', name: 'remove', disabled: false,
+                },
+
+
+            ]),
+        },
+    },
+    setup() {
+        const contextRef = ref(null);
+        return {
+            ...actions,
+            contextRef,
+        };
+    },
+}
+);
+
+
+export const whiteCase = () => ({
+    components: { PContextMenu, PI },
+    template: `
+<div class="context-menu-story">
+    <p-context-menu
+            style="position:static; width:15.125rem;"
+            ref="contextRef"
+            :menu="menu"
+            theme="white"
+            @click:select='clickLink'
+    >
+        <template #info--format>
+            <div class="context-info">
+                <p-i class="mr-1" name="admin" style="border-radius: 0.625rem" />
+                <span class="value">admin@admin.com</span>
+            </div>
+        </template>
+        <template #divider>
+            <div class="border my-2" />
+        </template>
+    </p-context-menu>
+<!--    ContextMenu에 버튼이 아닌 텍스트를 넣고 싶은 경우, info 타입을 적용한 뒤, #info&#45;&#45;format 안에 해당 내용을 넣으면 됩니다.-->
+</div>`,
+    setup() {
+        const state = reactive({
+            menu: [
+                {
+                    type: 'info', label: 'info', name: 'info', disabled: false,
+                },
+                {
+                    type: 'divider',
+                },
+                {
+                    type: 'item', label: 'one', name: 'one', disabled: false,
+                },
+                {
+                    type: 'item', label: 'two', name: 'two', disabled: false,
+                },
+                {
+                    type: 'item', label: 'three', name: 'three', disabled: false,
+                },
+            ],
+        });
+        return {
+            ...toRefs(state),
+        };
+    },
+});

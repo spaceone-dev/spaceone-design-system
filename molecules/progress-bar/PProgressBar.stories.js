@@ -23,18 +23,18 @@ export const progressBar = () => ({
     },
 });
 
-// export const labelCase = () => ({
-//     components: { PProgressBar },
-//     template: `<p-progress-bar :percentage="percentage"
-//                                :label="label"
-//                                 :style="'width: 160px'" />`,
-//     props: {
-//         percentage: {
-//             default: number('percentage', 50, { min: 0 }),
-//         },
-//         label: {
-//             type: String,
-//             default: text('label', 'label'),
-//         },
-//     },
-// });
+export const labelCase = () => ({
+    components: { PProgressBar },
+    template: `<p-progress-bar :percentage="percentage"
+                               :label="label"
+                                :style="'width: 160px'" />`,
+    props: {
+        percentage: {
+            default: number('percentage', 50, { min: 0 }),
+        },
+        label: {
+            type: String,
+            default: text('label', 'label'),
+        },
+    },
+});

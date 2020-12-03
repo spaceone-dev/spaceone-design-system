@@ -32,10 +32,10 @@ export const status = () => ({
     template: '<p-status  v-bind="$props"/>',
 });
 
-// export const iconStatus = () => ({
-//     components: { PStatus },
-//     template: `<div>
-//                     <p-status icon="aws-ec2" iconColor="#60B731" text="enabled"/><br>
-//                 </div>`
-//     ,
-// });
+export const iconStatus = () => ({
+    components: { PStatus },
+    template: `<div>
+                    <p-status icon="aws-ec2" iconColor="#60B731" text="enabled"/><br>
+                </div>`
+    ,
+});

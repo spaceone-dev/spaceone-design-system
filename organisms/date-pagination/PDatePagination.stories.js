@@ -29,22 +29,22 @@ export const datePagination = () => ({
     },
 });
 
-// export const weekCase = () => ({
-//     components: { PDatePagination },
-//     template: `
-// <div>
-//     <p-date-pagination :date.sync="now" type="week" />
-//     <div>
-//         <p>{{ now.startOf('week').format('YYYY-MM-DD') }} - {{ now.endOf('week').format('YYYY-MM-DD') }}</p>
-//     </div>
-// </div>`,
-//     props: {},
-//     setup() {
-//         const state = reactive({
-//             now: dayjs(),
-//         });
-//         return {
-//             ...toRefs(state),
-//         };
-//     },
-// });
+export const weekCase = () => ({
+    components: { PDatePagination },
+    template: `
+<div>
+    <p-date-pagination :date.sync="now" type="week" />
+    <div>
+        <p>{{ now.startOf('week').format('YYYY-MM-DD') }} - {{ now.endOf('week').format('YYYY-MM-DD') }}</p>
+    </div>
+</div>`,
+    props: {},
+    setup() {
+        const state = reactive({
+            now: dayjs(),
+        });
+        return {
+            ...toRefs(state),
+        };
+    },
+});
