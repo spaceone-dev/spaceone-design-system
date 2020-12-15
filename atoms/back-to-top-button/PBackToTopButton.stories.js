@@ -2,16 +2,12 @@ import { withDesign } from 'storybook-addon-designs';
 import { action } from '@storybook/addon-actions';
 import PBackToTopButton from '@/components/atoms/back-to-top-button/PBackToTopButton.vue';
 import PI from '@/components/atoms/icons/PI.vue';
-import PTooltip from '@/components/molecules/tooltips/PTooltip.vue';
-import { number, select, text } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
+import { computed, ref, toRef } from '@vue/composition-api';
 
 export default {
     title: 'Navigation/BackToTopButton',
-    component: {
-        PBackToTopButton,
-        PI,
-        PTooltip,
-    },
+    component: { PBackToTopButton },
     decorators: [withDesign],
     argTypes: {
         label: {
@@ -43,63 +39,55 @@ export default {
 // };
 const data = {};
 
-export const backToTopButton = () => ({
-    components: { PBackToTopButton, PI, PTooltip },
+export const backToTopButton = (object, key) => ({
+    components: { PBackToTopButton, PI },
     template: `
         <div style="height: 200vh; overflow: scroll; width: 100px;" >
           <p-back-to-top-button
             @click="scrollTop"
             :location="location"
-            @mouseenter="hover=true"
-            @mouseleave="hover=false"
-          >
-            <p-i name="ic_back-to-top"
-                 width="1.15rem"
-                 height="1.15rem"
-                 :color="hover?'#007EE5':'#5F616D'"
-            />
-            <p-tooltip v-if="hover" 
-                       contents="back to top" 
-                       position="auto"/>
-          </p-back-to-top-button>
+            :style="margin={margin}"
+            v-tooltip.right="{content: 'Back to Top', delay: {show: 200}, classes: ['p-tooltip']}"
+          />
         </div>`,
-    data() {
-        return {
-            ...data,
-            hover: false,
-        };
-    },
     props: {
         location: {
-            default: select('location', ['topRight', 'bottomRight'], 'bottomRight'),
+            default: select('location', ['bottomRight', 'topRight'], 'bottomRight'),
         },
-        // margin: {
-        //     default: text('margin', '2rem'),
-        // },
+        margin: {
+            default: text('margin', '2rem'),
+        },
     },
-    computed: {
+    setup(props, context) {
+        const hover = ref(false);
+        // const margin = computed(() => margin);
+        // const visible = ref(false);
 
-    },
-    methods: {
-        // ...actions,
-        scrollTop() {
-            this.intervalId = setInterval(() => {
-                console.log(window.pageXOffset, window.pageYOffset);
-                if (window.pageYOffset === 0) {
-                    clearInterval(this.intervalId);
-                }
-                window.scroll(0, window.pageYOffset - 50);
-            }, 20);
-        },
-        scrollListener(e) {
-            // 스크롤 맨 위일 때에는 unvisible
+        const scrollTop = () => {
+            window.scroll(0, 0);
+            // this.intervalId = setInterval(() => {
+            //     console.log(window.pageXOffset, window.pageYOffset);
+            //     if (window.pageYOffset === 0) {
+            //         clearInterval(this.intervalId);
+            //     }
+            //     window.scroll(0, window.pageYOffset - 50);
+            // }, 20);
+        };
+        const scrollListener = (e) => {
+            // 스크롤 맨 위일 때에는 visible = false
             // this.visible = window.scrollY > 150;
-        },
+        };
+
+        return {
+            ...(toRef(hover, key)),
+            scrollTop,
+            scrollListener,
+        };
     },
-    mounted() {
-        window.addEventListener('scroll', this.scrollListener);
-    },
-    beforeDestroy() {
-        window.removeEventListener('scroll', this.scrollListener);
-    },
+    // mounted() {
+    //     window.addEventListener('scroll', this.scrollListener);
+    // },
+    // beforeDestroy() {
+    //     window.removeEventListener('scroll', this.scrollListener);
+    // },
 });

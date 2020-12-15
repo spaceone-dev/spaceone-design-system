@@ -14,7 +14,6 @@ export default {
         function getClass(attrs: BackToTopButton) {
             const cls = {
                 'p-back-to-top-button': true,
-                'back-to-top-icon': true,
                 margin: !!attrs.margin,
             };
             if (attrs.location) {
@@ -22,6 +21,15 @@ export default {
             }
             return cls;
         }
+
+        const iconEl = h(PI, {
+            props: {
+                name: 'ic_back-to-top',
+                width: '1.15rem',
+                height: '1.15rem',
+                color: 'inherit',
+            },
+        });
 
         return h('div', {
             ...data,
@@ -47,7 +55,7 @@ export default {
             //     },
             // },
         },
-        children);
+        [iconEl]);
     },
 };
 
@@ -65,6 +73,7 @@ export default {
   border: 1px solid theme('colors.gray.200');
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  color: theme('colors.gray.700');
 
   transition:
       color 0.15s ease-in-out,
@@ -72,15 +81,15 @@ export default {
       border-color 0.15s ease-in-out,
       box-shadow 0.15s ease-in-out;
 
-  &.topRight {
-     top: 1rem;
-     right: 1rem;
-   }
+ &.topRight {
+     top: 0;
+     right: 0;
+  }
 
    &.bottomRight {
-      bottom: 1rem;
-      right: 1rem;
-    }
+      bottom: 0;
+      right: 0;
+   }
 
 &[type="button"], &[type="reset"], &[type="submit"] {
                                       appearance: none;
@@ -88,13 +97,8 @@ export default {
 
 &:hover {
       background: theme('colors.blue.100');
+      color: theme('colors.blue.500');
  }
 }
-
-
-/*.svg{*/
-/*   color: theme('colors.white');*/
-/* }*/
-
 
 </style>
