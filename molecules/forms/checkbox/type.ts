@@ -1,4 +1,6 @@
 export interface CheckboxProps {
     value?: boolean | string | number | object;
     selected: boolean | any[];
+    error?: boolean;
+    disabled?: boolean;
 }
