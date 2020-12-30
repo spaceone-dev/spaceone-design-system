@@ -3,15 +3,15 @@
           @click.stop.prevent="onClick"
           v-on="$listeners"
     >
-        <input type="checkbox" :disabled="disabled">
+        <input type="checkbox">
         <slot :slot-scope="$props" name="icon">
             <p-i width="1.25rem" height="1.25rem"
-                 :class="computedIconClass"
+                 :class="iconClass"
                  :color="isSelected ? undefined : 'inherit transparent'"
                  :name="iconName"
             />
         </slot>
-        <span v-if="$scopedSlots.default" :class="computedClass"
+        <span v-if="$scopedSlots.default" :class="textClass"
               @click.stop="onClick"
         >
             <slot name="default" />
@@ -21,102 +21,94 @@
 
 <script lang="ts">
 import { indexOf, pull } from 'lodash';
-
 import {
-  computed, reactive, toRefs,
+    computed, reactive, toRefs,
 } from '@vue/composition-api';
-
 import PI from '@/components/atoms/icons/PI.vue';
 import { CheckboxProps } from '@/components/molecules/forms/checkbox/type';
 
 export default {
-  name: 'PCheckBox',
-  components: { PI },
-  model: {
-    prop: 'selected',
-    event: 'change',
-  },
-  props: {
-    value: {
-      type: [Boolean, String, Number, Object],
-      default: undefined,
+    name: 'PCheckBox',
+    components: { PI },
+    model: {
+        prop: 'selected',
+        event: 'change',
     },
-    selected: {
-      type: [Boolean, Array],
-      default: () => ([]),
+    props: {
+        value: {
+            type: [Boolean, String, Number, Object],
+            default: undefined,
+        },
+        selected: {
+            type: [Boolean, Array],
+            default: () => ([]),
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        required: {
+            type: Boolean,
+            default: false,
+        },
     },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    errored: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  setup(props: CheckboxProps, context) {
-    const state = reactive({
-      isSelected: computed(() => {
-        if (typeof props.selected === 'boolean') {
-          return props.selected;
-        }
-        return indexOf(props.selected, props.value) !== -1;
-      }),
-    });
-    const onClick = () => {
-      if (!props.disabled) {
-        if (typeof props.selected === 'boolean') {
-          context.emit('change', !props.selected);
-        } else {
-          const newResult = [...props.selected];
-          if (state.isSelected) {
-            pull(newResult, props.value);
-          } else { newResult.push(props.value); }
-          context.emit('change', newResult, state.isSelected);
-        }
-      }
-    };
-    const computedClass = computed(() => {
-      if (props.disabled) return 'disabled';
-      if (props.errored) return 'errored';
-      return 'text';
-    });
-    const computedIconClass = computed(() => {
-      if (props.disabled) return 'disabled';
-      if (props.errored) return 'errored';
-      return 'check-icon';
-    });
-    const iconName = computed(() => {
-      if (props.disabled) return 'ic_checkbox--disabled';
-      if (state.isSelected) return 'ic_checkbox--checked';
-      return 'ic_checkbox';
-    });
+    setup(props: CheckboxProps, context) {
+        const state = reactive({
+            isSelected: computed(() => {
+                if (typeof props.selected === 'boolean') {
+                    return props.selected;
+                }
+                return indexOf(props.selected, props.value) !== -1;
+            }),
+            isInvalid: !!props.required,
+        });
+        const onClick = () => {
+            if (!props.disabled) {
+                if (typeof props.selected === 'boolean') {
+                    context.emit('change', !props.selected);
+                } else {
+                    const newResult = [...props.selected];
+                    if (state.isSelected) {
+                        pull(newResult, props.value);
+                    } else { newResult.push(props.value); }
+                    context.emit('change', newResult, state.isSelected);
+                    console.log(newResult);
+                }
+                if (props.required) {
+                    if (state.isSelected) state.isInvalid = true;
+                    else state.isInvalid = false;
+                }
+            }
+        };
+        const textClass = computed(() => {
+            if (props.disabled) return 'disabled text';
+            if (state.isInvalid) return 'invalid text';
+            return 'text';
+        });
+        const iconClass = computed(() => {
+            if (props.disabled) return 'disabled check-icon';
+            if (state.isInvalid) return 'invalid check-icon';
+            return 'check-icon';
+        });
+        const iconName = computed(() => {
+            if (props.disabled) return 'ic_checkbox--disabled';
+            if (state.isSelected) return 'ic_checkbox--checked';
+            return 'ic_checkbox';
+        });
 
-    return {
-      ...toRefs(state),
-      onClick,
-      computedClass,
-      computedIconClass,
-      iconName,
-    };
-  },
-  methods: {
-
-  },
+        return {
+            ...toRefs(state),
+            onClick,
+            textClass,
+            iconClass,
+            iconName,
+        };
+    },
 };
 </script>
 
 <style lang="postcss">
 .p-checkbox {
-
-    &:hover {
-        .text {
-            @apply text-blue-500;
-        }
-        .check-icon {
-            @apply text-blue-500;
-        }
-    }
 
     input {
         position: absolute;
@@ -126,24 +118,37 @@ export default {
         width: 0;
     }
 
-    span {
+    &:hover {
+        .text {
+            @apply text-blue-500;
+        }
+        .check-icon {
+            @apply text-blue-500;
+        }
+        .disabled {
+            @apply text-gray-400;
+        }
+        .invalid {
+            @apply text-red-500;
+        }
+    }
+
+    .text {
         @apply text-gray-900 cursor-pointer;
         font-weight: 400;
         font-size: 14px;
     }
-
+    .check-icon {
+        @apply text-gray-400 cursor-pointer;
+    }
     .disabled {
         @apply text-gray-400;
         cursor: not-allowed;
     }
-
-    .errored {
+    .invalid {
         @apply text-red-500 cursor-pointer;
     }
 
-    .check-icon {
-        @apply text-gray-400 cursor-pointer;
-    }
 }
 
 </style>

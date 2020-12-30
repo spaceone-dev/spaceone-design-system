@@ -23,17 +23,19 @@ const setup = () => {
 
 export const radioButton = () => ({
     components: { PRadio },
-    template: `<div>
-                    <div v-for="(item, idx) in multi" :key="idx">
-                        <p-radio 
-                                 v-model="selected"
-                                 :value="item"
-                                 @change="onChange"
-                        >{{ item }}</p-radio>
-                    </div>
-                    <p-radio @change="onChange" disabled>disabled</p-radio>
-                    <p-radio v-model="errorSelected" @change="onChange" errored>error</p-radio>
-    </div>`,
+    template: `
+        <div>
+            <div v-for="(item, idx) in multi" :key="idx">
+                <p-radio 
+                         v-model="selected"
+                         :value="item"
+                         @change="onChange"
+                >{{ item }}</p-radio>
+            </div>
+            <p-radio @change="onChange" disabled>disabled</p-radio>
+            <p-radio v-model="errorSelected" @change="onChange" required>required</p-radio>
+        </div>
+    `,
     setup() {
         return {
             ...setup(),
