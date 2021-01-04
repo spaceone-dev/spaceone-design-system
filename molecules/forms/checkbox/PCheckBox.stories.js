@@ -18,7 +18,7 @@ export const checkbox = () => ({
         <div>
             <div>
                 <PCheckBox v-model="selectIndex" value=0>default</PCheckBox>
-                <PCheckBox v-model="selectIndex" value=1 required>required</PCheckBox>
+                <PCheckBox v-model="selectIndex" value=1 invalid>invalid</PCheckBox>
                 <PCheckBox v-model="selectIndex" value=3 disabled>disabled</PCheckBox>
             </div>
             selected index : {{selectIndex}}

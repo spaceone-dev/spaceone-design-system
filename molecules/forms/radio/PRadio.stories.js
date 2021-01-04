@@ -33,7 +33,7 @@ export const radioButton = () => ({
                 >{{ item }}</p-radio>
             </div>
             <p-radio @change="onChange" disabled>disabled</p-radio>
-            <p-radio v-model="errorSelected" @change="onChange" required>required</p-radio>
+            <p-radio v-model="errorSelected" @change="onChange" invalid>invalid</p-radio>
         </div>
     `,
     setup() {

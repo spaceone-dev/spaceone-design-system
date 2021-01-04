@@ -2,7 +2,7 @@
     <span class="p-radio"
           :class="{
               selected: isSelected,
-              disabled, required,
+              disabled, invalid,
           }"
           @click.stop.prevent="onClick"
           v-on="$listeners"
@@ -43,16 +43,13 @@ export default {
             type: Boolean,
             default: false,
         },
-        required: {
+        invalid: {
             type: Boolean,
             default: false,
         },
     },
     setup(props, { emit }) {
         const isSelected = computed(() => props.selected === props.value);
-        const state = reactive({
-            isInvalid: !!props.required,
-        });
         const onClick = () => {
             if (!props.disabled) {
                 if (!isSelected.value) {
@@ -61,20 +58,16 @@ export default {
                         else emit('change', { ...props.value }, isSelected.value);
                     } else emit('change', props.value, isSelected.value);
                 }
-                if (props.required) {
-                    if (isSelected) state.isInvalid = false;
-                    else state.isInvalid = true;
-                }
             }
         };
         const textClass = computed(() => {
             if (props.disabled) return 'text disabled';
-            if (state.isInvalid) return 'text invalid';
+            if (props.invalid) return 'text invalid';
             return 'text';
         });
         const iconClass = computed(() => {
             if (props.disabled) return 'radio-icon disabled';
-            if (state.isInvalid) return 'radio-icon invalid';
+            if (props.invalid) return 'radio-icon invalid';
             return 'radio-icon';
         });
         const iconName = computed(() => {
@@ -83,7 +76,6 @@ export default {
             return 'ic_radio';
         });
         return {
-            ...toRefs(state),
             isSelected,
             iconName,
             textClass,

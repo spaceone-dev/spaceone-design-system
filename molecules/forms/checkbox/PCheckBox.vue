@@ -47,7 +47,7 @@ export default {
             type: Boolean,
             default: false,
         },
-        required: {
+        invalid: {
             type: Boolean,
             default: false,
         },
@@ -60,7 +60,6 @@ export default {
                 }
                 return indexOf(props.selected, props.value) !== -1;
             }),
-            isInvalid: !!props.required,
         });
         const onClick = () => {
             if (!props.disabled) {
@@ -72,22 +71,17 @@ export default {
                         pull(newResult, props.value);
                     } else { newResult.push(props.value); }
                     context.emit('change', newResult, state.isSelected);
-                    console.log(newResult);
-                }
-                if (props.required) {
-                    if (state.isSelected) state.isInvalid = true;
-                    else state.isInvalid = false;
                 }
             }
         };
         const textClass = computed(() => {
             if (props.disabled) return 'disabled text';
-            if (state.isInvalid) return 'invalid text';
+            if (props.invalid) return 'invalid text';
             return 'text';
         });
         const iconClass = computed(() => {
             if (props.disabled) return 'disabled check-icon';
-            if (state.isInvalid) return 'invalid check-icon';
+            if (props.invalid) return 'invalid check-icon';
             return 'check-icon';
         });
         const iconName = computed(() => {
