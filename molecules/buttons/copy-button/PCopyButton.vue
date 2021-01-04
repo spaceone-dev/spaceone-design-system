@@ -13,16 +13,18 @@
                  :color="color"
             />
         </span>
-        <div v-if="isAlertVisible" class="copy-button-alert">
-            <p-i name="ic_state_active" color="inherit" width="0.875rem" />
-            <span>Copied</span>
-        </div>
+        <transition name="fade">
+            <div v-if="isAlertVisible" class="copy-button-alert">
+                <p-i name="ic_state_active" color="inherit" width="1rem" />
+                <span>Copied</span>
+            </div>
+        </transition>
     </span>
 </template>
 
 <script lang="ts">
 import {
-    computed, reactive, ref, toRefs,
+    computed, reactive, toRefs,
 } from '@vue/composition-api';
 import PI from '@/components/atoms/icons/PI.vue';
 import { copyAnyData, isNotEmpty } from '@/components/util/helpers';
@@ -70,7 +72,7 @@ export default {
 
         const copyText = () => {
             state.isAlertVisible = true;
-            setTimeout(() => { state.isAlertVisible = false; }, 1000);
+            setTimeout(() => { state.isAlertVisible = false; }, 500);
             if (state.click) {
                 if (isNotEmpty(props.value)) {
                     copyAnyData(props.value);
@@ -94,6 +96,14 @@ export default {
 </script>
 
 <style lang="postcss">
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
 .p-copy-button {
     @apply flex;
     position: relative;
@@ -104,12 +114,13 @@ export default {
     }
 
     .copy-button-alert {
-        @apply flex bg-black text-white;
+        @apply flex text-white;
+        background-color: rgba(theme('colors.gray.900'), 0.88);
         position: absolute;
         font-weight: 400;
         right: -5.25rem;
         font-size: 0.75rem;
-        z-index: 100;
+        z-index: 2;
         width: 4.75rem;
         height: 1.5rem;
         border-radius: 0.125rem;
