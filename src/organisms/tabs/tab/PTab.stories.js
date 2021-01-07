@@ -42,7 +42,6 @@ export const tab = () => ({
             </template>
         
             </PTab>
-            <p>{{activeTab}}</p>
         </div>`,
     setup() {
         return {
@@ -51,6 +50,7 @@ export const tab = () => ({
         };
     },
 });
+
 export const oneTab = () => ({
     components: { PTab },
     template: `
@@ -74,6 +74,37 @@ export const oneTab = () => ({
         return {
             tabs: [
                 { name: 'detail', label: '디테일' },
+            ],
+            activeTab: 'detail',
+            ...actions,
+        };
+    },
+});
+
+export const twoTabs = () => ({
+    components: { PTab },
+    template: `
+        <div style="width: 80vw;">
+            <PTab :tabs="tabs" :activeTab.sync="activeTab" >
+            <template #detail="{tabName}" >
+                <keep-alive>
+                   <p> this tab is {{tabName}}</p>
+                </keep-alive>
+            </template>
+            <template #info="{tabName}" >
+                   <p> this tab is {{tabName}}</p>
+            </template>
+            <template #tags="{tabName}" >
+                   <p> this tab is {{tabName}}</p>
+            </template>
+        
+            </PTab>
+        </div>`,
+    setup() {
+        return {
+            tabs: [
+                { name: 'detail', label: '디테일' },
+                { name: 'info', label: '정보' },
             ],
             activeTab: 'detail',
             ...actions,

@@ -1,6 +1,8 @@
 <template>
     <div class="p-tab">
-        <p-tab-bar class="p-tab-bar" :class="{'is-single':isSingle}" :active-tab.sync="proxyActiveTab"
+        <p-tab-bar class="p-tab-bar"
+                   :class="{'is-single':isSingle,'is-double':isDouble}"
+                   :active-tab.sync="proxyActiveTab"
                    :tabs="tabs"
         />
         <div class="tab-pane">
@@ -48,6 +50,7 @@ export default {
         const state = reactive({
             proxyActiveTab: makeProxy('activeTab', props, emit),
             isSingle: computed(() => props.tabs.length === 1),
+            isDouble: computed(() => props.tabs.length === 2),
             nonKeepTabs: computed(() => props.tabs.reduce<TabItem[]>((results, current, idx) => {
                 if (typeof current === 'string') results.push({ name: current, label: current, keepAlive: false });
                 else if (!current.keepAlive) results.push(current);
@@ -69,6 +72,11 @@ export default {
         @apply border-b-4 border-gray-100;
         &.is-single {
             @apply border-b-2;
+        }
+        &.is-double {
+            &.p-nav-tabs .nav-item {
+                flex: 0.5;
+            }
         }
     }
     .tab-pane {
