@@ -70,9 +70,6 @@ export default {
     @apply rounded-sm border  border-gray-200 bg-white;
     .p-tab-bar {
         @apply border-b-4 border-gray-100;
-        &.is-single {
-            @apply border-b-2;
-        }
         &.is-double {
             &.p-nav-tabs .nav-item {
                 flex: 0.5;

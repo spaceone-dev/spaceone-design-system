@@ -9,6 +9,10 @@ export default {
             summary: '',
             components: { PTab },
         },
+        design: {
+            type: 'figma',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=6013%3A121728',
+        },
     },
 };
 const actions = {
@@ -16,9 +20,9 @@ const actions = {
 };
 const data = {
     tabs: [
-        { name: 'detail', label: '디테일' },
-        { name: 'info', label: '정보' },
-        { name: 'tags', label: '태그' },
+        { name: 'detail', label: 'Detail' },
+        { name: 'info', label: 'Info' },
+        { name: 'tags', label: 'Tags' },
     ],
     activeTab: 'detail',
 };
@@ -73,7 +77,7 @@ export const oneTab = () => ({
     setup() {
         return {
             tabs: [
-                { name: 'detail', label: '디테일' },
+                { name: 'detail', label: 'Detail' },
             ],
             activeTab: 'detail',
             ...actions,
@@ -103,8 +107,8 @@ export const twoTabs = () => ({
     setup() {
         return {
             tabs: [
-                { name: 'detail', label: '디테일' },
-                { name: 'info', label: '정보' },
+                { name: 'detail', label: 'Detail' },
+                { name: 'info', label: 'Info' },
             ],
             activeTab: 'detail',
             ...actions,
