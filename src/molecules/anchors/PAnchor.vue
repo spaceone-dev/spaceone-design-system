@@ -1,20 +1,18 @@
 <template>
-    <a disabled :href="!disabled&&href" :target="target"
-       class="p-anchor"
+    <a :href="!disabled&&href" :target="target"
+       class="p-anchor" :class="{disabled}"
     >
-        <span :class="{disabled}">
-            <span class="text" :class="{disabled}">
-                <slot v-bind="$props">
-                    {{ text }}
-                </slot>
-            </span>
-            <slot v-if="showIcon && target === '_blank'" name="icon" v-bind="$props">
-                <p-i name="ic_external-link"
-                     height="1em" width="1em"
-                     color="inherit"
-                />
+        <span class="text" :class="{disabled}">
+            <slot v-bind="$props">
+                {{ text }}
             </slot>
         </span>
+        <slot v-if="showIcon && target === '_blank'" name="icon" v-bind="$props">
+            <p-i name="ic_external-link"
+                 height="1em" width="1em"
+                 color="inherit"
+            />
+        </slot>
     </a>
 </template>
 
@@ -62,7 +60,6 @@ export default {
     .disabled {
         @apply text-gray-400;
         cursor: not-allowed;
-        text-decoration: none;
     }
     &:hover {
         .text {
