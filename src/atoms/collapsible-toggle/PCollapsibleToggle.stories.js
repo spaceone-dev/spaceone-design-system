@@ -23,19 +23,14 @@ export const collapsibleToggle = () => ({
     components: { PCollapsibleToggle },
     template: `
         <div>
-            <p-collapsible-toggle 
-                v-model="isCollapsed"
-                @change="onChange"
-            >
+            <p-collapsible-toggle :is-collapsed.sync="isCollapsed">
                 collapsible toggle
             </p-collapsible-toggle>
             <span>State : {{isCollapsed?'collapsed':'opened'}}</span>
         </div>`,
     setup() {
-        const isCollapsed = ref(true);
         return {
-            isCollapsed,
-            onChange: action('onChange'),
+            isCollapsed: ref(true),
         };
     },
 });

@@ -1,9 +1,9 @@
 <template>
     <span class="p-collapsible-toggle"
-          @click.stop.prevent="onClick"
+          @click="onClick"
           v-on="$listeners"
     >
-        <span v-if="$scopedSlots.default" @click.stop="onClick">
+        <span v-if="$scopedSlots.default">
             <slot name="default" />
         </span>
         <p-i class="p-collapsible-icon"
@@ -19,12 +19,7 @@ import PI from '@/atoms/icons/PI.vue';
 
 export default {
     name: 'PCollapsibleToggle',
-    events: ['change'],
     components: { PI },
-    model: {
-        prop: 'isCollapsed',
-        event: 'change',
-    },
     props: {
         isCollapsed: {
             type: Boolean,
@@ -32,11 +27,10 @@ export default {
         },
     },
     setup(props, { emit }) {
-        const onClick = () => {
-            emit('change', !props.isCollapsed);
-        };
         return {
-            onClick,
+            onClick() {
+                emit('update:isCollapsed', !props.isCollapsed);
+            },
         };
     },
 };
