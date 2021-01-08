@@ -57,7 +57,7 @@ export default {
         color: inherit;
         font-weight: 400;
     }
-    .disabled {
+    &.disabled {
         @apply text-gray-400;
         cursor: not-allowed;
     }
