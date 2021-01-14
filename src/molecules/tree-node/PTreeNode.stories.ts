@@ -2,7 +2,7 @@ import {
     reactive, toRefs,
 } from '@vue/composition-api';
 import {
-    text, number, boolean, object,
+    text, number, boolean,
 } from '@storybook/addon-knobs';
 import PI from '@/atoms/icons/PI.vue';
 import PTreeNode from '@/molecules/tree-node/PTreeNode.vue';
