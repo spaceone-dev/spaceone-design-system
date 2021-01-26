@@ -49,12 +49,9 @@ import {BUTTON_STYLE} from "@/atoms/buttons-new/type";
         defaultValue: 'button',
         table: {
             type: {
-                summary: 'string'
+                summary: null
             },
             category: 'slots',
-            defaultValue: {
-                summary: 'null',
-            }
         },
         control: {
             type: 'text'
@@ -99,7 +96,7 @@ import {BUTTON_STYLE} from "@/atoms/buttons-new/type";
     loading: {
         name: 'loading',
         type: {name: 'boolean'},
-        description: 'Loading when true`',
+        description: 'Loading when true',
         defaultValue: false,
         table: {
             type: {
@@ -157,12 +154,9 @@ import {BUTTON_STYLE} from "@/atoms/buttons-new/type";
         defaultValue: "()=>{console.log('click')}",
         table: {
             type: {
-                summary: 'function'
+                summary: null
             },
             category: 'event',
-            defaultValue: {
-                summary: 'null'
-            }
         },
         control: {
             type: 'text'
@@ -174,7 +168,7 @@ export const Template = (args, {argTypes})=>({
     props: Object.keys(argTypes),
     components: {PButton, PLottie},
     template: `
-        <div style="display:flex; align-items:center; justify-content:center; height:100px;">
+        <div style="display:flex; align-items:center; justify-content:center; height:150px;">
             <p-button
                 @click="onClick"
                 :href="href"
