@@ -1,6 +1,6 @@
 <script lang="ts">
 import { getBindClass } from '@/util/functional-helpers';
-import { gray, primary3 } from '@/styles/colors';
+import { gray } from '@/styles/colors';
 
 const isEmptyVNode = (nodes) => {
     if (!nodes) return true;
@@ -25,7 +25,11 @@ export default {
         },
         color: {
             type: String,
-            default: primary3,
+            default: gray[200],
+        },
+        opacity: {
+            type: String,
+            default: '0.4',
         },
         duration: {
             type: Number,
@@ -34,6 +38,10 @@ export default {
         highlight: {
             type: String,
             default: gray[100],
+        },
+        borderRadius: {
+            type: String,
+            default: '0.375rem',
         },
         width: {
             type: String,
@@ -56,13 +64,15 @@ export default {
         props, slots, data,
     }) {
         const {
-            loading, color, duration, highlight, width, height, tag, animation,
+            loading, color, opacity, borderRadius, duration, highlight, width, height, tag, animation,
         } = props;
         const style: CSSStyleDeclaration = {} as CSSStyleDeclaration;
         const showLoading = loading || isEmptyVNode(slots().default);
 
         if (showLoading) {
             style.backgroundColor = color;
+            style.opacity = opacity;
+            style.borderRadius = borderRadius;
             if (width) style.width = width;
             if (height) style.height = height;
 
