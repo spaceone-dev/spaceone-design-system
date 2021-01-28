@@ -23,25 +23,9 @@ export default {
             type: Boolean,
             default: true,
         },
-        color: {
-            type: String,
-            default: gray[200],
-        },
-        opacity: {
-            type: String,
-            default: '0.4',
-        },
         duration: {
             type: Number,
             default: 2,
-        },
-        highlight: {
-            type: String,
-            default: gray[100],
-        },
-        borderRadius: {
-            type: String,
-            default: '0.375rem',
         },
         width: {
             type: String,
@@ -64,20 +48,17 @@ export default {
         props, slots, data,
     }) {
         const {
-            loading, color, opacity, borderRadius, duration, highlight, width, height, tag, animation,
+            loading, duration, width, height, tag, animation,
         } = props;
         const style: CSSStyleDeclaration = {} as CSSStyleDeclaration;
         const showLoading = loading || isEmptyVNode(slots().default);
 
         if (showLoading) {
-            style.backgroundColor = color;
-            style.opacity = opacity;
-            style.borderRadius = borderRadius;
             if (width) style.width = width;
             if (height) style.height = height;
 
             if (animation) {
-                style.backgroundImage = `linear-gradient(90deg, ${color}, ${highlight}, ${color})`;
+                style.backgroundImage = `linear-gradient(90deg, ${gray[200]}, ${gray[100]}, ${gray[200]})`;
                 style.animation = `p-skeleton-loading ${duration}s ease-in-out infinite`;
             } else {
                 style.backgroundImage = '';
@@ -104,7 +85,9 @@ export default {
 
 <style lang="postcss">
 .p-skeleton {
-    @apply rounded-sm inline-block w-full;
+    @apply rounded-sm inline-block w-full bg-gray-200;
+    opacity: 0.4;
+    border-radius: 0.375rem;
     height: 0.875rem;
     line-height: inherit;
     background-repeat: no-repeat;
