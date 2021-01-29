@@ -3,6 +3,8 @@ import { select, boolean } from '@storybook/addon-knobs';
 
 import icon from 'vue-svgicon';
 import PIconButton from '@/molecules/buttons/icon-button/PIconButton.vue';
+import { ICON_BUTTON_STYLE } from '@/molecules/buttons/icon-button/type';
+import { BUTTON_STYLE } from '@/atoms/buttons-new/type';
 
 const iconStyleMapping = {
     solid: 'fas',
@@ -11,20 +13,20 @@ const iconStyleMapping = {
     duotone: 'fad',
     brands: 'fab',
 };
-const sizeMapping = {
-    xs: 'fa-xs',
-    sm: 'fa-sm',
-    lg: 'fa-lg',
-    '2x': 'fa-2x',
-    '3x': 'fa-3x',
-    '4x': 'fa-4x',
-    '5x': 'fa-5x',
-    '6x': 'fa-6x',
-    '7x': 'fa-7x',
-    '8x': 'fa-8x',
-    '9x': 'fa-9x',
-    '10x': 'fa-10x',
-};
+// const sizeMapping = {
+//     xs: 'fa-xs',
+//     sm: 'fa-sm',
+//     lg: 'fa-lg',
+//     '2x': 'fa-2x',
+//     '3x': 'fa-3x',
+//     '4x': 'fa-4x',
+//     '5x': 'fa-5x',
+//     '6x': 'fa-6x',
+//     '7x': 'fa-7x',
+//     '8x': 'fa-8x',
+//     '9x': 'fa-9x',
+//     '10x': 'fa-10x',
+// };
 const animationMapping = {
     spin: 'fa-spin',
     pulse: 'fa-pulse',
@@ -59,16 +61,17 @@ export const iconButton = () => ({
     template: `
         <p-icon-button 
             @click="click"
-            :name="name"
+            :name="iconName"
             :disabled="disabled"
             :iconStyle="iconStyle"
-            :size="size"
+            :size="buttonSize"
             :animation="animation"
             :rotating="rotating"
             :flip="flip"
+            :styleType="style-type"
         />`,
     props: {
-        name: {
+        iconName: {
             default: select('name', icons, 'ic_refresh'),
         },
         iconStyle: {
@@ -77,8 +80,8 @@ export const iconButton = () => ({
         disabled: {
             default: boolean('disabled', false),
         },
-        size: {
-            default: select('size', ['', ...Object.keys(sizeMapping)], ''),
+        buttonSize: {
+            default: select('size', ['md', 'sm', 'lg'], 'md'),
         },
         animation: {
             default: select('animation', ['', ...Object.keys(animationMapping)], ''),
@@ -88,6 +91,15 @@ export const iconButton = () => ({
         },
         flip: {
             default: select('flip', ['', ...Object.keys(flipMapping)], ''),
+        },
+        outline: {
+            default: boolean('outline', false),
+        },
+        styleType: {
+            default: select('styleType', [...Object.keys(BUTTON_STYLE)], ICON_BUTTON_STYLE.primary),
+        },
+        shape: {
+            default: select('shape', ['circle', 'square'], 'square'),
         },
     },
     setup() {

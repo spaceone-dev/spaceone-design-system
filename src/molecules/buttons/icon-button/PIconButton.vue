@@ -1,10 +1,10 @@
 <template>
     <p-button
         class="p-icon-button"
-        :class="{solid, [`icon-btn-${styleType}`]: !!styleType}"
         :outline="outline"
         :disabled="disabled"
         :size="size"
+        :style-type="styleType"
         v-on="$listeners"
     >
         <slot>
@@ -23,16 +23,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 
 import PI from '@/atoms/icons/PI.vue';
-import PButton from '@/atoms/buttons/PButton.vue';
-import { IconButtonProps, BUTTON_STYLE_TYPE } from '@/molecules/buttons/icon-button/type';
+import PButton from '@/atoms/buttons-new/PButton.vue';
+import { BUTTON_STYLE } from '@/atoms/buttons-new/type';
 
 export default defineComponent({
     name: 'PIconButton',
     components: { PButton, PI },
     props: {
+        // icon
         name: {
             type: String,
             default: '',
@@ -69,12 +70,13 @@ export default defineComponent({
             type: String,
             default: 'transparent inherit',
         },
+        // button
         styleType: {
             type: String,
             default: undefined,
             validator: (value) => {
                 if (value === undefined) return true;
-                return Object.keys(BUTTON_STYLE_TYPE).includes(value as string);
+                return Object.keys(BUTTON_STYLE).includes(value as string);
             },
         },
         disabled: {
@@ -91,12 +93,12 @@ export default defineComponent({
         },
         size: {
             type: String,
-            default: undefined,
+            default: 'md',
         },
-    },
-    setup(props: IconButtonProps) {
-        return {
-        };
+        shape: {
+            type: String,
+            default: 'square',
+        },
     },
 });
 </script>
@@ -110,7 +112,7 @@ export default defineComponent({
     max-height: 2rem;
 
     &.p-button {
-        background-color: transparent;
+        /*background-color: transparent;*/
         border-color: transparent;
         border-radius: 50px;
 
@@ -142,35 +144,35 @@ export default defineComponent({
             }
         }
 
-        @define-mixin button-style
-            $solid-text-color, $solid-bg-color, $outline-border-color, $outline-text-color {
-            color: $outline-text-color;
+        /*@define-mixin button-style*/
+        /*    $solid-text-color, $solid-bg-color, $outline-border-color, $outline-text-color {*/
+        /*    color: $outline-text-color;*/
 
-            &.solid {
-                background-color: $solid-bg-color;
-                border-color: $solid-bg-color;
-                color: $solid-text-color;
-            }
+        /*    &.solid {*/
+        /*        background-color: $solid-bg-color;*/
+        /*        border-color: $solid-bg-color;*/
+        /*        color: $solid-text-color;*/
+        /*    }*/
 
-            &.outline {
-                border-radius: 2px;
-                background-color: transparent;
-                border-color: $outline-border-color;
-                color: $outline-text-color;
-            }
-        }
+        /*    &.outline {*/
+        /*        border-radius: 2px;*/
+        /*        background-color: transparent;*/
+        /*        border-color: $outline-border-color;*/
+        /*        color: $outline-text-color;*/
+        /*    }*/
+        /*}*/
 
-        /* default */
-        @mixin button-style
-            theme('colors.gray.900'), theme('colors.white'),
-            theme('colors.gray.300'), theme('colors.gray.900');
+        /*!* default *!*/
+        /*@mixin button-style*/
+        /*    theme('colors.gray.900'), theme('colors.white'),*/
+        /*    theme('colors.gray.300'), theme('colors.gray.900');*/
 
-        /* themes */
-        &.icon-btn-primary-dark {
-            @mixin button-style
-                theme('colors.primary-dark'), theme('colors.white'),
-                theme('colors.primary-dark'), theme('colors.primary-dark');
-        }
+        /*!* themes *!*/
+        /*&.icon-btn-primary-dark {*/
+        /*    @mixin button-style*/
+        /*        theme('colors.primary-dark'), theme('colors.white'),*/
+        /*        theme('colors.primary-dark'), theme('colors.primary-dark');*/
+        /*}*/
     }
 }
 </style>
