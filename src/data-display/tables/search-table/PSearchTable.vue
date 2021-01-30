@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts">
-import PSearch from '@/molecules/search/PSearch.vue';
+import PSearch from '@/inputs/search/search/PSearch.vue';
 import PToolboxTable from '@/data-display/tables/toolbox-table/PToolboxTable.vue';
 import {
     ComponentRenderProxy,

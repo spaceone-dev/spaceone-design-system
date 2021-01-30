@@ -1,5 +1,5 @@
-import { Button } from '@/atoms/buttons/type';
-import { ContentModalProps } from '@/others/modals/content-modal/type';
+import { Button } from '@/inputs/buttons/button/type';
+import { ContentModalProps } from '@/feedbacks/modals/content-modal/type';
 
 export interface ButtonModalProps extends ContentModalProps {
     headerTitle: string;

@@ -1,6 +1,6 @@
 import {
     ProgressTabBarProps,
-} from '@/molecules/tabs/progress-tab-bar/type';
+} from '@/navigation/wizards/progress-wizard/progress-tab-bar/type';
 
 export interface ProgressWizardProps extends ProgressTabBarProps {
     cancelBtnBind: any;

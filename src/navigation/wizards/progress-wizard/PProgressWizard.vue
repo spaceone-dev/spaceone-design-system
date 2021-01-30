@@ -89,14 +89,14 @@ import {
 } from '@vue/composition-api';
 import { makeProxy } from '@/util/composition-helpers';
 
-import PPaneLayout from '@/molecules/layouts/pane-layout/PPaneLayout.vue';
-import PProgressTabBar from '@/molecules/tabs/progress-tab-bar/PProgressTabBar.vue';
-import PI from '@/atoms/icons/PI.vue';
-import PButton from '@/atoms/buttons/PButton.vue';
+import PPaneLayout from '@/layouts/pane-layout/PPaneLayout.vue';
+import PProgressTabBar from '@/navigation/wizards/progress-wizard/progress-tab-bar/PProgressTabBar.vue';
+import PI from '@/foundation/icons/PI.vue';
+import PButton from '@/inputs/buttons/button/PButton.vue';
 import {
     ProgressWizardProps,
 } from '@/navigation/wizards/progress-wizard/type';
-import PLoadingButton from '@/molecules/buttons/loading-button/PLoadingButton.vue';
+import PLoadingButton from '@/others/deprecated/loading-button/PLoadingButton.vue';
 
 
 const setPagination = (props, state, emit) => {

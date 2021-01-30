@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import {
     boolean, number, select, text, array, withKnobs,
 } from '@storybook/addon-knobs';
-import PButton from '@/atoms/buttons/PButton.vue';
+import PButton from '@/inputs/buttons/button/PButton.vue';
 import PButtonModal from '@/feedbacks/modals/button-modal/PButtonModal.vue';
 import { sizeMapping } from '@/feedbacks/modals/modal/type';
 import {

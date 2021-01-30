@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import PBadge from '@/data-display/badges/PBadge.vue';
-import PI from '@/atoms/icons/PI.vue';
+import PI from '@/foundation/icons/PI.vue';
 
 export default {
     name: 'PTag',

@@ -28,7 +28,7 @@ import {
     computed, reactive, toRefs,
 } from '@vue/composition-api';
 
-import PTabBar from '@/molecules/tabs/tab-bar/PTabBar.vue';
+import PTabBar from '@/navigation/tabs/tab/tab-bar/PTabBar.vue';
 import { TabProps, TabItem } from '@/navigation/tabs/tab/type';
 
 import { makeProxy } from '@/util/composition-helpers';

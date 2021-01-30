@@ -25,7 +25,7 @@
     </nav>
 </template>
 <script lang="ts">
-import PIconButton from '@/molecules/buttons/icon-button/PIconButton.vue';
+import PIconButton from '@/inputs/buttons/icon-button/PIconButton.vue';
 import {
     ComponentRenderProxy,
     computed, getCurrentInstance, reactive, toRefs,

@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import PI from '@/atoms/icons/PI.vue';
+import PI from '@/foundation/icons/PI.vue';
 import { reactive } from '@vue/composition-api';
 
 export default {

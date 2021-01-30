@@ -34,7 +34,7 @@ import {
     computed, defineComponent, reactive, toRefs,
 } from '@vue/composition-api';
 import { LOADER_TYPES } from '@/feedbacks/loading/data-loader/config';
-import PLottie from '@/molecules/lottie/PLottie.vue';
+import PLottie from '@/foundation/lottie/PLottie.vue';
 import { i18n } from '@/translations';
 import { isEmpty } from 'lodash';
 import PSkeleton from '@/feedbacks/loading/skeleton/PSkeleton.vue';

@@ -68,19 +68,19 @@
 
 <script lang="ts">
 import PToolboxTable from '@/data-display/tables/toolbox-table/PToolboxTable.vue';
-import PQuerySearch from '@/organisms/search/query-search/PQuerySearch.vue';
-import PQuerySearchTags from '@/organisms/search/query-search-tags/PQuerySearchTags.vue';
+import PQuerySearch from '@/inputs/search/query-search/PQuerySearch.vue';
+import PQuerySearchTags from '@/inputs/search/query-search-tags/PQuerySearchTags.vue';
 import {
     ComponentRenderProxy,
     computed, getCurrentInstance, reactive, toRefs, watch,
 } from '@vue/composition-api';
 import { forEach } from 'lodash';
-import { QueryItem } from '@/organisms/search/query-search/type';
+import { QueryItem } from '@/inputs/search/query-search/type';
 import {
     QuerySearchTagsFunctions,
     QuerySearchTagsListeners,
     QueryTag,
-} from '@/organisms/search/query-search-tags/type';
+} from '@/inputs/search/query-search-tags/type';
 import { Options, QuerySearchTableProps } from '@/data-display/tables/query-search-table/type';
 import { makeOptionalProxy } from '@/util/composition-helpers';
 

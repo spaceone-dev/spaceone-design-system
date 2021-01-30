@@ -63,10 +63,10 @@
 
 <script lang="ts">
 // @ts-ignore
-import PContentModal from '@/others/modals/content-modal/PContentModal.vue';
-import PI from '@/atoms/icons/PI.vue';
-import PLoadingButton from '@/molecules/buttons/loading-button/PLoadingButton.vue';
-import PButton from '@/atoms/buttons/PButton.vue';
+import PContentModal from '@/feedbacks/modals/content-modal/PContentModal.vue';
+import PI from '@/foundation/icons/PI.vue';
+import PLoadingButton from '@/others/deprecated/loading-button/PLoadingButton.vue';
+import PButton from '@/inputs/buttons/button/PButton.vue';
 import { sizeMapping } from '@/feedbacks/modals/modal/type';
 import { computed, reactive, toRefs } from '@vue/composition-api';
 import { makeProxy } from '@/util/composition-helpers';

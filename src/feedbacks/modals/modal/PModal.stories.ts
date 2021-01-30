@@ -8,7 +8,7 @@ import PModal from '@/feedbacks/modals/modal/PModal.vue';
 import { computed, ref } from '@vue/composition-api';
 
 export default {
-    title: 'Feedbacks/Modals/Modal',
+    title: 'Feedbacks/Modals/Deprecated/Modal',
     component: PModal,
     decorators: [withKnobs],
     parameters: {

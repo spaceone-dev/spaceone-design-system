@@ -32,7 +32,7 @@
     </notifications>
 </template>
 <script lang="ts">
-import PI from '@/atoms/icons/PI.vue';
+import PI from '@/foundation/icons/PI.vue';
 
 /**
  * Used library: vue-notification

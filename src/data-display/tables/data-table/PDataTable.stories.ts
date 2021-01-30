@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import {
     text, number, object, boolean, withKnobs,
 } from '@storybook/addon-knobs';
-import PButton from '@/atoms/buttons/PButton.vue';
+import PButton from '@/inputs/buttons/button/PButton.vue';
 import PDataTable from '@/data-display/tables/data-table/PDataTable.vue';
 import {
     computed, reactive, ref, toRefs, watch,

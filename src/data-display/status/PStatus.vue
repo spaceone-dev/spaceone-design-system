@@ -31,12 +31,12 @@
 </template>
 
 <script lang="ts">
-import PI from '@/atoms/icons/PI.vue';
-import PLabel from '@/atoms/labels/PLabel.vue';
+import PI from '@/foundation/icons/PI.vue';
+import PLabel from '@/inputs/forms/label/PLabel.vue';
 import { computed } from '@vue/composition-api';
 import { StatusProps } from '@/data-display/status/type';
 import { getColor } from '@/util/helpers';
-import PLottie from '@/molecules/lottie/PLottie.vue';
+import PLottie from '@/foundation/lottie/PLottie.vue';
 import '@/styles/fontawesome.scss';
 import { themes } from '@/data-display/status/config';
 

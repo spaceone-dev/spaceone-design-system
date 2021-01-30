@@ -2,7 +2,7 @@
 import { getBindClass } from '@/util/functional-helpers';
 import { getColor } from '@/util/helpers';
 import { BADGE_STYLE } from '@/data-display/badges/type';
-import PAnchor from '@/molecules/anchors/PAnchor.vue';
+import PAnchor from '@/inputs/anchors/PAnchor.vue';
 
 export default {
     name: 'PBadge',

@@ -46,9 +46,9 @@ import {
     computed, getCurrentInstance,
     reactive, toRefs, watch,
 } from '@vue/composition-api';
-import PLottie from '@/molecules/lottie/PLottie.vue';
+import PLottie from '@/foundation/lottie/PLottie.vue';
 import { LazyImgPropsType } from '@/feedbacks/loading/lazy-img/type';
-import PI from '@/atoms/icons/PI.vue';
+import PI from '@/foundation/icons/PI.vue';
 import { makeOptionalProxy } from '@/util/composition-helpers';
 import PSkeleton from '@/feedbacks/loading/skeleton/PSkeleton.vue';
 

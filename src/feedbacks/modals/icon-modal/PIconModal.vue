@@ -35,9 +35,9 @@
 import { reactive, toRefs } from '@vue/composition-api';
 
 import PModal from '@/feedbacks/modals/modal/PModal.vue';
-import PLottie from '@/molecules/lottie/PLottie.vue';
-import PI from '@/atoms/icons/PI.vue';
-import PButton from '@/atoms/buttons/PButton.vue';
+import PLottie from '@/foundation/lottie/PLottie.vue';
+import PI from '@/foundation/icons/PI.vue';
+import PButton from '@/inputs/buttons/button/PButton.vue';
 import { IconModalProps } from '@/feedbacks/modals/icon-modal/type';
 
 import { makeProxy } from '@/util/composition-helpers';

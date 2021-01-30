@@ -42,10 +42,10 @@ import {
 import {
     DefinitionTableProps, DefinitionData, DefinitionField,
 } from '@/data-display/tables/definition-table/type';
-import PDefinition from '@/organisms/definition/PDefinition.vue';
-import PLottie from '@/molecules/lottie/PLottie.vue';
+import PDefinition from '@/data-display/tables/definition-table/definition/PDefinition.vue';
+import PLottie from '@/foundation/lottie/PLottie.vue';
 import PEmpty from '@/data-display/empty/PEmpty.vue';
-import { DefinitionProps } from '@/organisms/definition/type';
+import { DefinitionProps } from '@/data-display/tables/definition-table/definition/type';
 
 const makeDefItems = (fields: DefinitionField[], data?: DefinitionData): DefinitionProps[] => fields.map(item => ({
     ...item,

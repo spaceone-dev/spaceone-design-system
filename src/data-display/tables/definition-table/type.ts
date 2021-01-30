@@ -1,4 +1,4 @@
-import { DefinitionProps } from '@/organisms/definition/type';
+import { DefinitionProps } from '@/data-display/tables/definition-table/definition/type';
 
 export interface DefinitionData {
     [key: string]: any;

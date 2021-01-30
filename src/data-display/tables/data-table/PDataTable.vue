@@ -140,11 +140,11 @@ import { makeOptionalProxy } from '@/util/composition-helpers';
 import { PDataTableProps, DataTableField, DataTableFieldType } from '@/data-display/tables/data-table/type';
 
 
-import PCheckBox from '@/molecules/forms/checkbox/PCheckBox.vue';
-import PRadio from '@/molecules/forms/radio/PRadio.vue';
-import PCopyButton from '@/molecules/buttons/copy-button/PCopyButton.vue';
-import PLottie from '@/molecules/lottie/PLottie.vue';
-import PI from '@/atoms/icons/PI.vue';
+import PCheckBox from '@/inputs/checkbox/PCheckBox.vue';
+import PRadio from '@/inputs/radio/PRadio.vue';
+import PCopyButton from '@/inputs/buttons/copy-button/PCopyButton.vue';
+import PLottie from '@/foundation/lottie/PLottie.vue';
+import PI from '@/foundation/icons/PI.vue';
 
 const color = ['default', 'light', 'primary4'];
 
