@@ -20,7 +20,7 @@ import {
 } from '@vue/composition-api';
 import { get } from 'lodash';
 import { HtmlDynamicLayoutProps, HtmlFetchOptions } from '@/organisms/dynamic-layout/templates/html/type';
-import PPanelTop from '@/molecules/panel/panel-top/PPanelTop.vue';
+import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
 import DOMPurify from 'dompurify';
 import { iframeStyle } from './style';
 

@@ -29,9 +29,9 @@ import {
     computed, getCurrentInstance, reactive, toRefs,
 } from '@vue/composition-api';
 import { get } from 'lodash';
-import PDataTable from '@/organisms/tables/data-table/PDataTable.vue';
+import PDataTable from '@/data-display/tables/data-table/PDataTable.vue';
 import PDynamicField from '@/organisms/dynamic-field/PDynamicField.vue';
-import PPanelTop from '@/molecules/panel/panel-top/PPanelTop.vue';
+import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
 import { DynamicFieldProps } from '@/organisms/dynamic-field/type';
 import {
     SimpleTableDynamicLayoutProps,

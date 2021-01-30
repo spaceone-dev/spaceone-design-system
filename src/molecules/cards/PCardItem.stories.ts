@@ -1,6 +1,6 @@
 import { withKnobs, text } from '@storybook/addon-knobs';
 import PCardItem from '@/molecules/cards/PCardItem.vue';
-import PBadge from '@/atoms/badges/PBadge.vue';
+import PBadge from '@/data-display/badges/PBadge.vue';
 
 export default {
     title: 'Others/Definition, Label, Item/CardItem',

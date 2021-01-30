@@ -50,8 +50,8 @@
 </template>
 
 <script lang="ts">
-import PTag from '@/molecules/tags/PTag.vue';
-import PBadge from '@/atoms/badges/PBadge.vue';
+import PTag from '@/data-display/tags/PTag.vue';
+import PBadge from '@/data-display/badges/PBadge.vue';
 import {
     QuerySearchTagsFunctions,
     QuerySearchTagsProps,

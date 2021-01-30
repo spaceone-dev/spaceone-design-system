@@ -48,7 +48,7 @@ import { SelectableListProps, MapperKeyType } from '@/organisms/lists/selectable
 import PSelectableItem from '@/molecules/selectable-item/PSelectableItem.vue';
 import PLottie from '@/molecules/lottie/PLottie.vue';
 import { makeOptionalProxy, makeProxy } from '@/util/composition-helpers';
-import PEmpty from '@/atoms/empty/PEmpty.vue';
+import PEmpty from '@/data-display/empty/PEmpty.vue';
 import { themes } from '@/molecules/selectable-item/config';
 
 
