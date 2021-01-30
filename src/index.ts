@@ -39,9 +39,9 @@ export { messages } from './translations';
 
 /* Components */
 export { default as PBackToTopButton } from './atoms/back-to-top-button/PBackToTopButton.vue';
-export { default as PBadge } from './atoms/badges/PBadge.vue';
+export { default as PBadge } from './data-display/badges/PBadge.vue';
 export { default as PButton } from './atoms/buttons/PButton.vue';
-export { default as PEmpty } from './atoms/empty/PEmpty.vue';
+export { default as PEmpty } from './data-display/empty/PEmpty.vue';
 export { default as PHr } from './atoms/hr/PHr.vue';
 export { default as PI } from './atoms/icons/PI.vue';
 export { default as PTextInput } from './atoms/inputs/PTextInput.vue';
@@ -58,7 +58,7 @@ export { default as PIconTextButton } from './molecules/buttons/icon-text-button
 export { default as PLoadingButton } from './molecules/buttons/loading-button/PLoadingButton.vue';
 export { default as PToggleButton } from './molecules/buttons/toggle-button/PToggleButton.vue';
 export { default as PCardItem } from './molecules/cards/PCardItem.vue';
-export { default as PCollapsiblePanel } from './molecules/collapsible/collapsible-panel/PCollapsiblePanel.vue';
+export { default as PCollapsiblePanel } from './data-display/collapsible/collapsible-panel/PCollapsiblePanel.vue';
 export { default as PCheckBox } from './molecules/forms/checkbox/PCheckBox.vue';
 export { default as PFieldGroup } from './molecules/forms/field-group/PFieldGroup.vue';
 export { default as PRadio } from './molecules/forms/radio/PRadio.vue';
@@ -67,21 +67,21 @@ export { default as PPaneLayout } from './molecules/layouts/pane-layout/PPaneLay
 export { default as PSidebar } from './molecules/layouts/sidebar/PSidebar.vue';
 export { default as PTextList } from './molecules/lists/text-list/PTextList.vue';
 export { default as PLottie } from './molecules/lottie/PLottie.vue';
-export { default as PMarkdown } from './molecules/markdown/PMarkdown.vue';
+export { default as PMarkdown } from './data-display/markdown/PMarkdown.vue';
 export { default as PModal } from './molecules/modals/PModal.vue';
 export { default as PPageNavigation } from './molecules/page-navigation/PPageNavigation.vue';
-export { default as PPanelTop } from './molecules/panel/panel-top/PPanelTop.vue';
-export { default as PProgressBar } from './molecules/progress-bar/PProgressBar.vue';
+export { default as PPanelTop } from './data-display/titles/panel-top/PPanelTop.vue';
+export { default as PProgressBar } from './data-display/progress-bar/PProgressBar.vue';
 export { default as PSearch } from './molecules/search/PSearch.vue';
 export { default as PSelectableItem } from './molecules/selectable-item/PSelectableItem.vue';
 export { default as PSelectBtnGroupSkeleton } from './molecules/skeletons/PSelectBtnGroupSkeleton.vue';
-export { default as PStatus } from './molecules/status/PStatus.vue';
+export { default as PStatus } from './data-display/status/PStatus.vue';
 export { default as PProgressTabBar } from './molecules/tabs/progress-tab-bar/PProgressTabBar.vue';
 export { default as PTabBar } from './molecules/tabs/tab-bar/PTabBar.vue';
-export { default as PTag } from './molecules/tags/PTag.vue';
+export { default as PTag } from './data-display/tags/PTag.vue';
 export { default as PTextEditor } from './molecules/text-editor/text-editor/PTextEditor.vue';
-export { default as PTooltip } from './molecules/tooltips/PTooltip.vue';
-export { default as PTreeNode } from './molecules/tree-node/PTreeNode.vue';
+export { default as PTooltip } from './data-display/tooltips/PTooltip.vue';
+export { default as PTreeNode } from './data-display/tree/tree-node/PTreeNode.vue';
 
 export { default as PSelectBtnGroup } from './organisms/buttons/select-btn-group/PSelectBtnGroup.vue';
 export { default as PTooltipButton } from './organisms/buttons/tooltip-button/PTooltipButton.vue';
@@ -111,20 +111,20 @@ export { default as PIconModal } from './organisms/modals/icon-modal/PIconModal.
 export { default as PTableCheckModal } from './organisms/modals/table-modal/PTableCheckModal.vue';
 export { default as PPagination } from './organisms/paginations/pagination/PPagination.vue';
 export { default as PTextPagination } from './organisms/paginations/text-pagination/PTextPagination.vue';
-export { default as PRawData } from './organisms/raw-data/PRawData.vue';
+export { default as PRawData } from './data-display/raw-data/PRawData.vue';
 export { default as PAutocompleteSearch } from './organisms/search/autocomplete-search/PAutocompleteSearch.vue';
 export { default as PQuerySearch } from './organisms/search/query-search/PQuerySearch.vue';
 export { default as PQuerySearchGuide } from './organisms/search/query-search-guide/PQuerySearchGuide.vue';
 export { default as PQuerySearchTags } from './organisms/search/query-search-tags/PQuerySearchTags.vue';
-export { default as PDataTable } from './organisms/tables/data-table/PDataTable.vue';
-export { default as PDefinitionTable } from './organisms/tables/definition-table/PDefinitionTable.vue';
-export { default as PQuerySearchTable } from './organisms/tables/query-search-table/PQuerySearchTable.vue';
-export { default as PSearchTable } from './organisms/tables/search-table/PSearchTable.vue';
-export { default as PToolboxTable } from './organisms/tables/toolbox-table/PToolboxTable.vue';
+export { default as PDataTable } from './data-display/tables/data-table/PDataTable.vue';
+export { default as PDefinitionTable } from './data-display/tables/definition-table/PDefinitionTable.vue';
+export { default as PQuerySearchTable } from './data-display/tables/query-search-table/PQuerySearchTable.vue';
+export { default as PSearchTable } from './data-display/tables/search-table/PSearchTable.vue';
+export { default as PToolboxTable } from './data-display/tables/toolbox-table/PToolboxTable.vue';
 export { default as PButtonTab } from './organisms/tabs/button-tab/PButtonTab.vue';
 export { default as PTab } from './organisms/tabs/tab/PTab.vue';
-export { default as PPageTitle } from './organisms/title/page-title/PPageTitle.vue';
-export { default as PTree } from './organisms/tree/PTree.vue';
+export { default as PPageTitle } from './data-display/titles/page-title/PPageTitle.vue';
+export { default as PTree } from './data-display/tree/PTree.vue';
 export { default as PProgressWizard } from './organisms/wizards/progress-wizard/PProgressWizard.vue';
 
 export { default as PNotificationBar } from './feedbacks/notification/PNotificationBar.vue';

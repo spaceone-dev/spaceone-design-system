@@ -41,7 +41,7 @@
 <script lang="ts">
 import { reactive, computed, toRefs } from '@vue/composition-api';
 import PButtonModal from '@/organisms/modals/button-modal/PButtonModal.vue';
-import PDataTable from '@/organisms/tables/data-table/PDataTable.vue';
+import PDataTable from '@/data-display/tables/data-table/PDataTable.vue';
 import { makeByEvent, makeProxy } from '@/util/composition-helpers';
 import { sizeMapping } from '@/molecules/modals/type';
 import { orderBy } from 'lodash';

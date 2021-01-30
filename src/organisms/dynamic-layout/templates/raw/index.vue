@@ -15,8 +15,8 @@ import {
     computed, getCurrentInstance, reactive, toRefs,
 } from '@vue/composition-api';
 import { get } from 'lodash';
-import PRawData from '@/organisms/raw-data/PRawData.vue';
-import PPanelTop from '@/molecules/panel/panel-top/PPanelTop.vue';
+import PRawData from '@/data-display/raw-data/PRawData.vue';
+import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
 import { RawDynamicLayoutProps, RawFetchOptions } from '@/organisms/dynamic-layout/templates/raw/type';
 
 export default {

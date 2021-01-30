@@ -16,8 +16,8 @@ import {
     computed, getCurrentInstance,
     reactive, toRefs,
 } from '@vue/composition-api';
-import PPanelTop from '@/molecules/panel/panel-top/PPanelTop.vue';
-import PMarkdown from '@/molecules/markdown/PMarkdown.vue';
+import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
+import PMarkdown from '@/data-display/markdown/PMarkdown.vue';
 import { get } from 'lodash';
 import {
     MarkdownDynamicLayoutProps,

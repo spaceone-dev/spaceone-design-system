@@ -1,8 +1,8 @@
 <script lang="ts">
-import PBadge from '@/atoms/badges/PBadge.vue';
+import PBadge from '@/data-display/badges/PBadge.vue';
 import { BadgeOptions } from '@/organisms/dynamic-field/type/field-schema';
 import { BadgeDynamicFieldProps } from '@/organisms/dynamic-field/templates/badge/type';
-import { Badge, BADGE_SHAPE } from '@/atoms/badges/type';
+import { Badge, BADGE_SHAPE } from '@/data-display/badges/type';
 import { getColor } from '@/util/helpers';
 import PAnchor from '@/molecules/anchors/PAnchor.vue';
 

@@ -48,8 +48,8 @@ import {
     ComponentRenderProxy,
     computed, getCurrentInstance, reactive, toRefs,
 } from '@vue/composition-api';
-import PQuerySearchTable from '@/organisms/tables/query-search-table/PQuerySearchTable.vue';
-import PPanelTop from '@/molecules/panel/panel-top/PPanelTop.vue';
+import PQuerySearchTable from '@/data-display/tables/query-search-table/PQuerySearchTable.vue';
+import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
 import PDynamicField from '@/organisms/dynamic-field/PDynamicField.vue';
 import { DynamicFieldProps } from '@/organisms/dynamic-field/type';
 import { KeyItemSet } from '@/organisms/search/query-search/type';
@@ -59,8 +59,8 @@ import {
     QuerySearchTableDynamicLayoutProps, QuerySearchTableFetchOptions,
 } from '@/organisms/dynamic-layout/templates/query-search-table/type';
 import { getPageStart } from '@/util/helpers';
-import { Options } from '@/organisms/tables/query-search-table/type';
-import { DataTableFieldType } from '@/organisms/tables/data-table/type';
+import { Options } from '@/data-display/tables/query-search-table/type';
+import { DataTableFieldType } from '@/data-display/tables/data-table/type';
 
 const getThisPage = (pageStart = 1, pageLimit = 15) => Math.floor(pageStart / pageLimit) || 1;
 

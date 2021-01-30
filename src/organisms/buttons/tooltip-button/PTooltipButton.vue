@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { merge } from 'lodash';
-import PTooltip from '@/molecules/tooltips/PTooltip.vue';
+import PTooltip from '@/data-display/tooltips/PTooltip.vue';
 import PButton from '@/atoms/buttons/PButton.vue';
 
 export default {

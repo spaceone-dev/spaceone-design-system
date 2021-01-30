@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import { object, select } from '@storybook/addon-knobs';
 import { reactive, ref, toRefs } from '@vue/composition-api';
 import PContextMenu from '@/organisms/context-menu/PContextMenu.vue';
-import PEmpty from '@/atoms/empty/PEmpty.vue';
+import PEmpty from '@/data-display/empty/PEmpty.vue';
 import PI from '@/atoms/icons/PI.vue';
 
 export default {

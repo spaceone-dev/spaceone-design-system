@@ -1,7 +1,7 @@
 <script lang="ts">
 import { get } from 'lodash';
-import PStatus from '@/molecules/status/PStatus.vue';
-import { StatusProps } from '@/molecules/status/type';
+import PStatus from '@/data-display/status/PStatus.vue';
+import { StatusProps } from '@/data-display/status/type';
 import { StateOptions } from '@/organisms/dynamic-field/type/field-schema';
 import { StateDynamicFieldProps } from '@/organisms/dynamic-field/templates/state/type';
 import PAnchor from '@/molecules/anchors/PAnchor.vue';

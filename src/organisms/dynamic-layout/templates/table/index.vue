@@ -50,7 +50,7 @@ import {
     ComponentRenderProxy,
     computed, getCurrentInstance, reactive, toRefs, watch,
 } from '@vue/composition-api';
-import PPanelTop from '@/molecules/panel/panel-top/PPanelTop.vue';
+import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
 import { DynamicFieldProps } from '@/organisms/dynamic-field/type';
 import {
     TableDynamicLayoutProps,
@@ -58,11 +58,11 @@ import {
     TableFetchOptions,
 } from '@/organisms/dynamic-layout/templates/table/type';
 import { forEach, get } from 'lodash';
-import PSearchTable from '@/organisms/tables/search-table/PSearchTable.vue';
+import PSearchTable from '@/data-display/tables/search-table/PSearchTable.vue';
 import PDynamicField from '@/organisms/dynamic-field/PDynamicField.vue';
 import { DynamicField } from '@/organisms/dynamic-field/type/field-schema';
 import { getPageStart, getThisPage } from '@/util/helpers';
-import { Options } from '@/organisms/tables/query-search-table/type';
+import { Options } from '@/data-display/tables/query-search-table/type';
 
 const bindExtra = (props: TableDynamicLayoutProps, name: string, init: any) => {
     if (props.typeOptions && props.typeOptions[name]) {

@@ -5,7 +5,7 @@ import {
 } from '@storybook/addon-knobs';
 import casual, { arrayOf } from '@/util/casual';
 import PAutocompleteSearch from '@/organisms/search/autocomplete-search/PAutocompleteSearch.vue';
-import PRawData from '@/organisms/raw-data/PRawData.vue';
+import PRawData from '@/data-display/raw-data/PRawData.vue';
 import Fuse from 'fuse.js';
 
 

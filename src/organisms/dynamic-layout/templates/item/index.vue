@@ -23,9 +23,9 @@ import {
     computed, getCurrentInstance, reactive, toRefs,
 } from '@vue/composition-api';
 import { get } from 'lodash';
-import PPanelTop from '@/molecules/panel/panel-top/PPanelTop.vue';
-import PDefinitionTable from '@/organisms/tables/definition-table/PDefinitionTable.vue';
-import { DefinitionData, DefinitionField } from '@/organisms/tables/definition-table/type';
+import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
+import PDefinitionTable from '@/data-display/tables/definition-table/PDefinitionTable.vue';
+import { DefinitionData, DefinitionField } from '@/data-display/tables/definition-table/type';
 import {
     ItemDynamicLayoutProps, ItemFetchOptions,
 } from '@/organisms/dynamic-layout/templates/item/type';
