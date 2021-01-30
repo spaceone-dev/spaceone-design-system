@@ -22,7 +22,7 @@
 import {
     computed, onMounted, reactive, toRefs, watch,
 } from '@vue/composition-api';
-import PSkeleton from '@/atoms/skeletons/PSkeleton.vue';
+import PSkeleton from '@/feedbacks/loading/skeleton/PSkeleton.vue';
 import { isEqual } from 'lodash';
 import { DynamicLayoutProps } from '@/organisms/dynamic-layout/type';
 import { dynamicLayoutTypes } from '@/organisms/dynamic-layout/type/layout-schema';

@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { SelectableItemPropsType } from '@/molecules/selectable-item/type';
-import PLazyImg from '@/organisms/lazy-img/PLazyImg.vue';
+import PLazyImg from '@/feedbacks/loading/lazy-img/PLazyImg.vue';
 import {
     computed, reactive, toRefs,
 } from '@vue/composition-api';

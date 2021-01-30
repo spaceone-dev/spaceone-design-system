@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import PPaneLayout from '@/molecules/layouts/pane-layout/PPaneLayout.vue';
-import PLazyImg from '@/organisms/lazy-img/PLazyImg.vue';
+import PLazyImg from '@/feedbacks/loading/lazy-img/PLazyImg.vue';
 
 export default {
     name: 'PCardItem',

@@ -29,7 +29,7 @@ import { MetricChartProps } from '@/organisms/charts/metric-chart/type';
 import PChartLoader from '@/organisms/charts/chart-loader/PChartLoader.vue';
 import { map, forEach } from 'lodash';
 import { gray } from '@/styles/colors';
-import PSkeleton from '@/atoms/skeletons/PSkeleton.vue';
+import PSkeleton from '@/feedbacks/loading/skeleton/PSkeleton.vue';
 import PLottie from '@/molecules/lottie/PLottie.vue';
 import { ChartColor, ChartDataSets } from 'chart.js';
 import { PChart, tooltips } from '@/organisms/charts/chart-helper';

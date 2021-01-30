@@ -2,7 +2,7 @@ import { toRefs, reactive } from '@vue/composition-api';
 import { number, object, boolean } from '@storybook/addon-knobs';
 import PDefinitionTable from '@/data-display/tables/definition-table/PDefinitionTable.vue';
 import PIconTextButton from '@/molecules/buttons/icon-text-button/PIconTextButton.vue';
-import PLazyImg from '@/organisms/lazy-img/PLazyImg.vue';
+import PLazyImg from '@/feedbacks/loading/lazy-img/PLazyImg.vue';
 
 export default {
     title: 'Data Display/Tables/Definition Table',

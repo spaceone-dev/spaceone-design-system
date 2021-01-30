@@ -87,7 +87,7 @@
 </template>
 
 <script lang="ts">
-import PContentModal from '@/organisms/modals/content-modal/PContentModal.vue';
+import PContentModal from '@/others/modals/content-modal/PContentModal.vue';
 import PI from '@/atoms/icons/PI.vue';
 import { reactive, toRefs } from '@vue/composition-api';
 import { makeProxy } from '@/util/composition-helpers';
