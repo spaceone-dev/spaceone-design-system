@@ -5,7 +5,7 @@ import { ref } from '@vue/composition-api';
 import PDoubleCheckModal from '@/others/modals/double-check-modal/PDoubleCheckModal.vue';
 
 export default {
-    title: 'Others/Modal/DoubleCheckModal',
+    title: 'Others/Deprecated/Modals/Double Check Modal',
     component: PDoubleCheckModal,
 };
 

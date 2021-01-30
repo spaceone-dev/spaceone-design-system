@@ -22,8 +22,7 @@
 </template>
 <script lang="ts">
 import PIconButton from '@/molecules/buttons/icon-button/PIconButton.vue';
-import { computed, reactive, watch } from '@vue/composition-api';
-import { makeProxy } from '@/util/composition-helpers';
+import { watch } from '@vue/composition-api';
 
 export default {
     name: 'PTextPagination',

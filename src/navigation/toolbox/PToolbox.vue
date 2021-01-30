@@ -65,7 +65,7 @@
 <script lang="ts">
 import PIconButton from '@/molecules/buttons/icon-button/PIconButton.vue';
 import PDropdownMenuBtn from '@/organisms/dropdown/dropdown-menu-btn/PDropdownMenuBtn.vue';
-import PTextPagination from '@/organisms/paginations/text-pagination/PTextPagination.vue';
+import PTextPagination from '@/navigation/pagination/text-pagination/PTextPagination.vue';
 import {
     ComponentRenderProxy, computed, defineComponent, getCurrentInstance, reactive, toRefs,
 } from '@vue/composition-api';

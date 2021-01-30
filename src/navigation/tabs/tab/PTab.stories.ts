@@ -1,14 +1,10 @@
 import { action } from '@storybook/addon-actions';
-import PTab from '@/organisms/tabs/tab/PTab.vue';
+import PTab from '@/navigation/tabs/tab/PTab.vue';
 
 export default {
     title: 'Navigation/Tabs',
     component: PTab,
     parameters: {
-        info: {
-            summary: '',
-            components: { PTab },
-        },
         design: {
             type: 'figma',
             url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=6013%3A121728',

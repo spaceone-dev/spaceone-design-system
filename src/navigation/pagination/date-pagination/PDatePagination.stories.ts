@@ -1,10 +1,16 @@
 import { reactive, toRefs } from '@vue/composition-api';
-import PDatePagination from '@/organisms/date-pagination/PDatePagination.vue';
+import PDatePagination from '@/navigation/pagination/date-pagination/PDatePagination.vue';
 import dayjs from 'dayjs';
 
 export default {
-    title: 'Navigation/Paginations/DatePagination',
+    title: 'Navigation/Pagination',
     component: PDatePagination,
+    parameters: {
+        design: {
+            type: 'figma',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=5894%3A178955',
+        },
+    },
 };
 
 export const datePagination = () => ({
@@ -29,7 +35,7 @@ export const datePagination = () => ({
     },
 });
 
-export const weekCase = () => ({
+export const weekPagination = () => ({
     components: { PDatePagination },
     template: `
         <div>

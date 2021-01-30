@@ -2,13 +2,14 @@ import {
     toRefs, reactive,
 } from '@vue/composition-api';
 import {
-    text,
+    text, withKnobs
 } from '@storybook/addon-knobs';
 import PPanelTop from '@/data-display/titles/panel-top/PPanelTop.vue';
 
 export default {
     title: 'Data Display/Titles/Panel Title',
     component: PPanelTop,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

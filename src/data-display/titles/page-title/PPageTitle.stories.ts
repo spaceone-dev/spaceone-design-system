@@ -1,10 +1,11 @@
-import { number, boolean, text } from '@storybook/addon-knobs';
+import { number, boolean, text, withKnobs } from '@storybook/addon-knobs';
 import PPageTitle from '@/data-display/titles/page-title/PPageTitle.vue';
 import { action } from '@storybook/addon-actions';
 
 export default {
     title: 'Data Display/Titles/Page Title',
     component: PPageTitle,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

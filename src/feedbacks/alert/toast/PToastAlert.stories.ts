@@ -1,10 +1,11 @@
 import Vue from 'vue';
-import { text, select } from '@storybook/addon-knobs';
+import { text, select, withKnobs } from '@storybook/addon-knobs';
 import PToastAlert from '@/feedbacks/alert/toast/PToastAlert.vue';
 
 export default {
     title: 'Feedbacks/Alert/Toast',
     component: PToastAlert,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

@@ -28,7 +28,7 @@ import {
 } from '@vue/composition-api';
 
 import PIconButton from '@/molecules/buttons/icon-button/PIconButton.vue';
-import { DatePaginationProps } from '@/organisms/date-pagination/type';
+import { DatePaginationProps } from '@/navigation/pagination/date-pagination/type';
 
 dayjs.extend(isSameOrAfter);
 

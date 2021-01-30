@@ -6,13 +6,9 @@ import faker from 'faker';
 import { computed, ref } from '@vue/composition-api';
 
 export default {
-    title: 'Others/Modal/ContentModal',
+    title: 'Others/Deprecated/Modals/Content Modal',
     component: PContentModal,
     parameters: {
-        info: {
-            summary: '',
-            components: { PContentModal },
-        },
         centered: { disable: true },
     },
 };

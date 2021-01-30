@@ -1,4 +1,6 @@
-import { number, select, boolean } from '@storybook/addon-knobs';
+import {
+    number, select, boolean, withKnobs,
+} from '@storybook/addon-knobs';
 import faker from 'faker';
 import { action } from '@storybook/addon-actions';
 import { sizeMapping } from '@/feedbacks/modals/modal/type';
@@ -8,6 +10,7 @@ import { computed, ref } from '@vue/composition-api';
 export default {
     title: 'Feedbacks/Modals/Modal',
     component: PModal,
+    decorators: [withKnobs],
     parameters: {
         centered: { disable: true },
         design: {

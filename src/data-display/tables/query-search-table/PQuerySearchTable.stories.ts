@@ -1,9 +1,9 @@
 import {
-    toRefs, reactive, ref, computed,
+    toRefs, reactive,
 } from '@vue/composition-api';
 import { action } from '@storybook/addon-actions';
 import {
-    text, number, select, object, boolean,
+    text, number, object, withKnobs
 } from '@storybook/addon-knobs';
 import casual, { arrayOf } from '@/util/casual';
 import PQuerySearchTable from './PQuerySearchTable.vue';
@@ -11,6 +11,7 @@ import PQuerySearchTable from './PQuerySearchTable.vue';
 export default {
     title: 'Data Display/Tables/Data Table/Query Search Table',
     component: PQuerySearchTable,
+    decorators: [withKnobs],
     parameters: {
         knobs: { escapeHTML: false },
         design: {

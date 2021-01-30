@@ -4,14 +4,14 @@ import { names } from './p-lotties/names';
 
 
 export default {
-    title: 'Foundation/Graphics',
+    title: 'Foundation/Graphics/Animations',
     component: PLottie,
     parameters: {
-        info: {
-            summary: '',
-            components: { PLottie },
-        },
         centered: { disable: true },
+        design: {
+            type: 'figma',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=6132%3A123859',
+        },
     },
 };
 

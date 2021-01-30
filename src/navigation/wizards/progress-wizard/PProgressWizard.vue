@@ -95,7 +95,7 @@ import PI from '@/atoms/icons/PI.vue';
 import PButton from '@/atoms/buttons/PButton.vue';
 import {
     ProgressWizardProps,
-} from '@/organisms/wizards/progress-wizard/type';
+} from '@/navigation/wizards/progress-wizard/type';
 import PLoadingButton from '@/molecules/buttons/loading-button/PLoadingButton.vue';
 
 

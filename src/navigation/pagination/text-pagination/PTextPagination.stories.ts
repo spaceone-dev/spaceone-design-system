@@ -1,14 +1,15 @@
-import { number } from '@storybook/addon-knobs';
+import { number, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import PTextPagination from '@/organisms/paginations/text-pagination/PTextPagination.vue';
+import PTextPagination from '@/navigation/pagination/text-pagination/PTextPagination.vue';
 
 export default {
-    title: 'Navigation/Paginations/TextPagination',
+    title: 'Navigation/Pagination',
     component: PTextPagination,
+    decorators: [withKnobs],
     parameters: {
-        info: {
-            summary: '',
-            components: { PTextPagination },
+        design: {
+            type: 'figma',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=5894%3A178955',
         },
     },
 };
@@ -16,7 +17,7 @@ const actions = {
     pageChange: action('pageChange'),
 };
 
-export const textPagination = () => ({
+export const simple = () => ({
     components: { PTextPagination },
     template: '<p-text-pagination :thisPage.sync="thisPage" :allPage="allPage" @pageChange="pageChange"/>',
     props: {
@@ -32,7 +33,7 @@ export const textPagination = () => ({
     },
 });
 
-export const autoDisabledButton = () => ({
+export const simpleAutoDisabled = () => ({
     components: { PTextPagination },
     template: '<p-text-pagination :thisPage.sync="thisPage" :allPage="allPage" @pageChange="pageChange"/>',
     setup() {

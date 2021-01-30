@@ -1,18 +1,15 @@
-import PBackToTopButton from '@/atoms/back-to-top-button/PBackToTopButton.vue';
-import { select, text } from '@storybook/addon-knobs';
+import PBackToTopButton from '@/navigation/scrolls/back-to-top-button/PBackToTopButton.vue';
+import { select, text, withKnobs } from '@storybook/addon-knobs';
 import { ref } from '@vue/composition-api';
 
 export default {
-    title: 'Navigation/BackToTopButton',
+    title: 'Navigation/Scrolls',
     component: { PBackToTopButton },
+    decorators: [withKnobs],
     parameters: {
-        info: {
-            summary: '',
-            components: { PBackToTopButton },
-        },
         design: {
             type: 'figma',
-            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=5870%3A136238',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=6169%3A189268',
         },
     },
 };

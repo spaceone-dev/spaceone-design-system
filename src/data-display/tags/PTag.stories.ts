@@ -1,4 +1,4 @@
-import { boolean, select } from '@storybook/addon-knobs';
+import { boolean, select, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import PTag from '@/data-display/tags/PTag.vue';
 import { BADGE_STYLE } from '@/data-display/badges/type';
@@ -6,6 +6,7 @@ import { BADGE_STYLE } from '@/data-display/badges/type';
 export default {
     title: 'Data Display/Tags',
     component: PTag,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

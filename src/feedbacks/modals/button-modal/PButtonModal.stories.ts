@@ -1,7 +1,7 @@
 import faker from 'faker';
 import { action } from '@storybook/addon-actions';
 import {
-    boolean, number, select, text, array,
+    boolean, number, select, text, array, withKnobs,
 } from '@storybook/addon-knobs';
 import PButton from '@/atoms/buttons/PButton.vue';
 import PButtonModal from '@/feedbacks/modals/button-modal/PButtonModal.vue';
@@ -13,6 +13,7 @@ import {
 export default {
     title: 'Feedbacks/Modals/Button Modal',
     component: PButtonModal,
+    decorators: [withKnobs],
     parameters: {
         centered: { disable: true },
         design: {

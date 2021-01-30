@@ -1,10 +1,11 @@
 import { reactive, toRefs } from '@vue/composition-api';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 import PLazyImg from '@/feedbacks/loading/lazy-img/PLazyImg.vue';
 
 export default {
     title: 'FeedBacks/Loading/Lazy Image',
     component: PLazyImg,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

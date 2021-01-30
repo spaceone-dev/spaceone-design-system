@@ -1,9 +1,6 @@
 import {
-    toRefs, reactive, ref, computed,
+    toRefs, reactive
 } from '@vue/composition-api';
-import {
-    text, number, select, object, boolean,
-} from '@storybook/addon-knobs';
 import PSkeleton from '@/feedbacks/loading/skeleton/PSkeleton.vue';
 
 export default {
@@ -17,12 +14,6 @@ export default {
     },
 };
 
-/**
- * propName: {
- *      default: object('propName', {}),
- * }
- */
-const getProps = () => ({});
 
 const getState = (props, context) => {
     const state = reactive({});

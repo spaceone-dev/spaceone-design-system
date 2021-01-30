@@ -6,7 +6,7 @@ import { sizeMapping } from '@/feedbacks/modals/modal/type';
 import { computed, ref } from '@vue/composition-api';
 
 export default {
-    title: 'Others/Modal/TableCheckModal',
+    title: 'Others/Deprecated/Modals/Table Check Modal',
     component: PTableCheckModel,
 };
 

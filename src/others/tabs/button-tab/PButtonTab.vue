@@ -23,8 +23,8 @@
 import { computed } from '@vue/composition-api';
 
 import PSelectBtnGroup from '@/organisms/buttons/select-btn-group/PSelectBtnGroup.vue';
-import { TabItem } from '@/organisms/tabs/tab/type';
-import { ButtonTabProps } from '@/organisms/tabs/button-tab/type';
+import { TabItem } from '@/navigation/tabs/tab/type';
+import { ButtonTabProps } from '@/others/tabs/button-tab/type';
 
 import { makeProxy } from '@/util/composition-helpers';
 

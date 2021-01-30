@@ -38,7 +38,7 @@ export default SpaceoneDS;
 export { messages } from './translations';
 
 /* Components */
-export { default as PBackToTopButton } from './atoms/back-to-top-button/PBackToTopButton.vue';
+export { default as PBackToTopButton } from './navigation/scrolls/back-to-top-button/PBackToTopButton.vue';
 export { default as PBadge } from './data-display/badges/PBadge.vue';
 export { default as PButton } from './atoms/buttons/PButton.vue';
 export { default as PEmpty } from './data-display/empty/PEmpty.vue';
@@ -69,7 +69,7 @@ export { default as PTextList } from './molecules/lists/text-list/PTextList.vue'
 export { default as PLottie } from './molecules/lottie/PLottie.vue';
 export { default as PMarkdown } from './data-display/markdown/PMarkdown.vue';
 export { default as PModal } from './feedbacks/modals/modal/PModal.vue';
-export { default as PPageNavigation } from './molecules/page-navigation/PPageNavigation.vue';
+export { default as PBreadcrumbs } from './navigation/breadcrumbs/PBreadcrumbs.vue';
 export { default as PPanelTop } from './data-display/titles/panel-top/PPanelTop.vue';
 export { default as PProgressBar } from './data-display/progress-bar/PProgressBar.vue';
 export { default as PSearch } from './molecules/search/PSearch.vue';
@@ -87,7 +87,7 @@ export { default as PTooltipButton } from './organisms/buttons/tooltip-button/PT
 export { default as PChartLoader } from './organisms/charts/chart-loader/PChartLoader.vue';
 export { default as PMetricChart } from './organisms/charts/metric-chart/PMetricChart.vue';
 export { default as PContextMenu } from './organisms/context-menu/PContextMenu.vue';
-export { default as PDatePagination } from './organisms/date-pagination/PDatePagination.vue';
+export { default as PDatePagination } from './navigation/pagination/date-pagination/PDatePagination.vue';
 export { default as PDefinition } from './organisms/definition/PDefinition.vue';
 export { default as PDropdownBtn } from './organisms/dropdown/dropdown-btn/PDropdownBtn.vue';
 export { default as PSelectDropdown } from './organisms/dropdown/select-dropdown/PSelectDropdown.vue';
@@ -108,8 +108,8 @@ export { default as PContentModal } from './others/modals/content-modal/PContent
 export { default as PDoubleCheckModal } from './others/modals/double-check-modal/PDoubleCheckModal.vue';
 export { default as PIconModal } from './feedbacks/modals/icon-modal/PIconModal.vue';
 export { default as PTableCheckModal } from './others/modals/table-modal/PTableCheckModal.vue';
-export { default as PPagination } from './organisms/paginations/pagination/PPagination.vue';
-export { default as PTextPagination } from './organisms/paginations/text-pagination/PTextPagination.vue';
+export { default as PPagination } from './navigation/pagination/pagination/PPagination.vue';
+export { default as PTextPagination } from './navigation/pagination/text-pagination/PTextPagination.vue';
 export { default as PRawData } from './data-display/raw-data/PRawData.vue';
 export { default as PAutocompleteSearch } from './organisms/search/autocomplete-search/PAutocompleteSearch.vue';
 export { default as PQuerySearch } from './organisms/search/query-search/PQuerySearch.vue';
@@ -120,11 +120,11 @@ export { default as PDefinitionTable } from './data-display/tables/definition-ta
 export { default as PQuerySearchTable } from './data-display/tables/query-search-table/PQuerySearchTable.vue';
 export { default as PSearchTable } from './data-display/tables/search-table/PSearchTable.vue';
 export { default as PToolboxTable } from './data-display/tables/toolbox-table/PToolboxTable.vue';
-export { default as PButtonTab } from './organisms/tabs/button-tab/PButtonTab.vue';
-export { default as PTab } from './organisms/tabs/tab/PTab.vue';
+export { default as PButtonTab } from './others/tabs/button-tab/PButtonTab.vue';
+export { default as PTab } from './navigation/tabs/tab/PTab.vue';
 export { default as PPageTitle } from './data-display/titles/page-title/PPageTitle.vue';
 export { default as PTree } from './data-display/tree/PTree.vue';
-export { default as PProgressWizard } from './organisms/wizards/progress-wizard/PProgressWizard.vue';
+export { default as PProgressWizard } from './navigation/wizards/progress-wizard/PProgressWizard.vue';
 
 export { default as PNotificationBar } from './feedbacks/notification/PNotificationBar.vue';
 export { default as PDataLoader } from './feedbacks/loading/data-loader/PDataLoader.vue';

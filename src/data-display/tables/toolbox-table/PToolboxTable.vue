@@ -92,7 +92,7 @@ import {
 } from '@vue/composition-api';
 
 import PDataTable from '@/data-display/tables/data-table/PDataTable.vue';
-import PTextPagination from '@/organisms/paginations/text-pagination/PTextPagination.vue';
+import PTextPagination from '@/navigation/pagination/text-pagination/PTextPagination.vue';
 import PDropdownMenuBtn from '@/organisms/dropdown/dropdown-menu-btn/PDropdownMenuBtn.vue';
 import PIconButton from '@/molecules/buttons/icon-button/PIconButton.vue';
 import { PToolboxTableProps } from '@/data-display/tables/toolbox-table/type';

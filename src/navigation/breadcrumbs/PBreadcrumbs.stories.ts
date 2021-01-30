@@ -1,14 +1,11 @@
-import { object } from '@storybook/addon-knobs';
-import PPageNavigation from './PPageNavigation.vue';
+import { object, withKnobs } from '@storybook/addon-knobs';
+import PBreadcrumbs from './PBreadcrumbs.vue';
 
 export default {
-    title: 'Navigation/PageNavigation',
-    component: PPageNavigation,
+    title: 'Navigation/Breadcrumbs',
+    component: PBreadcrumbs,
+    decorators: [withKnobs],
     parameters: {
-        info: {
-            summary: '',
-            components: { PPageNavigation },
-        },
         design: {
             type: 'figma',
             url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=5894%3A178955',
@@ -16,9 +13,9 @@ export default {
     },
 };
 
-export const pageNavigation = () => ({
-    components: { PPageNavigation },
-    template: '<p-page-navigation :routes="route"></p-page-navigation>',
+export const basic = () => ({
+    components: { PBreadcrumbs },
+    template: '<p-breadcrumbs :routes="route"></p-breadcrumbs>',
     props: {
         route: {
             default: object('pages', [

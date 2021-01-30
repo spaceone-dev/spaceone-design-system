@@ -29,7 +29,7 @@ import {
 } from '@vue/composition-api';
 
 import PTabBar from '@/molecules/tabs/tab-bar/PTabBar.vue';
-import { TabProps, TabItem } from '@/organisms/tabs/tab/type';
+import { TabProps, TabItem } from '@/navigation/tabs/tab/type';
 
 import { makeProxy } from '@/util/composition-helpers';
 

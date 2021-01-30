@@ -1,20 +1,23 @@
-import { text, select, boolean } from '@storybook/addon-knobs';
+import {
+    withKnobs, text, select, boolean,
+} from '@storybook/addon-knobs';
 import icon from 'vue-svgicon';
 import PI from '@/atoms/icons/PI.vue';
 
 export default {
-    title: 'Foundation/graphics',
+    title: 'Foundation/Graphics/Icons',
     component: PI,
+    decorators: [withKnobs],
     parameters: {
-        info: {
-            summary: '',
-            components: { PI },
+        design: {
+            type: 'figma',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=6132%3A123491',
         },
     },
 };
 
 const icons = Object.keys(icon.icons);
-export const Icons = () => ({
+export const Icon = () => ({
     components: { PI },
     props: {
         name: {

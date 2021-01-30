@@ -1,10 +1,11 @@
 import Vue from 'vue';
-import { text, select } from '@storybook/addon-knobs';
+import { text, select, withKnobs } from '@storybook/addon-knobs';
 import PNoticeAlert from '@/feedbacks/alert/notice/PNoticeAlert.vue';
 
 export default {
     title: 'Feedbacks/Alert/Notice',
     component: PNoticeAlert,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

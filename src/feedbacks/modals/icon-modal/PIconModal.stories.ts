@@ -1,10 +1,12 @@
 import { reactive, toRefs } from '@vue/composition-api';
 import PIconModal from '@/feedbacks/modals/icon-modal/PIconModal.vue';
 import PButton from '@/atoms/buttons/PButton.vue';
+import { withKnobs } from '@storybook/addon-knobs';
 
 export default {
     title: 'Feedbacks/Modals/Icon Modal',
     component: PIconModal,
+    decorators: [withKnobs],
     parameters: {
         centered: { disable: true },
         design: {

@@ -1,5 +1,5 @@
 <template>
-    <div class="p-page-navigation">
+    <div class="p-breadcrumbs">
         <span v-for="(route, idx) in routes" :key="idx">
             <span v-if="route.path">
                 <router-link
@@ -45,7 +45,7 @@ import PI from '@/atoms/icons/PI.vue';
 import { reactive } from '@vue/composition-api';
 
 export default {
-    name: 'PPageNavigation',
+    name: 'PBreadcrumbs',
     components: {
         PI,
     },
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="postcss">
-.p-page-navigation {
+.p-breadcrumbs {
     display: inline-flex;
     margin-bottom: 0.5rem;
 

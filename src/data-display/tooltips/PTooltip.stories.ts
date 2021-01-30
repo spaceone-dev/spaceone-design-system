@@ -1,10 +1,11 @@
-import { object, select, text } from '@storybook/addon-knobs';
+import { object, select, text, withKnobs } from '@storybook/addon-knobs';
 import Tooltip from '@/data-display/tooltips/PTooltip.vue';
 import { PLACEMENTS } from '@/data-display/tooltips/type';
 
 export default {
     title: 'Data Display/Tooltips',
     component: Tooltip,
+    decorators: [withKnobs],
     parameters: {
         centered: { disable: true },
         design: {

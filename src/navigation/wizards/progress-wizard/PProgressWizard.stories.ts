@@ -1,27 +1,18 @@
 import { ref } from '@vue/composition-api';
 import { action } from '@storybook/addon-actions';
-import { object, boolean } from '@storybook/addon-knobs';
+import { object, boolean, withKnobs } from '@storybook/addon-knobs';
 import { VTooltip } from 'v-tooltip';
-import PProgressWizard from '@/organisms/wizards/progress-wizard/PProgressWizard.vue';
+import PProgressWizard from '@/navigation/wizards/progress-wizard/PProgressWizard.vue';
 
 
 export default {
-    title: 'Navigation/ProgressWizard',
+    title: 'Navigation/Wizards/Progress Wizard',
     component: { PProgressWizard },
+    decorators: [withKnobs],
     parameters: {
-        info: {
-            summary: `
-            This component needs 'tabs' property with follow format: \n
-            \n
-                key: String (essential),
-                label: String (recommended),
-                alert: String (or warning),
-                invalid: Boolean,
-                help: Boolean,
-                optional: Boolean,
-            \n
-            `,
-            component: { PProgressWizard },
+        design: {
+            type: 'figma',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=5894%3A174372',
         },
     },
 };
@@ -87,6 +78,16 @@ export const progressWizard = () => ({
                         <div style="background-color: mediumpurple; padding: 2rem;" :key="tab.name">
                             <h2 style="text-align: center;">
                                 This is contents slot for '{{ tab.name }}' tab.
+
+                                This component needs 'tabs' property with follow format: 
+                                <pre>
+                                    key: String (essential),
+                                    label: String (recommended),
+                                    alert: String (or warning),
+                                    invalid: Boolean,
+                                    help: Boolean,
+                                    optional: Boolean,
+                                </pre>
                             </h2>
                             <br>
                             <h4 v-for="(item, idx) in JSON.stringify(tab).split(',')"

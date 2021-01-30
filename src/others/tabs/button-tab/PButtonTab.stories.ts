@@ -5,13 +5,9 @@ import { action } from '@storybook/addon-actions';
 import PButtonTab from './PButtonTab.vue';
 
 export default {
-    title: 'Others/Tab, Progress Tab/ButtonTab',
+    title: 'Others/Deprecated/Tabs/Button Tab',
     component: PButtonTab,
     parameters: {
-        info: {
-            summary: '',
-            components: { PButtonTab },
-        },
         knobs: { escapeHTML: false },
     },
 };

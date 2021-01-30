@@ -1,15 +1,16 @@
-import { number } from '@storybook/addon-knobs';
+import { number, withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
-import PPagination from '@/organisms/paginations/pagination/PPagination.vue';
+import PPagination from '@/navigation/pagination/pagination/PPagination.vue';
 import { reactive, toRefs } from '@vue/composition-api';
 
 export default {
-    title: 'Navigation/Paginations/Pagination',
+    title: 'Navigation/Pagination',
     component: PPagination,
+    decorators: [withKnobs],
     parameters: {
-        info: {
-            summary: '',
-            components: { PPagination },
+        design: {
+            type: 'figma',
+            url: 'https://www.figma.com/file/wq4wSowBcADBuUrMEZLz6i/SpaceONE-Console-Design?node-id=5894%3A178955',
         },
     },
 };
