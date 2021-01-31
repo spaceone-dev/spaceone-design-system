@@ -2,18 +2,19 @@ import {
     reactive, toRefs,
 } from '@vue/composition-api';
 import {
-    text, number, boolean,
+    text, number, boolean, withKnobs,
 } from '@storybook/addon-knobs';
-import PI from '@/atoms/icons/PI.vue';
+import PI from '@/foundation/icons/PI.vue';
 import PTreeNode from '@/data-display/tree/tree-node/PTreeNode.vue';
 import { TreeNode } from '@/data-display/tree/tree-node/type';
-import PTextEditor from '@/molecules/text-editor/text-editor/PTextEditor.vue';
+import PTextEditor from '@/inputs/text-editor/PTextEditor.vue';
 import { cloneDeep } from 'lodash';
 
 
 export default {
     title: 'Data Display/Tree',
     component: PTreeNode,
+    decorators: [withKnobs],
     parameters: {
         knobs: { escapeHTML: false },
         design: {

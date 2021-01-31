@@ -1,9 +1,10 @@
-import { number, text } from '@storybook/addon-knobs';
+import { number, text, withKnobs } from '@storybook/addon-knobs';
 import PProgressBar from '@/data-display/progress-bar/PProgressBar.vue';
 
 export default {
     title: 'Data Display/Progress Bar',
     component: PProgressBar,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

@@ -92,7 +92,7 @@ import {
     ComponentRenderProxy,
     computed, getCurrentInstance, onMounted, reactive, ref,
 } from '@vue/composition-api';
-import PI from '@/atoms/icons/PI.vue';
+import PI from '@/foundation/icons/PI.vue';
 import { makeProxy } from '@/util/composition-helpers';
 import {
     forEach,

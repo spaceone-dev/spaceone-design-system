@@ -1,5 +1,5 @@
-import { KeyItemSet, QueryItem, ValueHandlerMap } from '@/organisms/search/query-search/type';
-import { QueryTag } from '@/organisms/search/query-search-tags/type';
+import { KeyItemSet, QueryItem, ValueHandlerMap } from '@/inputs/search/query-search/type';
+import { QueryTag } from '@/inputs/search/query-search-tags/type';
 import { DataTableFieldType } from '@/data-display/tables/data-table/type';
 
 export interface QuerySearchTableProps {

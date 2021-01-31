@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
 import PRawData from '@/data-display/raw-data/PRawData.vue';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, withKnobs } from '@storybook/addon-knobs';
 
 export default {
     title: 'Data Display/Raw Data',
     component: PRawData,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

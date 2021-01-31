@@ -1,9 +1,9 @@
 import faker from 'faker';
 import { action } from '@storybook/addon-actions';
 import {
-    text, number, object, boolean,
+    text, number, object, boolean, withKnobs,
 } from '@storybook/addon-knobs';
-import PButton from '@/atoms/buttons/PButton.vue';
+import PButton from '@/inputs/buttons/button/PButton.vue';
 import PDataTable from '@/data-display/tables/data-table/PDataTable.vue';
 import {
     computed, reactive, ref, toRefs, watch,
@@ -14,6 +14,7 @@ import { orderBy } from 'lodash';
 export default {
     title: 'Data Display/Tables/Data Table',
     component: PDataTable,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

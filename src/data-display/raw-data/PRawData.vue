@@ -8,7 +8,7 @@
 import {
     computed, reactive, watch, onMounted, toRefs,
 } from '@vue/composition-api';
-import PTextEditor from '@/molecules/text-editor/text-editor/PTextEditor.vue';
+import PTextEditor from '@/inputs/text-editor/PTextEditor.vue';
 
 export default {
     name: 'PRawData',

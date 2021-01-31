@@ -1,5 +1,5 @@
 import {
-    select, text, color, boolean, number,
+    select, text, color, boolean, number, withKnobs,
 } from '@storybook/addon-knobs';
 import PStatus from '@/data-display/status/PStatus.vue';
 import { safe } from '@/styles/colors';
@@ -8,6 +8,7 @@ import { themes } from '@/data-display/status/config';
 export default {
     title: 'Data Display/Status',
     component: PStatus,
+    decorators: [withKnobs],
     parameters: {
         design: {
             type: 'figma',

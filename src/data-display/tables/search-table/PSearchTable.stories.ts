@@ -1,12 +1,13 @@
 import { toRefs, reactive } from '@vue/composition-api';
 import { action } from '@storybook/addon-actions';
-import { text, number, object } from '@storybook/addon-knobs';
+import { text, number, object, withKnobs } from '@storybook/addon-knobs';
 import casual, { arrayOf } from '@/util/casual';
 import PSearchTable from './PSearchTable.vue';
 
 export default {
     title: 'Data Display/Tables/Data Table/Search Table',
     component: PSearchTable,
+    decorators: [withKnobs],
     parameters: {
         knobs: { escapeHTML: false },
         design: {

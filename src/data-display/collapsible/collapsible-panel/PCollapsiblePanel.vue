@@ -27,8 +27,8 @@ import {
     getCurrentInstance,
     reactive, ref, toRefs, watch,
 } from '@vue/composition-api';
-import PPaneLayout from '@/molecules/layouts/pane-layout/PPaneLayout.vue';
-import PI from '@/atoms/icons/PI.vue';
+import PPaneLayout from '@/layouts/pane-layout/PPaneLayout.vue';
+import PI from '@/foundation/icons/PI.vue';
 
 export default {
     name: 'PCollapsiblePanel',
