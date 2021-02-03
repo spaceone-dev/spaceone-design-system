@@ -1,18 +1,27 @@
 <h1 align="center">SpaceONE Design System</h1>  
 
-<br/>  
-<div align="center" style="display:flex;">  
-  <img width="245" src="https://user-images.githubusercontent.com/35549653/76694897-de236300-66bb-11ea-9ace-b9edde9c12da.png">  
-  <p> 
+<br/>
+
+<div align="center" style="display:flex; flex-direction: column;">
+    <div>
+        <img width="245" src="https://user-images.githubusercontent.com/35549653/76694897-de236300-66bb-11ea-9ace-b9edde9c12da.png">
+    </div>
+<div style="margin-top: 24px;" >
 <a  href="https://www.apache.org/licenses/LICENSE-2.0"  target="_blank">  
 <img  alt="License: Apache 2.0"  src="https://img.shields.io/badge/License-Apache 2.0-yellow.svg"  />  
 </a> 
 <a href="http://storybook.developer.spaceone.dev/"  target="_blank">  
     <img alt="spaceone storybook" src="https://img.shields.io/badge/Design System-SpaceOne-blueviolet.svg?logo=storybook" />  
-</a>  
-</p>  
+</a> 
+</div>
 
-</div>    
+</div>  
+
+  
+    
+ 
+
+  
 
 <br/>
 
