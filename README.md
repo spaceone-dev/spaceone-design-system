@@ -6,7 +6,8 @@
     <div>
         <img width="245" src="https://user-images.githubusercontent.com/35549653/76694897-de236300-66bb-11ea-9ace-b9edde9c12da.png">
     </div>
-<div style="margin-top: 24px;" >
+<br/>
+<div>
 <a  href="https://www.apache.org/licenses/LICENSE-2.0"  target="_blank">  
 <img  alt="License: Apache 2.0"  src="https://img.shields.io/badge/License-Apache 2.0-yellow.svg"  />  
 </a> 
