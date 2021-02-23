@@ -1,6 +1,6 @@
 <template>
     <div :class="level ? 'p-tree-node' : 'tree-root'">
-        <div v-show="level" class="tree-row"
+        <div v-if="level" class="tree-row"
              :class="{selected, disabled, [`level-${level}`]: true}"
              :style="{paddingLeft: depth}"
         >
