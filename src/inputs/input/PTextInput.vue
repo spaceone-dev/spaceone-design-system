@@ -143,6 +143,7 @@ export default {
         }
     }
     .right-extra {
+        @apply text-gray-400;
         display: inline-flex;
         margin-left: 0.5rem;
         flex-shrink: 0;
