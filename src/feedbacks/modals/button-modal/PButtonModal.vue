@@ -1,7 +1,11 @@
 <template>
     <transition v-if="visible" name="modal">
-        <section class="modal-mask" :class="{'no-backdrop':!backdrop}" role="dialog"
+        <section class="modal-mask" :class="{'no-backdrop':!backdrop}"
+                 role="dialog"
                  aria-modal="true"
+                 aria-labelledby="headerTitle"
+                 tabindex="-1"
+                 @keyup.esc="onCloseClick"
         >
             <article class="modal-wrapper" :class="dialogClassObject">
                 <div class="modal-content" :class="[`modal-${themeColor}`, {'no-footer': !footerVisible}]">
