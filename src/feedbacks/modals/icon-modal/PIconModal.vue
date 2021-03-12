@@ -1,44 +1,47 @@
 <template>
-    <p-modal :visible.sync="proxyVisible"
-             :backdrop="true"
-             class="p-icon-modal-container"
-    >
-        <div class="content-wrapper">
-            <p-lottie v-if="lottieName"
-                      :name="lottieName"
-                      :size="5"
-            />
-            <p-i v-if="iconName"
-                 class="block" :name="iconName"
-                 width="5rem" height="5rem"
-            />
-            <span v-if="emoji" class="wave">👋</span>
-            <div class="text-wrapper">
-                <p v-if="headerTitle" class="header-title">
-                    {{ headerTitle }}
-                </p>
-                <span v-if="bodyText">
-                    {{ bodyText }}
-                </span>
-            </div>
-            <p-button
-                :style-type="buttonType" :outline="outline"
-                @click="onClickButton"
-            >
-                {{ buttonText }}
-            </p-button>
-        </div>
-    </p-modal>
+    <transition v-if="visible" name="modal">
+        <section class="modal-mask" :class="{'no-backdrop':!backdrop}" role="dialog"
+                 aria-modal="true"
+        >
+            <article class="modal-wrapper" :class="dialogClassObject">
+                <div class="content-wrapper">
+                    <p-lottie v-if="lottieName"
+                              :name="lottieName"
+                              :size="5"
+                    />
+                    <p-i v-if="iconName"
+                         class="block" :name="iconName"
+                         width="5rem" height="5rem"
+                    />
+                    <span v-if="emoji" class="wave">👋</span>
+                    <div class="text-wrapper">
+                        <p v-if="headerTitle" class="header-title">
+                            {{ headerTitle }}
+                        </p>
+                        <span v-if="bodyText">
+                            {{ bodyText }}
+                        </span>
+                    </div>
+                    <p-button
+                        :style-type="buttonType" :outline="outline"
+                        @click="onClickButton"
+                    >
+                        {{ buttonText }}
+                    </p-button>
+                </div>
+            </article>
+        </section>
+    </transition>
 </template>
 
 <script lang="ts">
-import { reactive, toRefs } from '@vue/composition-api';
+import {computed, reactive, toRefs} from '@vue/composition-api';
 
-import PModal from '@/feedbacks/modals/modal/PModal.vue';
 import PLottie from '@/foundation/lottie/PLottie.vue';
 import PI from '@/foundation/icons/PI.vue';
 import PButton from '@/inputs/buttons/button/PButton.vue';
 import { IconModalProps } from '@/feedbacks/modals/icon-modal/type';
+import '../modal.pcss';
 
 import { makeProxy } from '@/util/composition-helpers';
 
@@ -46,7 +49,6 @@ export default {
     name: 'PIconModal',
     components: {
         PI,
-        PModal,
         PLottie,
         PButton,
     },
@@ -87,11 +89,20 @@ export default {
             type: Boolean,
             default: true,
         },
+        backdrop: {
+            type: Boolean,
+            default: true,
+        },
     },
     setup(props: IconModalProps, { emit }) {
         const state = reactive({
             proxyVisible: makeProxy('visible', props, emit),
         });
+        const dialogClassObject = computed(() => [
+            { scrollable: props.scrollable },
+            { centered: props.centered },
+            props.size,
+        ]);
 
         const onClickButton = () => {
             state.proxyVisible = false;
@@ -100,6 +111,7 @@ export default {
 
         return {
             ...toRefs(state),
+            dialogClassObject,
             onClickButton,
         };
     },
@@ -108,49 +120,53 @@ export default {
 </script>
 
 <style lang="postcss">
-.p-icon-modal-container {
-    .content-wrapper {
-        @apply bg-white;
-        text-align: center;
-        opacity: 0.9;
-        border-radius: 1rem;
-        padding: 3.75rem;
-        margin-top: calc(50% - 1rem);
-        .p-lottie {
-            display: inline-flex;
-        }
-        .p-i-icon {
-            margin: auto;
-        }
-        .wave {
-            animation-name: wave-animation;
-            animation-duration: 2.5s;
-            animation-iteration-count: infinite;
-            transform-origin: 70% 70%;
-            display: inline-block;
-            font-size: 4rem;
-        }
 
-        @keyframes wave-animation {
-            0% { transform: rotate(0deg); }
-            10% { transform: rotate(14deg); }
-            20% { transform: rotate(-8deg); }
-            30% { transform: rotate(14deg); }
-            40% { transform: rotate(-4deg); }
-            50% { transform: rotate(10deg); }
-            60% { transform: rotate(0deg); }
-            100% { transform: rotate(0deg); }
-        }
-        .text-wrapper {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-            .header-title {
-                @apply text-primary-dark;
-                font-size: 1.375rem;
-                font-weight: bold;
-                padding-bottom: 0.5rem;
-            }
+.content-wrapper {
+    @apply bg-white mx-auto;
+    text-align: center;
+    opacity: 0.9;
+    border-radius: 1rem;
+    padding: 3.75rem;
+    width: 100%;
+    min-width: 17rem;
+    max-width: 32rem;
+    min-height: 12.875rem;
+
+    .p-lottie {
+        display: inline-flex;
+    }
+    .p-i-icon {
+        margin: auto;
+    }
+    .wave {
+        animation-name: wave-animation;
+        animation-duration: 2.5s;
+        animation-iteration-count: infinite;
+        transform-origin: 70% 70%;
+        display: inline-block;
+        font-size: 4rem;
+    }
+
+    @keyframes wave-animation {
+        0% { transform: rotate(0deg); }
+        10% { transform: rotate(14deg); }
+        20% { transform: rotate(-8deg); }
+        30% { transform: rotate(14deg); }
+        40% { transform: rotate(-4deg); }
+        50% { transform: rotate(10deg); }
+        60% { transform: rotate(0deg); }
+        100% { transform: rotate(0deg); }
+    }
+    .text-wrapper {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        .header-title {
+            @apply text-primary-dark;
+            font-size: 1.375rem;
+            font-weight: bold;
+            padding-bottom: 0.5rem;
         }
     }
 }
+
 </style>
