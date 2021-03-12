@@ -43,7 +43,7 @@ import { reactive, computed, toRefs } from '@vue/composition-api';
 import PButtonModal from '@/feedbacks/modals/button-modal/PButtonModal.vue';
 import PDataTable from '@/data-display/tables/data-table/PDataTable.vue';
 import { makeByEvent, makeProxy } from '@/util/composition-helpers';
-import { sizeMapping } from '@/feedbacks/modals/modal/type';
+import { sizeMapping } from '@/feedbacks/modals/type';
 import { orderBy } from 'lodash';
 
 export default {
