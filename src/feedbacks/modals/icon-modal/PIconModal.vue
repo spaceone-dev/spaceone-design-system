@@ -3,7 +3,7 @@
         <section class="modal-mask" :class="{'no-backdrop':!backdrop}" role="dialog"
                  aria-modal="true"
         >
-            <article class="modal-wrapper" :class="dialogClassObject">
+            <article class="modal-wrapper">
                 <div class="content-wrapper">
                     <p-lottie v-if="lottieName"
                               :name="lottieName"
@@ -98,11 +98,6 @@ export default {
         const state = reactive({
             proxyVisible: makeProxy('visible', props, emit),
         });
-        const dialogClassObject = computed(() => [
-            { scrollable: props.scrollable },
-            { centered: props.centered },
-            props.size,
-        ]);
 
         const onClickButton = () => {
             state.proxyVisible = false;
@@ -111,7 +106,6 @@ export default {
 
         return {
             ...toRefs(state),
-            dialogClassObject,
             onClickButton,
         };
     },
