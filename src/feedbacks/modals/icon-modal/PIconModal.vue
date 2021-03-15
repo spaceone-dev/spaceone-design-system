@@ -1,41 +1,46 @@
 <template>
-    <transition v-if="visible" name="modal">
-        <section class="modal-mask" :class="{'no-backdrop':!backdrop}" role="dialog"
-                 aria-modal="true"
-        >
-            <article class="modal-wrapper">
-                <div class="content-wrapper">
-                    <p-lottie v-if="lottieName"
-                              :name="lottieName"
-                              :size="5"
-                    />
-                    <p-i v-if="iconName"
-                         class="block" :name="iconName"
-                         width="5rem" height="5rem"
-                    />
-                    <span v-if="emoji" class="wave">👋</span>
-                    <div class="text-wrapper">
-                        <p v-if="headerTitle" class="header-title">
-                            {{ headerTitle }}
-                        </p>
-                        <span v-if="bodyText">
-                            {{ bodyText }}
-                        </span>
+    <section class="p-icon-modal">
+        <transition v-if="visible" name="modal">
+            <article class="modal-mask" :class="{'no-backdrop':!backdrop}"
+                     role="dialog"
+                     aria-modal="true"
+                     aria-labelledby="headerTitle"
+                     tabindex="1"
+            >
+                <div class="modal-wrapper">
+                    <div class="content-wrapper">
+                        <p-lottie v-if="lottieName"
+                                  :name="lottieName"
+                                  :size="5"
+                        />
+                        <p-i v-if="iconName"
+                             class="block" :name="iconName"
+                             width="5rem" height="5rem"
+                        />
+                        <span v-if="emoji" class="wave">👋</span>
+                        <div class="text-wrapper">
+                            <p v-if="headerTitle" class="header-title">
+                                {{ headerTitle }}
+                            </p>
+                            <span v-if="bodyText">
+                                {{ bodyText }}
+                            </span>
+                        </div>
+                        <p-button
+                            :style-type="buttonType" :outline="outline"
+                            @click="onClickButton"
+                        >
+                            {{ buttonText }}
+                        </p-button>
                     </div>
-                    <p-button
-                        :style-type="buttonType" :outline="outline"
-                        @click="onClickButton"
-                    >
-                        {{ buttonText }}
-                    </p-button>
                 </div>
             </article>
-        </section>
-    </transition>
+        </transition>
+    </section>
 </template>
 
 <script lang="ts">
-import {computed, reactive, toRefs} from '@vue/composition-api';
+import { computed, reactive, toRefs } from '@vue/composition-api';
 
 import PLottie from '@/foundation/lottie/PLottie.vue';
 import PI from '@/foundation/icons/PI.vue';

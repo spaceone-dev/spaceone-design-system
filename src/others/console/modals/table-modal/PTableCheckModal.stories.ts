@@ -53,7 +53,7 @@ export const modal = () => ({
     :fields="fields"
     :items="items"
     :visible.sync="visible"
-    :themeColor="themeColor"
+    themeColor="safe"
 
     @cancel="cancel"
     @close="close"
@@ -89,10 +89,7 @@ export const modal = () => ({
     },
     setup(props) {
         const visible = ref(false);
-        const ConfirmButtonBind = computed(() => ({
-            styleType: 'primary',
-            disabled: props.okDisabled,
-        }));
+
         const click = () => {
             visible.value = true;
         };
@@ -101,7 +98,7 @@ export const modal = () => ({
         };
         return {
             visible,
-            ConfirmButtonBind,
+
             click,
             close,
             ...actions,

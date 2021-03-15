@@ -34,13 +34,10 @@ const actions = {
 export const buttonModal = () => ({
     components: { PButtonModal, PButton },
     template: `<div>
-                <p-button styleType="alert" @click="launchModal">Launch a modal</p-button>
+                <p-button styleType="safe" @click="launchModal">Launch a modal</p-button>
                 <p-button-modal v-bind="$props"
                                 :visible.sync="visible"
-                                theme-color="alert"
-                                :footer-confirm-button-bind="{
-                                    styleType: 'alert',
-                                }"
+                                theme-color="safe"
                                 size="md"
                                 @close="closeModal"
                                 v-on="actions"

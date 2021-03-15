@@ -1,76 +1,76 @@
 <template>
-    <transition v-if="visible" name="modal">
-        <section class="modal-mask" :class="{'no-backdrop':!backdrop}"
-                 role="dialog"
-                 aria-modal="true"
-                 aria-labelledby="headerTitle"
-                 tabindex="-1"
-                 @keyup.esc="onCloseClick"
-        >
-            <article class="modal-wrapper" :class="dialogClassObject">
-                <div class="modal-content" :class="[`modal-${themeColor}`, {'no-footer': !footerVisible}]">
-                    <h3 class="header">
-                        <div v-if="headerVisible" class="modal-header" :class="headerClass">
-                            <p-lottie name="lottie_error" auto :size="1.5"
-                                      :class="[`modal-${themeColor}`]" class="header-lottie"
-                            />{{ headerTitle }}
+    <section class="p-button-modal">
+        <transition v-if="visible" name="modal">
+            <div class="modal-mask" :class="{'no-backdrop':!backdrop}">
+                <div class="modal-wrapper" :class="dialogClassObject"
+                     role="dialog"
+                     aria-modal="true"
+                     aria-labelledby="headerTitle"
+                     tabindex="1"
+                     @keydown.esc="onCloseClick"
+                >
+                    <article class="modal-content" :class="[`modal-${themeColor}`, {'no-footer': !footerVisible}]">
+                        <h3 class="header">
+                            <div v-if="headerVisible" class="modal-header" :class="headerClass">
+                                <p-lottie name="lottie_error" auto :size="1.5"
+                                          :class="[`modal-${themeColor}`]" class="header-lottie"
+                                />{{ headerTitle }}
+                            </div>
+                            <p-icon-button v-if="headerCloseButtonVisible"
+                                           name="ic_delete" color="transparent inherit"
+                                           class="close-btn"
+                                           :class="[{disabled: loading},
+                                                    {'no-footer': !footerVisible}]"
+                                           @click.stop="onCloseClick"
+                            />
+                        </h3>
+                        <div v-if="bodyVisible" class="modal-body" :class="allBodyClass">
+                            <slot name="body" />
                         </div>
-                        <p-icon-button v-if="headerCloseButtonVisible"
-                                       name="ic_delete" color="transparent inherit"
-                                       class="close-btn"
-                                       :class="[{disabled: loading},
-                                                {'no-footer': !footerVisible}]"
-                                       @click.stop="onCloseClick"
-                        />
-                    </h3>
-                    <div v-if="bodyVisible" class="modal-body" :class="allBodyClass">
-                        <slot name="body" />
-                    </div>
-                    <div v-if="footerVisible" class="modal-footer" :class="footerClass">
-                        <slot :slot-scope="$props" name="footer-extra" />
-                        <p-button
-                            v-if="footerResetButtonVisible"
-                            class="modal-btn reset-btn"
-                            style-type="gray-border"
-                            :disabled="loading"
-                            @click="onResetClick"
-                        >
-                            <slot :slot-scope="$props" name="reset-button">
-                                Reset
-                            </slot>
-                        </p-button>
-                        <p-button
-                            v-if="footerCancelButtonVisible"
-                            class="modal-btn cancel-btn"
-                            style-type="transparent"
-                            v-bind="footerCancelButtonBind"
-                            :disabled="loading"
-                            @click="onCancelClick"
-                        >
-                            <slot :slot-scope="$props" name="close-button">
-                                {{ $t('COMPONENT.BUTTON_MODAL.CANCEL') }}
-                            </slot>
-                        </p-button>
-                        <p-loading-button v-if="footerConfirmButtonVisible"
-                                          class="modal-btn"
-                                          :button-bind="footerConfirmButtonBind"
-                                          :loading="loading"
-                                          :disabled="disabled"
-                                          @click="onConfirmClick"
-                        >
-                            <slot :slot-scope="$props" name="confirm-button">
-                                {{ $t('COMPONENT.BUTTON_MODAL.CONFIRM') }}
-                            </slot>
-                        </p-loading-button>
-                    </div>
+                        <div v-if="footerVisible" class="modal-footer" :class="footerClass">
+                            <slot :slot-scope="$props" name="footer-extra" />
+                            <p-button
+                                v-if="footerResetButtonVisible"
+                                class="modal-btn reset-btn"
+                                style-type="gray-border"
+                                :disabled="loading"
+                                @click="onResetClick"
+                            >
+                                <slot :slot-scope="$props" name="reset-button">
+                                    Reset
+                                </slot>
+                            </p-button>
+                            <p-button
+                                v-if="footerCancelButtonVisible"
+                                class="modal-btn cancel-btn"
+                                style-type="transparent"
+                                :disabled="loading"
+                                @click="onCancelClick"
+                            >
+                                <slot :slot-scope="$props" name="close-button">
+                                    {{ $t('COMPONENT.BUTTON_MODAL.CANCEL') }}
+                                </slot>
+                            </p-button>
+                            <p-loading-button v-if="footerConfirmButtonVisible"
+                                              class="modal-btn"
+                                              :style-type="themeColor"
+                                              :loading="loading"
+                                              :disabled="disabled"
+                                              @click="onConfirmClick"
+                            >
+                                <slot :slot-scope="$props" name="confirm-button">
+                                    {{ $t('COMPONENT.BUTTON_MODAL.CONFIRM') }}
+                                </slot>
+                            </p-loading-button>
+                        </div>
+                    </article>
                 </div>
-            </article>
-        </section>
-    </transition>
+            </div>
+        </transition>
+    </section>
 </template>
 
 <script lang="ts">
-import PI from '@/foundation/icons/PI.vue';
 import PLoadingButton from '@/others/deprecated/loading-button/PLoadingButton.vue';
 import PButton from '@/inputs/buttons/button/PButton.vue';
 import { sizeMapping } from '@/feedbacks/modals/type';
@@ -86,7 +86,6 @@ export default {
     name: 'PButtonModal',
     components: {
         PIconButton,
-        PI,
         PLottie,
         PButton,
         PLoadingButton,
@@ -177,19 +176,6 @@ export default {
             type: Boolean,
             default: false,
         },
-        footerCancelButtonBind: {
-            type: Object,
-            default: () => ({
-                styleType: 'gray900',
-                outline: true,
-            }),
-        },
-        footerConfirmButtonBind: {
-            type: Object,
-            default: () => ({
-                styleType: 'primary-dark',
-            }),
-        },
     },
     setup(props: ButtonModalProps, { emit }) {
         const state = reactive({
@@ -250,85 +236,97 @@ export default {
 };
 
 </script>
-<style lang="postcss" scoped>
-.modal-content {
-    @apply bg-white border border-gray-200;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-height: calc(100vh - 4rem);
-    pointer-events: auto;
-    border-radius: 0.375rem;
-    box-shadow: 0 0 0.5rem rgba(theme('colors.gray.900'), 0.32);
-    transition: all 0.3s ease;
-    justify-content: space-between;
-    padding: 2rem 2rem;
-    &.no-footer {
-        padding-bottom: 2.5rem;
-    }
-
-    $header-height: 3.5rem;
-    $footer-height: 96px;
-    $wrapper-margin: 4rem;
-    $body-max-height: calc(100vh - $(header-height) - $(footer-height) - $(wrapper-margin));
-
-    .header {
+<style lang="postcss">
+.p-button-modal {
+    .modal-content {
+        @apply bg-white border border-gray-200;
         display: flex;
-        justify-content: space-between;
-
-        .modal-header {
-            height: $header-height;
-            font-size: 1.375rem;
-            line-height: 145%;
-        }
-        .header-lottie {
-            display: none;
-            &.modal-alert {
-                display: inline-flex;
-                margin-right: 0.5rem;
-            }
-        }
-        .close-btn {
-            @apply text-gray-400;
-            cursor: pointer;
-            &:hover {
-                @apply text-secondary;
-            }
-            &.disabled {
-                @apply text-gray-200;
-            }
-            &.no-footer {
-                @apply text-gray-900;
-            }
-        }
-    }
-
-    .modal-body {
-        @apply text-gray-600;
-        flex-grow: 1;
-        max-height: $body-max-height;
-        overflow: auto;
-    }
-
-    .modal-footer {
-        display: flex;
-        align-items: center;
+        flex-direction: column;
         width: 100%;
-        padding-top: 1.5rem;
-        border: none;
-        .modal-btn {
-            height: 2.5rem;
-            font-size: 1rem;
-        }
-        .cancel-btn {
-            margin-left: auto;
-            margin-right: 1rem;
-        }
-        .reset-btn {
-            display: none;
+        max-height: calc(100vh - 4rem);
+        pointer-events: auto;
+        border-radius: 0.375rem;
+        box-shadow: 0 0 0.5rem rgba(theme('colors.gray.900'), 0.32);
+        transition: all 0.3s ease;
+        justify-content: space-between;
+        padding: 2rem 2rem;
 
-            @screen xs {
-                display: flex;
+        &.no-footer {
+            padding-bottom: 2.5rem;
+        }
+
+        $header-height: 3.5rem;
+        $footer-height: 96px;
+        $wrapper-margin: 4rem;
+        $body-max-height: calc(100vh - $(header-height) - $(footer-height) - $(wrapper-margin));
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+
+            .modal-header {
+                height: $header-height;
+                font-size: 1.375rem;
+                line-height: 145%;
+            }
+
+            .header-lottie {
+                display: none;
+
+                &.modal-alert {
+                    display: inline-flex;
+                    margin-right: 0.5rem;
+                }
+            }
+
+            .close-btn {
+                @apply text-gray-400;
+                cursor: pointer;
+
+                &:hover {
+                    @apply text-secondary;
+                }
+
+                &.disabled {
+                    @apply text-gray-200;
+                }
+
+                &.no-footer {
+                    @apply text-gray-900;
+                }
+            }
+        }
+
+        .modal-body {
+            @apply text-gray-600;
+            flex-grow: 1;
+            max-height: $body-max-height;
+            overflow: auto;
+        }
+
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding-top: 1.5rem;
+            border: none;
+
+            .modal-btn {
+                height: 2.5rem;
+                font-size: 1rem;
+            }
+
+            .cancel-btn {
+                margin-left: auto;
+                margin-right: 1rem;
+            }
+
+            .reset-btn {
+                display: none;
+
+                @screen xs {
+                    display: flex;
+                }
             }
         }
     }

@@ -44,8 +44,7 @@ export interface ButtonModalProps {
     headerCloseButtonVisible: boolean;
     footerCancelButtonVisible: boolean;
     footerConfirmButtonVisible: boolean;
-    footerCancelButtonBind: Button;
-    footerConfirmButtonBind: Button;
+
     hideOnCancel: boolean;
     loading: boolean;
     disabled: boolean;

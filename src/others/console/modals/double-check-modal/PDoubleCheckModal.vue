@@ -7,9 +7,6 @@
                     :backdrop="backdrop"
                     :visible.sync="proxyVisible"
                     :theme-color="themeColor"
-                    :footer-cancel-button-bind="footerCancelButtonBind"
-                    :footer-confirm-button-bind="footerConfirmButtonBind"
-
                     @cancel="cancel"
                     @close="close"
                     @confirm="confirm"
@@ -102,13 +99,6 @@ export default {
         const state = reactive({
             proxyVisible: makeProxy('visible', props, context.emit),
         });
-        const footerCancelButtonBind = reactive({
-            styleType: 'black',
-            outline: true,
-        });
-        const footerConfirmButtonBind = computed(() => ({
-            styleType: props.themeColor === 'primary' ? 'primary-dark' : props.themeColor,
-        }));
 
         const checkState = reactive({
             inputText: '',
@@ -139,8 +129,6 @@ export default {
         return {
             ...toRefs(state),
             ...toRefs(checkState),
-            footerCancelButtonBind,
-            footerConfirmButtonBind,
             cancel,
             close,
             confirm,
