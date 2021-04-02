@@ -1,7 +1,7 @@
 <template>
     <div class="p-field-group">
         <div class="label-box">
-            <label v-if="label || $scopedSlots.label" class="form-label">
+            <label v-if="label || $scopedSlots.label" class="form-label" @click="$emit('click-label')">
                 <slot name="label">
                     {{ label }}
                 </slot>
