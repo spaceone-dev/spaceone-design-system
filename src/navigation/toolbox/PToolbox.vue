@@ -72,20 +72,32 @@ import {
 import { makeOptionalProxy } from '@/util/composition-helpers';
 import PQuerySearch from '@/inputs/search/query-search/PQuerySearch.vue';
 import { QueryTag } from '@/inputs/search/query-search-tags/type';
-import { QueryItem } from '@/inputs/search/query-search/type';
+import { KeyItemSet, QueryItem, ValueHandlerMap } from '@/inputs/search/query-search/type';
 import PSearch from '@/inputs/search/search/PSearch.vue';
 import PQuerySearchTags from '@/inputs/search/query-search-tags/PQuerySearchTags.vue';
 import { SEARCH_TYPES } from '@/navigation/toolbox/config';
 
-interface Options {
-    start?: number;
-    limit?: number;
-    sortBy?: string;
+interface Props {
+    paginationVisible: boolean;
+    pageSizeChangeable: boolean;
+    sortable: boolean;
+    exportable: boolean;
+    refreshable: boolean;
+    searchable: boolean;
+    filtersVisible: boolean;
+    searchType: string;
+    pageSize?: number;
+    totalCount: number;
+    pageSizeOptions: number[];
+    sortByOptions: string[];
+    keyItemSets: KeyItemSet[];
+    valueHandlerMap: ValueHandlerMap;
     queryTags?: QueryTag[];
     searchText?: string;
+    timezone: string;
 }
 
-export default defineComponent({
+export default defineComponent<Props>({
     name: 'PToolbox',
     components: {
         PQuerySearchTags,
@@ -172,7 +184,7 @@ export default defineComponent({
             default: 'UTC',
         },
     },
-    setup(props) {
+    setup(props: Props) {
         const vm = getCurrentInstance() as ComponentRenderProxy;
 
         const initPageSize = props.pageSizeOptions ? props.pageSizeOptions[0] || 24 : 24;
@@ -224,15 +236,11 @@ export default defineComponent({
 
         const onSearch = (val?: string|QueryItem) => {
             if (!val) {
-                if (proxyState.searchText !== '') {
-                    proxyState.searchText = '';
-                    emitChange({ searchText: '' });
-                }
+                proxyState.searchText = '';
+                emitChange({ searchText: '' });
             } else if (typeof val === 'string') {
-                if (proxyState.searchText !== val) {
-                    proxyState.searchText = val;
-                    emitChange({ searchText: val });
-                }
+                proxyState.searchText = val;
+                emitChange({ searchText: val });
             } else if (state.tagRef) {
                 state.tagRef.addTag(val);
             } else {
