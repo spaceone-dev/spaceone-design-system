@@ -55,8 +55,10 @@
                                      ref="tagRef"
                                      :tags="proxyState.queryTags"
                                      :timezone="timezone"
+                                     @init="onQueryTagsInit"
                                      @change="onQueryTagsChange"
-                />
+                >
+                </p-query-search-tags>
             </div>
         </div>
     </div>
@@ -76,6 +78,7 @@ import { KeyItemSet, QueryItem, ValueHandlerMap } from '@/inputs/search/query-se
 import PSearch from '@/inputs/search/search/PSearch.vue';
 import PQuerySearchTags from '@/inputs/search/query-search-tags/PQuerySearchTags.vue';
 import { SEARCH_TYPES } from '@/navigation/toolbox/config';
+import { ToolboxOptions } from '@/navigation/toolbox/type';
 
 interface Props {
     paginationVisible: boolean;
@@ -86,6 +89,7 @@ interface Props {
     searchable: boolean;
     filtersVisible: boolean;
     searchType: string;
+    proxyState?: number;
     pageSize?: number;
     totalCount: number;
     pageSizeOptions: number[];
@@ -116,6 +120,10 @@ export default defineComponent<Props>({
             type: Boolean,
             default: true,
         },
+        settingsVisible: {
+            type: Boolean,
+            default: false,
+        },
         sortable: {
             type: Boolean,
             default: false,
@@ -142,6 +150,13 @@ export default defineComponent<Props>({
             validator(searchType) {
                 return Object.values(SEARCH_TYPES).includes(searchType as any);
             },
+        },
+        thisPage: {
+            type: Number,
+            validator(value?: number) {
+                return value === undefined || value > 0;
+            },
+            default: undefined,
         },
         pageSize: {
             type: Number,
@@ -189,15 +204,15 @@ export default defineComponent<Props>({
 
         const initPageSize = props.pageSizeOptions ? props.pageSizeOptions[0] || 24 : 24;
         const proxyState = reactive({
+            thisPage: makeOptionalProxy<number>('thisPage', vm, 1),
             pageSize: makeOptionalProxy<number>('pageSize', vm, initPageSize),
-            sortBy: makeOptionalProxy<number>('sortBy', vm, props.sortByOptions[0] || 24),
+            sortBy: makeOptionalProxy<string>('sortBy', vm, props.sortByOptions[0] || ''),
             searchText: makeOptionalProxy<string>('searchText', vm, ''),
             queryTags: makeOptionalProxy<QueryTag[]>('queryTags', vm, []),
         });
 
         const state = reactive({
-            thisPage: 1,
-            pageStart: computed(() => ((state.thisPage - 1) * proxyState.pageSize) + 1),
+            pageStart: computed(() => ((proxyState.thisPage - 1) * proxyState.pageSize) + 1),
             allPage: computed(() => Math.ceil(props.totalCount / proxyState.pageSize) || 1),
             pageMenu: computed(() => {
                 if (!Array.isArray(props.pageSizeOptions)) return [];
@@ -215,23 +230,25 @@ export default defineComponent<Props>({
         });
 
 
-        const emitChange = (options) => {
+        const emitChange = (options: ToolboxOptions) => {
             vm.$emit('change', options);
         };
 
         const onChangeThisPage = (thisPage: number) => {
-            state.thisPage = thisPage;
-            emitChange({ start: state.pageStart });
+            proxyState.thisPage = thisPage;
+            emitChange({ pageStart: state.pageStart });
         };
 
         const onChangePageSize = (pageSize) => {
             proxyState.pageSize = pageSize;
-            emitChange({ limit: pageSize });
+            emitChange({ pageLimit: pageSize });
         };
 
         const onChangeSortBy = (sortBy) => {
-            proxyState.sortBy = sortBy;
-            emitChange({ sortBy });
+            if (props.sortable) {
+                proxyState.sortBy = sortBy;
+                emitChange({ sortBy });
+            }
         };
 
         const onSearch = (val?: string|QueryItem) => {
@@ -246,6 +263,16 @@ export default defineComponent<Props>({
             } else {
                 proxyState.queryTags.push(val);
             }
+        };
+
+        const onQueryTagsInit = ({ tags }) => {
+            vm.$emit('init-tags', {
+                pageStart: state.pageStart,
+                pageLimit: proxyState.pageSize,
+                searchText: proxyState.searchText,
+                sortBy: proxyState.sortBy,
+                queryTags: tags,
+            } as ToolboxOptions);
         };
 
         const onQueryTagsChange = (tags: QueryTag[]) => {
@@ -263,6 +290,7 @@ export default defineComponent<Props>({
             onChangePageSize,
             onChangeSortBy,
             onSearch,
+            onQueryTagsInit,
             onQueryTagsChange,
         };
     },

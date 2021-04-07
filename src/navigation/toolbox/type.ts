@@ -1,8 +1,8 @@
 import { QueryTag } from '@/inputs/search/query-search-tags/type';
 
 export interface ToolboxOptions {
-    start?: number;
-    limit?: number;
+    pageStart?: number;
+    pageLimit?: number;
     sortBy?: string;
     queryTags?: QueryTag[];
     searchText?: string;
