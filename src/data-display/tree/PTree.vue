@@ -427,7 +427,6 @@ export default defineComponent({
             onDragEnd,
             finishEdit,
             onToggle,
-            fetchData,
         };
     },
 });
