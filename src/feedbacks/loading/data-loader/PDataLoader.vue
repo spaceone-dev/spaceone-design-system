@@ -1,7 +1,7 @@
 <template>
     <div class="p-data-loader">
         <transition-group name="fade-in" tag="div" class="data-loader-container">
-            <div v-if="loading" key="loader" class="loader-wrapper">
+            <div v-if="showLoader" key="loader" class="loader-wrapper">
                 <slot name="loader">
                     <div class="loader-backdrop" />
                     <template v-if="loaderType === LOADER_TYPES.spinner">
@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import {
-    computed, defineComponent, reactive, toRefs,
+    computed, defineComponent, reactive, toRefs, watch,
 } from '@vue/composition-api';
 import { LOADER_TYPES } from '@/feedbacks/loading/data-loader/config';
 import PLottie from '@/foundation/lottie/PLottie.vue';
@@ -44,6 +44,8 @@ interface Props {
     data?: any;
     loaderType: LOADER_TYPES;
     disableEmptyCase: boolean;
+    minLoadingTime: number;
+    lazyLoadingTime: number;
 }
 export default defineComponent({
     name: 'PDataLoader',
@@ -69,16 +71,60 @@ export default defineComponent({
             type: Boolean,
             default: false,
         },
+        minLoadingTime: {
+            type: Number,
+            default: 0,
+        },
+        lazyLoadingTime: {
+            type: Number,
+            default: 0,
+        },
     },
     setup(props: Props) {
         const state = reactive({
             isEmpty: computed(() => {
-                if (props.disableEmptyCase) return true;
+                if (props.disableEmptyCase) return false;
                 if (!props.data) return false;
                 if (Array.isArray(props.data)) return props.data.length === 0;
                 return isEmpty(props.data);
             }),
+            showLoader: computed(() => {
+                if (props.lazyLoadingTime) return state.lazyLoading;
+                if (props.minLoadingTime) return state.minTimeLoading || props.loading;
+                return props.loading;
+            }),
+            minTimeLoading: props.loading,
+            lazyLoading: false,
         });
+
+        let minLoadingHandler;
+        let lazyLoadingHandler;
+        watch(() => props.loading, (after, before) => {
+            if (after === before) return;
+            if (after) {
+                if (props.minLoadingTime) {
+                    state.minTimeLoading = true;
+
+                    if (minLoadingHandler) clearTimeout(minLoadingHandler);
+                    minLoadingHandler = setTimeout(() => {
+                        state.minTimeLoading = false;
+                    }, props.minLoadingTime);
+                }
+
+
+                if (props.lazyLoadingTime) {
+                    state.lazyLoading = false;
+
+                    if (lazyLoadingHandler) clearTimeout(lazyLoadingHandler);
+                    lazyLoadingHandler = setTimeout(() => {
+                        state.lazyLoading = true;
+                    }, props.lazyLoadingTime);
+                }
+            } else if (props.lazyLoadingTime) {
+                if (lazyLoadingHandler) clearTimeout(lazyLoadingHandler);
+                state.lazyLoading = false;
+            }
+        }, { immediate: true });
         return {
             LOADER_TYPES,
             ...toRefs(state),
