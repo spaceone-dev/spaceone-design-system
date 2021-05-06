@@ -39,6 +39,12 @@ import { i18n } from '@/translations';
 import { isEmpty } from 'lodash';
 import PSkeleton from '@/feedbacks/loading/skeleton/PSkeleton.vue';
 
+interface Props {
+    loading: boolean;
+    data?: any;
+    loaderType: LOADER_TYPES;
+    disableEmptyCase: boolean;
+}
 export default defineComponent({
     name: 'PDataLoader',
     components: { PSkeleton, PLottie },
@@ -59,10 +65,15 @@ export default defineComponent({
                 return Object.values(LOADER_TYPES).includes(loaderType as any);
             },
         },
+        disableEmptyCase: {
+            type: Boolean,
+            default: false,
+        },
     },
-    setup(props) {
+    setup(props: Props) {
         const state = reactive({
             isEmpty: computed(() => {
+                if (props.disableEmptyCase) return true;
                 if (!props.data) return false;
                 if (Array.isArray(props.data)) return props.data.length === 0;
                 return isEmpty(props.data);

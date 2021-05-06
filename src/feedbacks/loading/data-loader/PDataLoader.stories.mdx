@@ -65,6 +65,23 @@ import { LOADER_TYPES } from './config';
             options: Object.values(LOADER_TYPES)
         }
     },
+    disableEmptyCase: {
+        name: 'disableEmptyCase',
+        type: {name: 'boolean'},
+        defaultValue: false,
+        table: {
+            type: {
+                summary: 'boolean'
+            },
+            category: 'props',
+            defaultValue: {
+                summary: false
+            },
+        },
+        control: {
+            type: 'boolean'
+        }
+    },
     loader: {
         name: 'loader',
         description: 'Slot to replace loader.',
