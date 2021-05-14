@@ -4,7 +4,10 @@
             <slot name="default" />
         </div>
         <transition name="slide-fade">
-            <div v-if="proxyVisible" class="sidebar-wrapper">
+            <div v-if="proxyVisible"
+                 class="sidebar-wrapper"
+                 :class="styleType"
+            >
                 <div class="inner">
                     <p class="title" :class="{'mb-4': !!title || !!$scopedSlots.title}">
                         <slot name="title">
@@ -30,6 +33,7 @@ import {
     computed, defineComponent, reactive, toRefs,
 } from '@vue/composition-api';
 import PIconButton from '@/inputs/buttons/icon-button/PIconButton.vue';
+import { SIDEBAR_STYLE_TYPE } from '@/layouts/sidebar/type';
 
 export default defineComponent({
     name: 'PSidebar',
@@ -47,6 +51,11 @@ export default defineComponent({
         title: {
             type: String,
             default: '',
+        },
+        styleType: {
+            type: String,
+            default: 'primary',
+            validator: value => Object.keys(SIDEBAR_STYLE_TYPE).includes(value as string),
         },
     },
     setup(props, { emit, listeners }) {
@@ -107,6 +116,9 @@ export default defineComponent({
         box-shadow: 0 0 0.5rem rgba(theme('colors.black'), 0.08);
         overflow: hidden;
 
+        &.secondary {
+            @apply bg-secondary-2;
+        }
         .inner {
             padding: 0 1.5rem;
             overflow-y: auto;
@@ -152,6 +164,10 @@ export default defineComponent({
             flex-shrink: 0;
             border-top-width: 0;
             border-left-width: 1px;
+
+            &.secondary {
+                width: 45.97%;
+            }
         }
         .slide-fade-enter, .slide-fade-leave-to {
             margin-left: -25%;

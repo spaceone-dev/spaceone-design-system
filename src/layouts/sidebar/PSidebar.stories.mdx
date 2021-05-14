@@ -47,6 +47,25 @@ import faker from 'faker'
             type: 'text'
         }
     },
+    styleType: {
+        name: 'styleType',
+        type: {name: 'string'},
+        description: 'sidebar style',
+        defaultValue: 'primary',
+        table: {
+            type: {
+                summary: 'string'
+            },
+            category: 'props',
+            defaultValue: {
+                summary: 'primary'
+            },
+        },
+        control: {
+            type: 'select',
+            options: ['primary', 'secondary']
+        }
+    },
     'v-model': {
         name: 'v-model',
         type: {name: 'boolean', required: false},
@@ -133,6 +152,7 @@ export const Template = (args, {argTypes}) => {
                     {{visible ? 'close' : 'open' }}
                 </p-button>
                 <p-sidebar :title="title"
+                            :style-type="styleType"
                             v-model="visible"
                             class="mt-4 flex-grow"
                             @close="onClose"
@@ -163,6 +183,7 @@ export const Playground = (args, {argTypes}) => {
             <div class="flex flex-col" style="height: 500px;">
                 <p-sidebar :title="title"
                             :visible="visible"
+                            :style-type="styleType"
                             class="mt-4 flex-grow"
                 >
                     <div class="bg-primary3 h-full flex justify-center items-center">
@@ -309,12 +330,3 @@ export const Playground = (args, {argTypes}) => {
 </Canvas>
 
 <ArgsTable story="playground" />
-
-
-
-
-
-
-
-
-
