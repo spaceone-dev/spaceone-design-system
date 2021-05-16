@@ -1,26 +1,34 @@
 <template>
-    <a :href="!disabled&&href" :target="target"
-       class="p-anchor" :class="{disabled, highlight}"
-       v-on="$listeners"
-    >
-        <slot name="left-extra" v-bind="$props" />
-        <span class="text" :class="{disabled}">
-            <slot v-bind="$props">
-                {{ text }}
-            </slot>
-        </span>
-        <slot v-if="showIcon || (showIcon && target === '_blank')" name="icon" v-bind="$props">
-            <p-i name="ic_external-link"
-                 height="1em" width="1em"
-                 color="inherit"
-            />
-        </slot>
-    </a>
+    <router-link :to="to" custom>
+        <template #default="{href: toHref, route, navigate, isActive, isExactActive }">
+            <a class="p-anchor" :class="{disabled, highlight}" :target="target"
+               :href="!disabled && toHref || href"
+               v-on="anchorListeners"
+            >
+                <slot name="left-extra" v-bind="$props" />
+                <span class="text" :class="{disabled}">
+                    <slot v-bind="$props">
+                        {{ text }}
+                    </slot>
+                </span>
+                <slot v-if="showIcon || (showIcon && target === '_blank')" name="icon" v-bind="$props">
+                    <p-i name="ic_external-link"
+                         height="1em" width="1em"
+                         color="inherit"
+                    />
+                </slot>
+            </a>
+        </template>
+    </router-link>
 </template>
 
 <script lang="ts">
 import PI from '@/foundation/icons/PI.vue';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import { makeByPassListeners } from '@/util/composition-helpers';
 
+Vue.use(VueRouter);
 export default {
     name: 'PAnchor',
     components: { PI },
@@ -37,6 +45,10 @@ export default {
             type: String,
             default: undefined,
         },
+        to: {
+            type: Object,
+            default: undefined,
+        },
         target: {
             type: String,
             default: '_blank',
@@ -49,6 +61,17 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+    setup(props, { listeners }) {
+        const anchorListeners = {
+            ...listeners,
+            click(e) {
+                e.stopPropagation();
+                makeByPassListeners(listeners, 'click', e);
+            },
+        };
+
+        return { anchorListeners };
     },
 };
 </script>
