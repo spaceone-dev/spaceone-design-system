@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="to" custom>
+    <router-link :to="to || {}" custom>
         <template #default="{href: toHref, route, navigate, isActive, isExactActive }">
             <a class="p-anchor" :class="{disabled, highlight}" :target="target"
                :href="!disabled && toHref || href"
@@ -25,11 +25,22 @@
 <script lang="ts">
 import PI from '@/foundation/icons/PI.vue';
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import VueRouter, { Location } from 'vue-router';
 import { makeByPassListeners } from '@/util/composition-helpers';
+import { defineComponent } from '@vue/composition-api';
 
 Vue.use(VueRouter);
-export default {
+
+interface Props {
+  text?: string;
+  showIcon?: boolean;
+  href?: string;
+  to?: Location;
+  target?: string;
+  highlight?: boolean;
+}
+
+export default defineComponent<Props>({
     name: 'PAnchor',
     components: { PI },
     props: {
@@ -62,7 +73,7 @@ export default {
             default: false,
         },
     },
-    setup(props, { listeners }) {
+    setup(props: Props, { listeners }) {
         const anchorListeners = {
             ...listeners,
             click(e) {
@@ -73,7 +84,7 @@ export default {
 
         return { anchorListeners };
     },
-};
+});
 </script>
 
 <style lang="postcss">
