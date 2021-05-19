@@ -43,7 +43,7 @@ import {
 } from '@vue/composition-api';
 import { makeByPassListeners, makeOptionalProxy } from '@/util/composition-helpers';
 import PSearch from '@/inputs/search/search/PSearch.vue';
-import { reduce, intersectionWith } from 'lodash';
+import { reduce } from 'lodash';
 import { MenuItem } from '@/inputs/context-menu/type';
 import Fuse from 'fuse.js';
 
