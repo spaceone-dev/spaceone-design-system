@@ -308,7 +308,7 @@ export default defineComponent<ContextMenuProps>({
         font-size: 0.75rem;
 
         &.secondary {
-            @apply text-gray-900;
+            @apply text-secondary;
         }
         &.gray900 {
             @apply text-gray-400;
@@ -336,12 +336,12 @@ export default defineComponent<ContextMenuProps>({
         }
 
         &.secondary {
-            @mixin context-item-theme theme('colors.gray.900'), theme('colors.secondary'), theme('colors.white'),
-                theme('colors.secondary2'), theme('colors.secondary'), theme('colors.gray.200');
+            @mixin context-item-theme theme('colors.gray.900'), theme('colors.blue.200'), theme('colors.gray.900'),
+                theme('colors.secondary2'), theme('colors.secondary'), theme('colors.gray.300');
         }
         &.gray900 {
             @mixin context-item-theme theme('colors.gray.900'), theme('colors.gray.100'), theme('colors.gray.900'),
-                theme('colors.white'), theme('colors.gray.900'), theme('colors.gray.200');
+                theme('colors.white'), theme('colors.gray.900'), theme('colors.gray.300');
         }
     }
     .no-drag {
