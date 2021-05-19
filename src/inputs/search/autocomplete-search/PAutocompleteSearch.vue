@@ -1,7 +1,6 @@
 <template>
     <div class="p-autocomplete-search">
-        <p-search ref="searchRef"
-                  v-model="proxyValue"
+        <p-search v-model="proxyValue"
                   :placeholder="placeholder"
                   :focused="focused"
                   :disabled="disabled"
@@ -59,6 +58,7 @@ interface AutocompleteSearchProps {
     visibleMenu?: boolean;
     handler?: AutocompleteHandler;
     disableHandler?: boolean;
+    exactMode?: boolean;
 }
 
 const fuseOptions = {
@@ -123,11 +123,14 @@ export default defineComponent<AutocompleteSearchProps>({
             type: Boolean,
             default: false,
         },
+        exactMode: {
+            type: Boolean,
+            default: true,
+        },
     },
     setup(props: AutocompleteSearchProps, { emit, slots, listeners }) {
         const vm = getCurrentInstance() as ComponentRenderProxy;
         const state = reactive({
-            searchRef: null,
             menuRef: null,
             proxyValue: makeOptionalProxy('value', vm, ''),
             isAutoMode: computed(() => props.visibleMenu === undefined),
@@ -170,13 +173,11 @@ export default defineComponent<AutocompleteSearchProps>({
         };
 
         const focusSearch = () => {
-            if (state.searchRef) {
-                state.searchRef.focus();
-            }
+            state.proxyIsFocused = true;
         };
 
         const blurSearch = () => {
-            if (state.searchRef) state.searchRef.blur();
+            state.proxyIsFocused = false;
         };
 
         const hideMenu = () => {
@@ -249,17 +250,34 @@ export default defineComponent<AutocompleteSearchProps>({
             emit('search', val);
         };
 
-        const onSearch = (val?: string) => {
-            emitSearch(val);
-            hideMenu();
+        const emitSelectMenu = (item: MenuItem) => {
+            emit('select-menu', item);
         };
 
         const onClickMenuItem = (name, idx) => {
-            const result = state.filteredMenu[idx]?.label ?? name;
-            state.proxyValue = result;
-            if (listeners['select-menu']) emit('select-menu', name, idx);
-            else emitSearch(name);
+            state.proxyValue = state.bindingMenu[idx]?.label ?? name;
+            emitSelectMenu(state.bindingMenu[idx]);
             hideMenu();
+        };
+
+        const onSearch = (val?: string) => {
+            const trimmed = val?.trim() ?? '';
+            const menuItem = state.filteredMenu.find(d => trimmed.toLowerCase() === d.label?.toLowerCase());
+            if (menuItem) {
+                emitSelectMenu(menuItem);
+                state.proxyValue = menuItem.label;
+            }
+
+            if (!menuItem && props.exactMode) {
+                state.proxyValue = '';
+                emitSearch('');
+            } else {
+                emitSearch(trimmed);
+            }
+
+            vm.$nextTick(() => {
+                allFocusOut();
+            });
         };
 
         const onDelete = () => {

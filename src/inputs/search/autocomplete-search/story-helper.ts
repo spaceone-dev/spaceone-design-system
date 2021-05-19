@@ -18,7 +18,7 @@ const extraArgTypes = {
             },
         },
         control: {
-            type: 'boolean',
+            type: null,
         },
     },
     handler: {
@@ -36,7 +36,7 @@ const extraArgTypes = {
             },
         },
         control: {
-            type: 'object',
+            type: null,
         },
     },
     disableHandler: {
@@ -51,6 +51,24 @@ const extraArgTypes = {
             category: 'props',
             defaultValue: {
                 summary: 'false',
+            },
+        },
+        control: {
+            type: 'boolean',
+        },
+    },
+    exactMode: {
+        name: 'exactMode',
+        type: { name: 'boolean' },
+        description: 'If it is `true` and there is no exact match for the menu item, the search text will be blank.',
+        defaultValue: true,
+        table: {
+            type: {
+                summary: 'boolean',
+            },
+            category: 'props',
+            defaultValue: {
+                summary: 'true',
             },
         },
         control: {
@@ -123,6 +141,9 @@ const initSearchArgTypes = (): ArgTypes => {
             argTypes[`search-${k}`] = { ...item, name: `search-${k}` };
         } else {
             argTypes[k] = item;
+        }
+        if (['isFocused', 'value'].includes(k)) {
+            item.control = { type: null };
         }
     });
     return argTypes;

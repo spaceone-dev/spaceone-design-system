@@ -6,5 +6,3 @@ interface HandlerRes {
     totalCount?: number;
 }
 export type AutocompleteHandler = (inputText: string, list: MenuItem[]) => Promise<HandlerRes>|HandlerRes
-
-

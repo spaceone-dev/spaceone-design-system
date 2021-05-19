@@ -19,14 +19,13 @@ export const Template = (args, { argTypes }) => ({
     components: { PAutocompleteSearch },
     template: `
         <p-autocomplete-search
-            v-model="_value"
+            :menu="menu"
             :placeholder="placeholder"
             :focused="focused"
             :disabeld="disabled"
             :disable-icon="disableIcon"
-            :is-focused="isFocused"
-            :visible-menu="visibleMenu"
-            :handler="handler"
+            :disable-handler="disableHandler"
+            :exact-mode="exactMode"
             @search="onSearch"
             @focus="onFocus"
             @blur="onBlur"
@@ -39,14 +38,6 @@ export const Template = (args, { argTypes }) => ({
         >
         </p-autocomplete-search>
     `,
-    setup(props) {
-        const state = reactive({
-            _value: props.value,
-        })
-        return {
-            ...toRefs(state)
-        }
-    }
 });
 
 
@@ -171,7 +162,7 @@ export const Template = (args, { argTypes }) => ({
 ## Playground
 
 <Canvas>
-    <Story name="playground">
+    <Story name="playground" args={{menu: getAutocompleteMenu()}}>
         {Template.bind({})}
     </Story>
 </Canvas>
