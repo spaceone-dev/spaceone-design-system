@@ -66,10 +66,10 @@ import PSelectButtonGroup from '@/inputs/buttons/select-button-group/PSelectButt
                 options: ['one', 'two', 'three', 'four'],
             },
         },
-        buttonType: {
-            name: 'buttonType',
+        theme: {
+            name: 'theme',
             type: {name: 'string'},
-            description: 'Style type of buttons.',
+            description: 'Style theme of buttons.',
             defaultValue: 'default',
             table: {
                 type: {
@@ -96,7 +96,7 @@ export const Template = (args, { argTypes }) => ({
     <p-select-button-group
         :buttons="buttons"
         :selected.sync="selected"
-        :button-type="buttonType"
+        :theme="theme"
         @clickButton="clickButton"
         @click-one="clickOne"
         @click-two="clickTwo"

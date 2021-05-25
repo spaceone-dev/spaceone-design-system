@@ -4,10 +4,10 @@
             <button v-for="(button, idx) in formattedButtons"
                     :key="`${button.name}-${idx}`"
                     class="select-button"
-                    :class="[{ active:selected === button.name }, buttonType]"
+                    :class="[{ active:selected === button.name }, theme]"
                     @click="onClickButton(button.name, idx)"
             >
-                <p-i v-if="selected === button.name && buttonType === 'text'"
+                <p-i v-if="selected === button.name && theme === 'text'"
                      name="ic_check"
                      width="1rem" height="1rem"
                      :color="secondary"
@@ -25,6 +25,7 @@ import {
 
 import PI from '@/foundation/icons/PI.vue';
 import { SelectButtonGroupProps, SelectButtonType } from '@/inputs/buttons/select-button-group/type';
+import { SELECT_BUTTON_GROUP_THEME } from '@/inputs/buttons/select-button-group/config';
 import { secondary } from '@/styles/colors';
 
 export default {
@@ -41,9 +42,12 @@ export default {
             type: String,
             default: '',
         },
-        buttonType: {
+        theme: {
             type: String,
-            default: 'default',
+            default: SELECT_BUTTON_GROUP_THEME.default,
+            validator(theme) {
+                return Object.keys(SELECT_BUTTON_GROUP_THEME).includes(theme);
+            },
         },
     },
     setup(props: SelectButtonGroupProps, context) {
