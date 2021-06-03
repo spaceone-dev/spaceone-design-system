@@ -180,6 +180,7 @@ export default {
             font-size: 1rem;
             cursor: pointer;
             white-space: nowrap;
+            filter: drop-shadow(0 2px 4px rgba(theme('colors.black'), 0.06));
             &.tail {
                 &::after {
                     position: absolute;
