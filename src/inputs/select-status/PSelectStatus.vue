@@ -1,10 +1,10 @@
 <template>
-    <p-status class="p-select-status" :class="{selected: isSelected, 'with-icon': icon}"
+    <p-status class="p-select-status" :class="{selected: isSelected, 'with-icon': withIcon}"
               :icon="icon || (isSelected ? 'ic_check' : undefined)"
               :icon-color="icon ? undefined : 'inherit'"
               :icon-animation="iconAnimation"
               :lottie="lottie"
-              :disable-icon="!icon && !lottie && !isSelected"
+              :disable-icon="!withIcon && !isSelected"
               @click="onClick"
     >
         {{ value }}
@@ -12,12 +12,18 @@
 </template>
 
 <script lang="ts">
-import { useSelect } from '@/hooks/select';
-import { toRefs } from '@vue/composition-api';
+import { SelectProps, useSelect } from '@/hooks/select';
+import { computed, defineComponent, toRefs } from '@vue/composition-api';
 import PStatus from '@/data-display/status/PStatus.vue';
 import { ANIMATION_TYPE } from '@/foundation/icons/config';
 
-export default {
+interface Props extends SelectProps {
+    icon?: string;
+    lottie?: string;
+    iconAnimation?: ANIMATION_TYPE;
+}
+
+export default defineComponent({
     name: 'PSelectStatus',
     components: { PStatus },
     model: {
@@ -59,14 +65,16 @@ export default {
             },
         },
     },
-    setup(props, context) {
+    setup(props: Props, context) {
         const { state, onClick } = useSelect(props, context);
+        const withIcon = computed(() => props.icon || props.lottie);
         return {
             ...toRefs(state),
             onClick,
+            withIcon,
         };
     },
-};
+});
 </script>
 
 <style lang="postcss">
