@@ -5,6 +5,7 @@ import {makeOptionalProxy} from '@/util/composition-helpers';
 
 import PBoxTab from './PBoxTab.vue';
 import { argTypes, Inner } from '@/navigation/tabs/box-tab/story-helper';
+import { BOX_TAB_STYLE_TYPE } from '@/navigation/tabs/box-tab/config';
 
 
 <Meta title='Navigation/Tabs/Box Tab' parameters={{
@@ -24,6 +25,7 @@ export const Template = (args, { argTypes }) => ({
             :tabs="tabs"
             v-model="proxyActiveTab"
             :keep-alive-all="keepAliveAll"
+            :style-type="styleType"
             @update:activeTab="onUpdateActiveTab"
             @change="onChange"
         >
@@ -71,6 +73,44 @@ export const Template = (args, { argTypes }) => ({
         }
     }
 }}
+    </Story>
+</Canvas>
+
+<br/>
+<br/>
+
+
+## Style Types
+
+<Canvas>
+    <Story name="Style Types">
+        {{
+            components: { PBoxTab },
+            template: `
+    <div>
+        <div class="flex w-full mb-8" v-for="styleType in styleTypes" :key="styleType">
+            <p-box-tab :tabs="tabs"
+                v-model="activeTab"
+                :style-type="styleType"
+            >{{styleType}}</p-box-tab>
+        </div>
+    </div>
+    `,
+            setup(props) {
+                const state = reactive({
+                    tabs: [
+                        { name: 'detail', label: 'Detail' },
+                        { name: 'info', label: 'Info' },
+                        { name: 'tags', label: 'Tags' },
+                    ],
+                    activeTab: 'detail',
+                    styleTypes: Object.values(BOX_TAB_STYLE_TYPE)
+                })
+                return {
+                    ...toRefs(state)
+                }
+            }
+        }}
     </Story>
 </Canvas>
 

@@ -1,6 +1,6 @@
 <template>
-    <div class="p-box-tab">
-        <div class="box-group">
+    <div class="p-box-tab" :class="styleType">
+        <div class="box-group" >
             <button v-for="(tab, idx) in tabItems"
                     :key="tab.name"
                     :class="{ active: activeTab && activeTab === tab.name}"
@@ -24,6 +24,7 @@
 import { TabProps, useTab } from '@/hooks/tab';
 import { defineComponent, toRefs } from '@vue/composition-api';
 import PI from '@/foundation/icons/PI.vue';
+import { BOX_TAB_STYLE_TYPE } from '@/navigation/tabs/box-tab/config';
 
 type Props = TabProps
 
@@ -47,6 +48,14 @@ export default defineComponent({
         keepAliveAll: {
             type: Boolean,
             default: false,
+        },
+        /* box tab props */
+        styleType: {
+            type: String,
+            default: BOX_TAB_STYLE_TYPE.white,
+            validator(styleType: any) {
+                return Object.values(BOX_TAB_STYLE_TYPE).includes(styleType);
+            },
         },
     },
     setup(props: Props, context) {
@@ -72,7 +81,7 @@ export default defineComponent({
         width: calc(100% + $button-margin + $button-margin);
         margin: -$button-margin;
         button {
-            @apply bg-gray-100 text-gray-500 border border-gray-200 rounded-sm;
+            @apply text-gray-500 border rounded-sm;
             line-height: 1.6;
             font-size: 0.875rem;
             font-weight: bold;
@@ -91,9 +100,6 @@ export default defineComponent({
                 }
             }
 
-            &.active {
-                @apply bg-primary1 border-primary1 text-white;
-            }
         }
     }
     .tab-pane {
@@ -101,5 +107,21 @@ export default defineComponent({
         flex-grow: 1;
         flex-shrink: 0;
     }
+
+    /* style type */
+    @define-mixin button-style $bg-color, $border-color {
+        .box-group {
+            button {
+                background-color: $bg-color;
+                border-color: $border-color;
+                &.active {
+                    @apply bg-primary1 border-primary1 text-white;
+                }
+            }
+        }
+    }
+
+    &.white { @mixin button-style theme('colors.white'), theme('colors.gray.200'); }
+    &.gray { @mixin button-style theme('colors.gray.100'), theme('colors.gray.100'); }
 }
 </style>
