@@ -3,49 +3,69 @@
           @click="onClick"
           v-on="$listeners"
     >
-        <span v-if="$scopedSlots.default">
-            <slot name="default" />
+        <span>
+            <slot :is-collapsed="proxyIsCollapsed">
+                {{ proxyIsCollapsed ? $t('COMPONENT.COLLAPSIBLE_TOGGLE.SHOW_MORE') : $t('COMPONENT.COLLAPSIBLE_TOGGLE.HIDE') }}
+            </slot>
         </span>
-        <p-i class="p-collapsible-icon"
-             width="0.875rem" height="0.875rem"
-             :name="isCollapsed?'ic_arrow_bottom':'ic_arrow_top'"
-             color="inherit transparent"
+        <p-i width="0.875rem" height="0.875rem"
+             :name="proxyIsCollapsed ? 'ic_arrow_bottom' : 'ic_arrow_top'"
+             color="inherit"
         />
     </span>
 </template>
 
 <script lang="ts">
+import {
+    ComponentRenderProxy, defineComponent, getCurrentInstance, reactive, toRefs,
+} from '@vue/composition-api';
+import { makeOptionalProxy } from '@/util/composition-helpers';
+
 import PI from '@/foundation/icons/PI.vue';
 
-export default {
+interface Props {
+    isCollapsed?: boolean;
+}
+export default defineComponent({
     name: 'PCollapsibleToggle',
     components: { PI },
+    model: {
+        prop: 'isCollapsed',
+        event: 'update:isCollapsed',
+    },
     props: {
         isCollapsed: {
             type: Boolean,
             default: true,
         },
     },
-    setup(props, { emit }) {
+    setup(props: Props) {
+        const vm = getCurrentInstance() as ComponentRenderProxy;
+        const state = reactive({
+            proxyIsCollapsed: makeOptionalProxy('isCollapsed', vm, props.isCollapsed),
+        });
+        const onClick = () => {
+            state.proxyIsCollapsed = !state.proxyIsCollapsed;
+        };
         return {
-            onClick() {
-                emit('update:isCollapsed', !props.isCollapsed);
-            },
+            ...toRefs(state),
+            onClick,
         };
     },
-};
+});
 </script>
 
 <style lang="postcss">
-
 .p-collapsible-toggle {
     @apply flex text-blue-600 cursor-pointer;
     font-size: 0.75rem;
     font-weight: 400;
     align-items: center;
 
-    &:hover {
-        text-decoration: underline;
+    @media (hover: hover) {
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 </style>
