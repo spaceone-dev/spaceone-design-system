@@ -1,6 +1,6 @@
 <template>
     <span class="p-collapsible-toggle"
-          @click="onClick"
+          @click="onClickToggle"
           v-on="$listeners"
     >
         <span>
@@ -17,16 +17,15 @@
 
 <script lang="ts">
 import {
-    ComponentRenderProxy, defineComponent, getCurrentInstance, reactive, toRefs,
+    defineComponent, toRefs,
 } from '@vue/composition-api';
-import { makeOptionalProxy } from '@/util/composition-helpers';
 
 import PI from '@/foundation/icons/PI.vue';
+import { CollapsibleProps, useCollapsible } from '@/hooks/collapsible';
 
-interface Props {
-    isCollapsed?: boolean;
-}
-export default defineComponent({
+type Props = CollapsibleProps;
+
+export default defineComponent<Props>({
     name: 'PCollapsibleToggle',
     components: { PI },
     model: {
@@ -34,22 +33,17 @@ export default defineComponent({
         event: 'update:isCollapsed',
     },
     props: {
+        /* collapsible props */
         isCollapsed: {
             type: Boolean,
             default: true,
         },
     },
-    setup(props: Props) {
-        const vm = getCurrentInstance() as ComponentRenderProxy;
-        const state = reactive({
-            proxyIsCollapsed: makeOptionalProxy('isCollapsed', vm, props.isCollapsed),
-        });
-        const onClick = () => {
-            state.proxyIsCollapsed = !state.proxyIsCollapsed;
-        };
+    setup(props: Props, context) {
+        const { state, onClickToggle } = useCollapsible(props, context);
         return {
             ...toRefs(state),
-            onClick,
+            onClickToggle,
         };
     },
 });
@@ -57,7 +51,7 @@ export default defineComponent({
 
 <style lang="postcss">
 .p-collapsible-toggle {
-    @apply flex text-blue-600 cursor-pointer;
+    @apply inline-flex text-blue-600 cursor-pointer;
     font-size: 0.75rem;
     font-weight: 400;
     align-items: center;
