@@ -4,7 +4,7 @@ import PToolboxTable from '@/data-display/tables/toolbox-table/PToolboxTable.vue
 import { computed } from '@vue/composition-api';
 
 export default {
-    title: 'Data Display/Tables/Data Table/Toolbox Table',
+    title: 'Data Display/Tables/Toolbox Table',
     component: PToolboxTable,
     parameters: {
         design: {
