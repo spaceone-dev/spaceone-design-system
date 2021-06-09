@@ -36,7 +36,7 @@
 import { every, range, get } from 'lodash';
 
 import {
-    computed, reactive, toRefs, watch,
+    computed, defineComponent, reactive, toRefs, watch,
 } from '@vue/composition-api';
 
 import {
@@ -52,7 +52,7 @@ const makeDefItems = (fields: DefinitionField[], data?: DefinitionData): Definit
     data: get(data, item.name, ''),
 }));
 
-export default {
+export default defineComponent<DefinitionTableProps>({
     name: 'PDefinitionTable',
     components: {
         PLottie, PEmpty, PDefinition,
@@ -95,7 +95,7 @@ export default {
             },
         };
     },
-};
+});
 </script>
 
 <style lang="postcss">

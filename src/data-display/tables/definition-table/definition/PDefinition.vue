@@ -20,14 +20,14 @@
 
 <script lang="ts">
 import {
-    computed, reactive, toRefs,
+    computed, defineComponent, reactive, toRefs,
 } from '@vue/composition-api';
-import { DefinitionProps } from '@/data-display/tables/definition-table/definition/type';
 import { copyAnyData, copyTextToClipboard, isNotEmpty } from '@/util/helpers';
 import PCopyButton from '@/inputs/buttons/copy-button/PCopyButton.vue';
 import { mouseOverState } from '@/hooks/mouse-over-state';
+import { DefinitionProps } from '@/data-display/tables/definition-table/definition/type';
 
-export default {
+export default defineComponent<DefinitionProps>({
     name: 'PDefinition',
     components: { PCopyButton },
     props: {
@@ -77,7 +77,7 @@ export default {
             copy,
         };
     },
-};
+});
 </script>
 
 <style lang="postcss">
