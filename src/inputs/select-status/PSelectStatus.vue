@@ -7,7 +7,7 @@
               :disable-icon="!withIcon && (!isSelected || disableCheckIcon)"
               @click="onClick"
     >
-        {{ value }}
+        <slot>{{ value }}</slot>
     </p-status>
 </template>
 
