@@ -11,7 +11,7 @@ export const getTextPaginationArgTypes = (): ArgTypes => ({
             },
             category: 'props',
             defaultValue: {
-                summary: 1,
+                summary: 'undefined',
             },
         },
         control: {
@@ -28,7 +28,7 @@ export const getTextPaginationArgTypes = (): ArgTypes => ({
             },
             category: 'props',
             defaultValue: {
-                summary: 1,
+                summary: 'undefined',
             },
         },
         control: {

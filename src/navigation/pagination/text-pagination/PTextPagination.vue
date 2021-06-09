@@ -33,14 +33,14 @@ export default {
             validator(value) {
                 return value > 0;
             },
-            default: 1,
+            default: undefined,
         },
         allPage: {
             type: Number,
             validator(value) {
                 return value > 0;
             },
-            default: 1,
+            default: undefined,
         },
         showPageNumber: {
             type: Boolean,
