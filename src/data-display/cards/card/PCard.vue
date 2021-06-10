@@ -26,7 +26,7 @@ export default defineComponent<CardProps>({
         },
         styleType: {
             type: String,
-            default: CARD_STYLE_TYPE.gray,
+            default: CARD_STYLE_TYPE.gray100,
             validator(styleType: any) {
                 return Object.values(CARD_STYLE_TYPE).includes(styleType);
             },
@@ -40,25 +40,53 @@ export default defineComponent<CardProps>({
 
 <style lang="postcss">
 .p-card {
-    @apply border border-gray-200 rounded-lg;
+    @apply border rounded-lg;
     header {
-        @apply text-gray-500 rounded-t-lg border-b border-gray-200;
+        @apply rounded-t-lg border-b;
         padding: 0.5rem 1rem;
-        font-size: 0.75rem;
-        line-height: 1.5;
-        min-height: 2rem;
     }
     .body {
         padding: 0.75rem 0.875rem;
     }
 
-    @define-mixin style-type $bg-color {
+    @define-mixin style-type $bg-color, $color, $border-color {
+        border-color: $border-color;
         header {
+            min-height: 2rem;
+            font-size: 0.75rem;
+            line-height: 1.5;
             background-color: $bg-color;
+            color: $color;
+            border-color: $border-color;
         }
     }
 
-    &.gray { @mixin style-type theme('colors.gray.100'); }
-    &.yellow { @mixin style-type theme('colors.yellow.100'); }
+    @define-mixin style-type2 $bg-color, $color, $border-color {
+        border-color: $border-color;
+        header {
+            min-height: 2.5rem;
+            font-size: 1rem;
+            line-height: 1.35;
+            font-weight: bold;
+            background-color: $bg-color;
+            color: $color;
+            border-color: $border-color;
+        }
+    }
+    &.gray100 {
+        @mixin style-type theme('colors.gray.100'), theme('colors.gray.500'), theme('colors.gray.200');
+    }
+    &.yellow100 {
+        @mixin style-type theme('colors.yellow.100'), theme('colors.gray.500'), theme('colors.gray.200');
+    }
+    &.yellow500 {
+        @mixin style-type2 theme('colors.yellow.500'), theme('colors.white'), theme('colors.yellow.500');
+    }
+    &.indigo400 {
+        @mixin style-type2 theme('colors.indigo.400'), theme('colors.white'), theme('colors.indigo.400');
+    }
+    &.red400 {
+        @mixin style-type2 theme('colors.red.400'), theme('colors.white'), theme('colors.red.400');
+    }
 }
 </style>
