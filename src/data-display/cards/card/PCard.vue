@@ -49,44 +49,43 @@ export default defineComponent<CardProps>({
         padding: 0.75rem 0.875rem;
     }
 
-    @define-mixin style-type $bg-color, $color, $border-color {
+    @define-mixin style-type $bg-color, $border-color {
         border-color: $border-color;
         header {
-            min-height: 2rem;
+            @apply text-gray-500;
+            min-height: 1.875rem;
             font-size: 0.75rem;
-            line-height: 1.5;
+            line-height: 1.2;
             background-color: $bg-color;
-            color: $color;
             border-color: $border-color;
         }
     }
 
-    @define-mixin style-type2 $bg-color, $color, $border-color {
+    @define-mixin style-type2 $bg-color, $border-color {
         border-color: $border-color;
         header {
-            min-height: 2.5rem;
+            @apply font-bold text-white;
+            min-height: 2.25rem;
             font-size: 1rem;
-            line-height: 1.35;
-            font-weight: bold;
+            line-height: 1.2;
             background-color: $bg-color;
-            color: $color;
             border-color: $border-color;
         }
     }
     &.gray100 {
-        @mixin style-type theme('colors.gray.100'), theme('colors.gray.500'), theme('colors.gray.200');
+        @mixin style-type theme('colors.gray.100'), theme('colors.gray.200');
     }
     &.yellow100 {
-        @mixin style-type theme('colors.yellow.100'), theme('colors.gray.500'), theme('colors.gray.200');
+        @mixin style-type theme('colors.yellow.100'), theme('colors.gray.200');
     }
     &.yellow500 {
-        @mixin style-type2 theme('colors.yellow.500'), theme('colors.white'), theme('colors.yellow.500');
+        @mixin style-type2 theme('colors.yellow.500'), theme('colors.yellow.500');
     }
     &.indigo400 {
-        @mixin style-type2 theme('colors.indigo.400'), theme('colors.white'), theme('colors.indigo.400');
+        @mixin style-type2 theme('colors.indigo.400'), theme('colors.indigo.400');
     }
     &.red400 {
-        @mixin style-type2 theme('colors.red.400'), theme('colors.white'), theme('colors.red.400');
+        @mixin style-type2 theme('colors.red.400'), theme('colors.red.400');
     }
 }
 </style>
