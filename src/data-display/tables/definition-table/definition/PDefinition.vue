@@ -115,5 +115,14 @@ export default defineComponent<DefinitionProps>({
         line-height: 1.45;
         cursor: unset;
     }
+
+    @screen mobile {
+        flex-wrap: no-wrap;
+        flex-direction: column;
+        .key, .value-wrapper {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
 }
 </style>

@@ -1,24 +1,33 @@
 <template>
-    <div class="p-definition-table">
-        <slot v-if="!loading && isNoData" name="empty">
-            <p-empty class="no-data">
-                <span>{{ $t('COMPONENT.DEFINITION_TABLE.NO_DATA') }}</span>
-            </p-empty>
-        </slot>
+    <div class="p-definition-table" :class="styleType">
+        <p-empty v-if="!loading && isNoData" class="no-data">
+            <slot name="no-data">
+                {{ $t('COMPONENT.DEFINITION_TABLE.NO_DATA') }}
+            </slot>
+        </p-empty>
         <table v-else-if="!isNoData">
             <tbody>
-                <p-definition v-for="(bind, idx) in items" :key="`${contextKey}-${idx}`"
-                              class="def-row" v-bind="bind" @copy="onCopy(bind, idx)"
+                <p-definition v-for="(item, idx) in items" :key="`${contextKey}-${idx}`"
+                              class="def-row"
+                              :label="item.label"
+                              :name="item.name"
+                              :data="item.data"
                               :disable-copy="disableCopy"
+                              @copy="onCopy(item, idx)"
                 >
                     <template #default="scope">
-                        <slot :name="`data-${bind.name}`" v-bind="{...scope, index: idx, items}" />
-                        <slot :name="`data-${idx}`" v-bind="{...scope, index: idx, items}" />
-                    </template>
-                    <template #copy="scope">
-                        <slot name="copy" v-bind="{...scope, index: idx, items}">
-                            <slot :name="`copy-${bind.name}`" v-bind="{...scope, index: idx, items}" />
-                            <slot :name="`copy-${idx}`" v-bind="{...scope, index: idx, items}" />
+                        <slot name="data" v-bind="{
+                            ...scope, index: idx, items}"
+                        >
+                            <slot :name="`data-${item.name}`"
+                                  v-bind="{...scope, index: idx, items}"
+                            >
+                                <slot :name="`data-${idx}`"
+                                      v-bind="{...scope, index: idx, items}"
+                                >
+                                    {{ scope.value }}
+                                </slot>
+                            </slot>
                         </slot>
                     </template>
                     <template v-if="$scopedSlots.key" #key="scope">
@@ -27,12 +36,15 @@
                 </p-definition>
             </tbody>
         </table>
-        <slot v-if="loading" name="loading">
-            <div class="loading-backdrop fade-in" />
-            <p-lottie name="thin-spinner" :size="2.5"
-                      :auto="true" class="loading"
-            />
-        </slot>
+
+        <div v-if="loading" class="loading-backdrop fade-in" />
+        <div v-if="loading" class="loading">
+            <slot name="loading">
+                <p-lottie name="thin-spinner" :size="2.5"
+                          auto
+                />
+            </slot>
+        </div>
     </div>
 </template>
 
@@ -50,11 +62,13 @@ import PDefinition from '@/data-display/tables/definition-table/definition/PDefi
 import PLottie from '@/foundation/lottie/PLottie.vue';
 import PEmpty from '@/data-display/empty/PEmpty.vue';
 import { DefinitionProps } from '@/data-display/tables/definition-table/definition/type';
+import { DEFINITION_TABLE_STYLE_TYPE } from '@/data-display/tables/definition-table/config';
 
-const makeDefItems = (fields: DefinitionField[], data?: DefinitionData): DefinitionProps[] => fields.map(item => ({
-    ...item,
-    data: get(data, item.name, ''),
+const makeDefItems = (fields: DefinitionField[], data?: DefinitionData): DefinitionProps[] => fields.map(field => ({
+    ...field,
+    data: get(data, field.name, ''),
 }));
+
 
 export default defineComponent<DefinitionTableProps>({
     name: 'PDefinitionTable',
@@ -90,11 +104,11 @@ export default defineComponent<DefinitionTableProps>({
             },
         },
     },
-    setup(props: DefinitionTableProps, { emit }) {
+    setup(props: DefinitionTableProps, { emit, slots }) {
         const state = reactive({
             contextKey: Math.floor(Math.random() * Date.now()),
             isNoData: computed(() => every(state.items, def => !def.data)),
-            skeletons: computed(() => range(props.skeletonRows)),
+            skeletons: computed(() => range(props.skeletonRows ?? 5)),
             items: computed(() => makeDefItems(props.fields, props.data)),
         });
 
@@ -106,7 +120,6 @@ export default defineComponent<DefinitionTableProps>({
             ...toRefs(state),
             onCopy(bind, idx) {
                 emit('copy', bind, idx);
-                emit(`copy:${bind.name}`, bind, idx);
             },
         };
     },
@@ -125,7 +138,6 @@ export default defineComponent<DefinitionTableProps>({
         @apply w-full;
         table-layout: fixed;
         td {
-            @apply border-white;
             line-height: 1.8;
             word-break: break-word;
         }
@@ -200,6 +212,16 @@ export default defineComponent<DefinitionTableProps>({
     }
     .fade-in-leave, .fade-in-enter-to {
         opacity: 0.5;
+    }
+
+    /* responsive */
+
+    @screen mobile {
+        .def-row {
+            td:first-child {
+                @apply border-r-0;
+            }
+        }
     }
 }
 </style>
