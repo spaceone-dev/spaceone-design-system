@@ -9,6 +9,7 @@
             <tbody>
                 <p-definition v-for="(bind, idx) in items" :key="`${contextKey}-${idx}`"
                               class="def-row" v-bind="bind" @copy="onCopy(bind, idx)"
+                              :disable-copy="disableCopy"
                 >
                     <template #default="scope">
                         <slot :name="`data-${bind.name}`" v-bind="{...scope, index: idx, items}" />
@@ -19,6 +20,9 @@
                             <slot :name="`copy-${bind.name}`" v-bind="{...scope, index: idx, items}" />
                             <slot :name="`copy-${idx}`" v-bind="{...scope, index: idx, items}" />
                         </slot>
+                    </template>
+                    <template v-if="$scopedSlots.key" #key="scope">
+                        <slot name="key" v-bind="{...scope, index: idx, items}" />
                     </template>
                 </p-definition>
             </tbody>
@@ -74,6 +78,17 @@ export default defineComponent<DefinitionTableProps>({
             type: Number,
             default: 5,
         },
+        disableCopy: {
+            type: Boolean,
+            default: false,
+        },
+        styleType: {
+            type: String,
+            default: DEFINITION_TABLE_STYLE_TYPE.primary,
+            validator(styleType: any) {
+                return Object.values(DEFINITION_TABLE_STYLE_TYPE).includes(styleType);
+            },
+        },
     },
     setup(props: DefinitionTableProps, { emit }) {
         const state = reactive({
@@ -101,6 +116,7 @@ export default defineComponent<DefinitionTableProps>({
 <style lang="postcss">
 .p-definition-table {
     @apply relative;
+    z-index: 0;
     min-height: 11.25rem;
     .no-data {
         min-height: 11.25rem;
@@ -114,19 +130,14 @@ export default defineComponent<DefinitionTableProps>({
             word-break: break-word;
         }
     }
-    .def-row:nth-child(2n+1) {
-        td {
-            &:first-child {
-                @apply border-r-2 border-white;
-            }
-
-            @apply bg-violet-100;
+    .def-row {
+        td:first-child {
+            @apply border-r-2;
         }
     }
     .loading-backdrop {
         @apply absolute w-full h-full overflow-hidden;
-        background-color: white;
-        opacity: 0.5;
+        background-color: rgba(theme('colors.white'), 0.5);
         top: 0;
         z-index: 1;
     }
@@ -134,6 +145,46 @@ export default defineComponent<DefinitionTableProps>({
         @apply absolute flex w-full h-full justify-center items-center;
         top: 0;
         max-height: 10rem;
+        z-index: 2;
+    }
+
+    /* style types */
+    @define-mixin style-type $table-border-color, $stripe-bg-color, $row-border-color, $key-border-color {
+        table {
+            td {
+                border-color: $table-border-color;
+            }
+            tr {
+                border-color: $row-border-color;
+            }
+        }
+        .def-row {
+            &:nth-child(2n+1) {
+                background-color: $stripe-bg-color;
+            }
+            td:first-child {
+                border-color: $key-border-color;
+            }
+        }
+    }
+
+    &.primary {
+        @mixin style-type theme('colors.white'), theme('colors.violet.100'), transparent, theme('colors.white');
+    }
+    &.white {
+        @mixin style-type theme('colors.white'), theme('colors.white'), theme('colors.gray.300'), theme('colors.white');
+        @apply rounded-lg border border-gray-200;
+        table {
+            tr {
+                @apply border-b;
+                &:first-of-type {
+                    @apply rounded-t-lg;
+                }
+                &:last-of-type {
+                    @apply rounded-b-lg border-b-0;
+                }
+            }
+        }
     }
 
     /* transitions */
