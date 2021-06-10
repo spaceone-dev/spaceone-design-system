@@ -33,6 +33,9 @@
                     <template v-if="$scopedSlots.key" #key="scope">
                         <slot name="key" v-bind="{...scope, index: idx, items}" />
                     </template>
+                    <template #extra="scope">
+                        <slot name="extra" v-bind="scope" />
+                    </template>
                 </p-definition>
             </tbody>
         </table>

@@ -2,6 +2,7 @@ import { Meta, Canvas, Story, ArgsTable } from '@storybook/addon-docs/blocks';
 import { reactive, toRefs } from '@vue/composition-api';
 
 import PDefinitionTable from '@/data-display/tables/definition-table/PDefinitionTable';
+import PButton from '@/inputs/buttons/button/PButton';
 import { DEFINITION_TABLE_STYLE_TYPE } from '@/data-display/tables/definition-table/config';
 import { getDefinitionTableArgTypes } from '@/data-display/tables/definition-table/story-helper';
 
@@ -133,6 +134,7 @@ export const Template = (args, { argTypes }) => ({
 | data-{field index} | Slot for definition field value that matched for the field index. It has the second highest priority among field value slots. |
 | data-{field.name} | Slot for definition field value. Use it only when all field names are distinct. Otherwise, it can cause unexpected error. It's useful when field names are duplicated. * Don't use 'data-{field.name}' slot together. It can cause multiple definition field. It has the lowest priority among field value slots. |
 | key | Slot for replacing field key text. |
+| extra | Slot for right space of field value. |
 | loading | Slot for replacing loader. |
 | no-data | Slot for no data case. |
 
@@ -162,7 +164,7 @@ export const Template = (args, { argTypes }) => ({
 <Canvas>
     <Story name="Slots">
 {{
-    components: { PDefinitionTable },
+    components: { PDefinitionTable, PButton },
     template: `
 <div>
     <p class="mb-4 text-lg font-bold">Slot: data</p>
@@ -199,6 +201,15 @@ export const Template = (args, { argTypes }) => ({
     >
         <template #key="{label}">
             <span class="text-secondary-dark">{{label}}</span>
+        </template>
+    </p-definition-table>
+    <p class="my-4 text-lg font-bold">Slot: extra</p>
+    <p-definition-table
+        :fields="fields"
+        :data="data"
+    >
+        <template #extra="{label}">
+            <div class="text-peacock mr-4 w-full text-right"><p-button style-type="secondary" size="sm">Edit</p-button></div>
         </template>
     </p-definition-table>
     <p class="my-4 text-lg font-bold">Slot: loading</p>
