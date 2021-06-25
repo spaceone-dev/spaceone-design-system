@@ -86,20 +86,20 @@ import {
     DragOptions,
     DataGetter,
     DataSetter,
-    GetClassNames,
+    GetClassNames, DataFetcher,
 } from '@/data-display/tree/type';
 import { getDefaultNode } from '@/data-display/tree/helper';
 
 interface HeTree extends OriginTree, Fold, Draggable {}
 
-interface Props{
+interface Props {
     toggleOptions: ToggleOptions;
     selectOptions: SelectOptions;
     editOptions: EditOptions;
     dragOptions: DragOptions;
     dataGetter: DataGetter;
     dataSetter: DataSetter;
-    dataFetcher?: (node: Partial<TreeNode>) => Promise<any[]>|any[];
+    dataFetcher?: DataFetcher;
     fetchOnInit?: boolean;
     getClassNames: GetClassNames;
 }
