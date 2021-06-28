@@ -66,7 +66,7 @@
 <script lang="ts">
 /* eslint-disable no-await-in-loop */
 import {
-    Tree as TreeComp, Fold, Draggable, Store, Tree as OriginTree,
+    Tree as TreeComp, Fold, Draggable, Store, Tree as OriginTree, walkTreeData,
 } from 'he-tree-vue';
 import {
     computed, defineComponent, onMounted, reactive, toRefs, watch,
@@ -468,31 +468,22 @@ export default defineComponent<Props>({
             setSelectItems(foundItems);
             return foundItems;
         };
-        const getAllNodes = (node?: TreeNode|null, nodes: TreeNode[] = []): TreeNode[] => {
-            const children: any[] = node?.children || state.treeData;
-            children.forEach((d) => {
-                nodes.push(d);
-                if (d.children && d.children.length) getAllNodes(d, nodes);
+        const getAllNodes = (_node?: TreeNode|null): TreeNode[] => {
+            if (!state.treeRef) return [];
+
+            const items: TreeNode[] = [];
+            walkTreeData(_node?.children || state.treeData, (node) => {
+                items.push(node as TreeNode);
             });
-            return nodes;
+            return items;
         };
 
-        const getAllItems = (node?: TreeNode|null, _path: number[] = []): TreeItem[] => {
-            const children: TreeNode[] = node?.children || state.treeData;
-            let items: TreeItem[] = [];
+        const getAllItems = (_node?: TreeNode|null): TreeItem[] => {
+            if (!state.treeRef) return [];
 
-            children.forEach((d, i) => {
-                const path = [..._path];
-                path.push(i);
-
-                const data: TreeItem = {
-                    path,
-                    node: d,
-                };
-                items.push(data);
-                if (d.children && d.children.length) {
-                    items = items.concat(getAllItems(d, path));
-                }
+            const items: TreeItem[] = [];
+            walkTreeData(_node?.children || state.treeData, (node, index, parent, path) => {
+                items.push({ node: node as TreeNode, path });
             });
             return items;
         };
@@ -573,6 +564,7 @@ export default defineComponent<Props>({
             getNodeByPath(path: number[]) {
                 return state.treeRef.getNodeByPath(path) || null;
             },
+            walkTreeData,
         };
 
         onMounted(() => {
