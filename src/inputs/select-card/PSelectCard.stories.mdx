@@ -169,8 +169,8 @@ export const Template = (args, { argTypes }) => ({
         <p-select-card v-for="value in values" :key="value"
             :value="value"
             v-model="selected"
-            :label="icons[value]"
-            :image-url="icons[value]"
+            :label="'label-' + value"
+            :icon="true"
             style="min-width: 10rem; max-width: 10rem; min-height: 10rem; max-height: 10rem; margin: 1rem;"
         />
     </div>
@@ -179,7 +179,6 @@ export const Template = (args, { argTypes }) => ({
                 const state = reactive({
                     selected: undefined,
                     values: range(8),
-                    icons: getAllAvailableIcons()
                 })
                 return {
                     ...toRefs(state),

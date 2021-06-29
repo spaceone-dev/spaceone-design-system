@@ -60,14 +60,15 @@ export const getSelectCardArgTypes = () => {
         },
         icon: {
             name: 'icon',
-            type: { name: 'string' },
+            type: { name: 'string, boolean' },
             description: `Card icon.
         It has a lower priority than \`imageUrl\` props.
-        So it is rendered only when there is no value in \`imageUrl\` props or when the image load fails.`,
+        So it is rendered only when there is no value in \`imageUrl\` props or when the image load fails.
+        If it is \`true\`, default icon will be rendered.`,
             defaultValue: 'ic_service_compute-engine',
             table: {
                 type: {
-                    summary: 'string',
+                    summary: 'string, boolean',
                 },
                 category: 'props',
                 defaultValue: {

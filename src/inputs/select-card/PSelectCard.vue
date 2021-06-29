@@ -8,8 +8,8 @@
         />
         <div class="contents">
             <slot v-bind="{isSelected}">
-                <p-lazy-img v-if="imageUrl || icon" :src="imageUrl" :error-icon="icon || 'smile-face'"
-                            :error-icon-color="icon ? iconColor : 'inherit'"
+                <p-lazy-img v-if="imageUrl || icon" :src="imageUrl" :error-icon="errorIcon"
+                            :error-icon-color="typeof icon === 'boolean' && icon ? 'inherit' : iconColor"
                             :width="block ? '1rem' : '3rem'" :height="block ? '1rem' : '3rem'"
                 />
                 <span v-if="label" class="label">{{ label }}</span>
@@ -21,7 +21,7 @@
 <script lang="ts">
 import {
     computed,
-    defineComponent, toRefs,
+    defineComponent, reactive, toRefs,
 } from '@vue/composition-api';
 
 import PI from '@/foundation/icons/PI.vue';
@@ -34,7 +34,7 @@ import {
 interface Props extends SelectProps {
     block?: boolean;
     imageUrl?: string;
-    icon?: string;
+    icon?: string|boolean;
     iconColor?: string;
     label?: string;
 }
@@ -81,7 +81,7 @@ export default defineComponent<Props>({
             default: undefined,
         },
         icon: {
-            type: String,
+            type: [String, Boolean],
             default: undefined,
         },
         iconColor: {
@@ -94,7 +94,15 @@ export default defineComponent<Props>({
         },
     },
     setup(props: Props, context) {
-        const { state, onClick } = useSelect(props, context);
+        const { state: selectState, onClick } = useSelect(props, context);
+
+        const state = reactive({
+            errorIcon: computed(() => {
+                if (typeof props.icon === 'string') return props.icon;
+                if (props.icon) return 'smile-face';
+                return '';
+            }),
+        });
 
         const iconName = computed(() => {
             if (props.multiSelectable) {
@@ -108,6 +116,7 @@ export default defineComponent<Props>({
         });
 
         return {
+            ...toRefs(selectState),
             ...toRefs(state),
             onClick,
             iconName,
