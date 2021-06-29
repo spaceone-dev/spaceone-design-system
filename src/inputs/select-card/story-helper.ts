@@ -1,7 +1,7 @@
 import { argTypes as selectArgTypes } from '@/hooks/select/story-helper';
 import { ArgTypes } from '@storybook/addons';
 
-const getArgTypes = () => {
+export const getSelectCardArgTypes = () => {
     const argTypes: ArgTypes = {
         ...selectArgTypes,
         block: {
@@ -78,6 +78,24 @@ const getArgTypes = () => {
                 type: 'text',
             },
         },
+        iconColor: {
+            name: 'iconColor',
+            type: { name: 'string' },
+            description: 'Card icon\'s color.',
+            defaultValue: '',
+            table: {
+                type: {
+                    summary: 'string',
+                },
+                category: 'props',
+                defaultValue: {
+                    summary: '""',
+                },
+            },
+            control: {
+                type: 'text',
+            },
+        },
         defaultSlot: {
             name: 'default',
             description: 'Slot for card contents.',
@@ -109,4 +127,3 @@ const getArgTypes = () => {
     };
     return argTypes;
 };
-export const argTypes = getArgTypes();

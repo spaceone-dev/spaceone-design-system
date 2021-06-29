@@ -9,6 +9,7 @@
         <div class="contents">
             <slot v-bind="{isSelected}">
                 <p-lazy-img v-if="imageUrl || icon" :src="imageUrl" :error-icon="icon || 'smile-face'"
+                            :error-icon-color="icon ? iconColor : 'inherit'"
                             :width="block ? '1rem' : '3rem'" :height="block ? '1rem' : '3rem'"
                 />
                 <span v-if="label" class="label">{{ label }}</span>
@@ -31,8 +32,11 @@ import {
 
 
 interface Props extends SelectProps {
-    multiSelectable: boolean;
-    block: boolean;
+    block?: boolean;
+    imageUrl?: string;
+    icon?: string;
+    iconColor?: string;
+    label?: string;
 }
 
 export default defineComponent<Props>({
@@ -79,6 +83,10 @@ export default defineComponent<Props>({
         icon: {
             type: String,
             default: undefined,
+        },
+        iconColor: {
+            type: String,
+            default: '',
         },
         label: {
             type: String,
@@ -151,14 +159,10 @@ export default defineComponent<Props>({
         height: 100%;
 
         .p-lazy-img {
+            @apply text-gray-200;
             margin-right: 0;
             margin-bottom: 1rem;
             flex-shrink: 0;
-            .error {
-                path {
-                    fill: theme('colors.gray.300');
-                }
-            }
         }
 
         .label {
