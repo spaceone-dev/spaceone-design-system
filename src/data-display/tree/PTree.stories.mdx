@@ -502,7 +502,8 @@ You can use tree methods by tree instance that passed by `init` event. <br/>
 |toggleNode| It toggles a node that found by path. |
 |getNodeParentByPath| It returns parent node by path. |
 |getNodeByPath| It returns node by path. |
-|walkTreeData| Iterate tree nodes <br/> Arguments: (treeData: TreeNode[], handler: Function, options: {}) <br/> Handler: (node: TreeNode, index: number, parent: TreeNode(or null), path: number[]) <br/> - return false: stop walk <br/> - return 'skip children' <br/> - return 'skip siblings' <br/> Options: {Boolean} reverse|
+|walkTreeData| Iterate tree nodes <br/> Arguments: (treeData: TreeNode[](or null), handler: Function, options: {}) <br/> Handler: (node: TreeNode, index: number, parent: TreeNode(or null), path: number[]) <br/> - return false: stop walk <br/> - return 'skip children' <br/> - return 'skip siblings' <br/> Options: {Boolean} reverse|
+|cloneTreeData| Clones tree nodes <br> options - afterNodeCreated: (newNode, {oldNode: node, index, parent, path}) |
 
 ```typescript
 interface Tree<T=any> {
@@ -524,7 +525,8 @@ interface Tree<T=any> {
     // he tree vue api
     getNodeParentByPath: (path: number[]) => TreeNode<T>|null;
     getNodeByPath: (path: number[]) => TreeNode<T>;
-    walkTreeData: (treeData: TreeNode<T>[], callback: walkTreeDataCallback, options?: {reverse: boolean}) => void;
+    walkTreeData: (treeData: TreeNode<T>[]|null, callback: walkTreeDataCallback, options?: {reverse: boolean}) => void;
+    cloneTreeData(treeData: TreeNode<T>[]|null, options?: cloneTreeDataOptions): TreeNode[];
 }
 
 interface Predicate<T=any> {
