@@ -627,6 +627,7 @@ export default defineComponent<Props>({
         @apply h-8 text-sm text-black cursor-pointer rounded;
         .node {
             @apply h-full w-full inline-flex items-center;
+            line-height: 0;
             &.drag-target-parent {
                 @apply bg-secondary text-white rounded;
             }
