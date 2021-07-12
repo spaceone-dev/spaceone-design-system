@@ -614,6 +614,8 @@ export default defineComponent<Props>({
         }
     }
     .tree-node-back {
+        @apply rounded;
+
         @media (hover: hover) {
             &:hover {
                 @apply text-secondary bg-secondary2;
