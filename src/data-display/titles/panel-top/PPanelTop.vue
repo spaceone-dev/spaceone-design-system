@@ -14,6 +14,8 @@
     </div>
 </template>
 <script lang="ts">
+import { commaFormatter } from '@/util/helpers';
+
 export default {
     name: 'PPanelTop',
     props: {
@@ -31,10 +33,6 @@ export default {
         },
     },
     setup() {
-        const commaFormatter = (num) => {
-            if (num) return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-            return num;
-        };
         return {
             commaFormatter,
         };
