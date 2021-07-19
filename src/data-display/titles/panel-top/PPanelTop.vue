@@ -6,7 +6,7 @@
             </slot>
         </span>
         <span v-if="useTotalCount" class="total-count">
-            &nbsp;({{ totalCount }})
+            &nbsp;({{ commaFormatter(totalCount) }})
         </span>
         <span class="extra">
             <slot name="extra" />
@@ -29,6 +29,15 @@ export default {
             type: String,
             default: '',
         },
+    },
+    setup() {
+        const commaFormatter = (num) => {
+            if (num) return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return num;
+        };
+        return {
+            commaFormatter,
+        };
     },
 };
 </script>
